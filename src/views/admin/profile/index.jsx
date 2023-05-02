@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Banner from "./components/Banner";
 import General from "./components/General";
 import Notification from "./components/Notification";
@@ -8,22 +9,27 @@ import Upload from "./components/Upload";
 const ProfileOverview = () => {
   return (
     <div className="flex w-full flex-col gap-5">
-      <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
-        <div className="col-span-4 lg:!mb-0">
+      <div className="w-ful  mt-3 grid-cols-1 flex h-fit flex-col gap-5 grid grid-cols-2 lg:grid-cols-2">
+        <div className=" lg:!mb-0">
           <Banner />
         </div>
 
-        <div className="col-span-3 lg:!mb-0">
+        {/* <div className="col-span-3 lg:!mb-0">
           <Storage />
         </div>
 
         <div className="z-0 col-span-5 lg:!mb-0">
           <Upload />
+        </div> */}
+
+        <div className=" lg:col-span-1 lg:mb-0 3xl:col-span-1">
+          <General />
         </div>
       </div>
+
       {/* all project & ... */}
 
-      <div className="grid h-full grid-cols-1 gap-5 lg:!grid-cols-12">
+      {/* <div className="mt-3 grid h-full grid-cols-1 gap-5 lg:!grid-cols-12">
         <div className="col-span-5 lg:col-span-6 lg:mb-0 3xl:col-span-4">
           <Project />
         </div>
@@ -34,7 +40,9 @@ const ProfileOverview = () => {
         <div className="col-span-5 lg:col-span-12 lg:mb-0 3xl:!col-span-3">
           <Notification />
         </div>
-      </div>
+      </div> */}
+
+
     </div>
   );
 };

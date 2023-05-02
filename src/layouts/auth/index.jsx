@@ -5,6 +5,7 @@ import routes from "routes.js";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 
 export default function Auth() {
+
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
@@ -17,6 +18,7 @@ export default function Auth() {
     });
   };
   document.documentElement.dir = "ltr";
+
   return (
     <div>
       <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">

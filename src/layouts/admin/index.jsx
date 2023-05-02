@@ -4,18 +4,40 @@ import Navbar from "components/navbar";
 import Sidebar from "components/sidebar";
 import Footer from "components/footer/Footer";
 import routes from "routes.js";
+import { getMiddleware } from "Middleware";
+import { useDispatch } from "react-redux";
 
 export default function Admin(props) {
   const { ...rest } = props;
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
+  const dispatch = useDispatch();
   const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
     );
+    const callback = (res) => {
+      if (res) {
+        console.log(res);
+        if (res.data) {
+          dispatch({
+            type: "loadUser",
+            payload: {
+              userData: res.data,
+            },
+          });
+        }
+      }
+    };
+
+    getMiddleware("/user/userInfo", callback, true);
   }, []);
+
+
+ 
+  
   React.useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);

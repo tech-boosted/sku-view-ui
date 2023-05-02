@@ -5,10 +5,12 @@ import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/tables";
-import RTLDefault from "views/rtl/default";
+import Comparison1 from "views/admin/comparison1";
+import Comparison2 from "views/admin/comparison2";
 
 // Auth Imports
 import SignIn from "views/auth/SignIn";
+import SignUp from "views/auth/SignUp";
 
 // Icon Imports
 import {
@@ -17,7 +19,14 @@ import {
   MdBarChart,
   MdPerson,
   MdLock,
+  MdLockOpen,
+  MdSettings,
+  MdAnalytics,
+  MdAdsClick
 } from "react-icons/md";
+import Channels from "views/admin/channels";
+
+
 
 const routes = [
   {
@@ -28,14 +37,6 @@ const routes = [
     component: <MainDashboard />,
   },
   {
-    name: "NFT Marketplace",
-    layout: "/admin",
-    path: "nft-marketplace",
-    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    component: <NFTMarketplace />,
-    secondary: true,
-  },
-  {
     name: "Data Tables",
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
@@ -43,12 +44,37 @@ const routes = [
     component: <DataTables />,
   },
   {
-    name: "Profile",
+    name: "Platform - Multi SKU",
+    layout: "/admin",
+    icon: <MdAnalytics className="h-6 w-6" />,
+    path: "comparison1",
+    component: <Comparison1 />,
+  },
+  {
+    name: "SKU - Multi Platform",
+    layout: "/admin",
+    icon: <MdAnalytics className="h-6 w-6" />,
+    path: "comparison2",
+    component: <Comparison2/>,
+  },
+  {
+    name: "Channels",
+    layout: "/admin",
+    icon: <MdAdsClick className="h-6 w-6" />,
+    path: "channels",
+    component: <Channels/>,
+  },
+
+ 
+  
+  {
+    name: "Settings",
     layout: "/admin",
     path: "profile",
-    icon: <MdPerson className="h-6 w-6" />,
+    icon: <MdSettings className="h-6 w-6" />,
     component: <Profile />,
   },
+
   {
     name: "Sign In",
     layout: "/auth",
@@ -57,11 +83,26 @@ const routes = [
     component: <SignIn />,
   },
   {
-    name: "RTL Admin",
-    layout: "/rtl",
-    path: "rtl",
-    icon: <MdHome className="h-6 w-6" />,
-    component: <RTLDefault />,
+    name: "Sign Up",
+    layout: "/auth",
+    path: "sign-up",
+    icon: <MdLockOpen className="h-6 w-6" />,
+    component: <SignUp />,
   },
+  {
+    name: "NFT Marketplace",
+    layout: "/admin",
+    path: "nft-marketplace",
+    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
+    component: <NFTMarketplace />,
+    secondary: true,
+  },
+  // {
+  //   name: "RTL Admin",
+  //   layout: "/rtl",
+  //   path: "rtl",
+  //   icon: <MdHome className="h-6 w-6" />,
+  //   component: <RTLDefault />,
+  // },
 ];
 export default routes;
