@@ -1,6 +1,5 @@
 import { get, post } from "./API";
 
-
 export const postMiddleware =  (url, data, callback,auth) => {
     const baseURL = process.env.REACT_APP_BASE_URL;
     let completeurl = baseURL + url;
@@ -13,7 +12,8 @@ export const postMiddleware =  (url, data, callback,auth) => {
                 if(res.response.status != undefined){
                     if(res.response.status === 401){
                         localStorage.removeItem("token");
-                        // window.location.replace("/signIn");
+                        window.location.replace("/auth/sign-in");
+                        
                     }
                     else{
                         callback(res);
@@ -23,7 +23,7 @@ export const postMiddleware =  (url, data, callback,auth) => {
             else if(res.status != undefined){
                 if(res.status === 401){
                     localStorage.removeItem("token");
-                    // window.location.replace("/signIn");
+                    window.location.replace("/auth/sign-in");
                 }
                 else{
                     callback(res);
@@ -68,7 +68,7 @@ export const getMiddleware =  (url, callback,auth) => {
                 if(res.response.status != undefined){
                     if(res.response.status === 401){
                         localStorage.removeItem("token");
-                        // window.location.replace("/signIn");
+                        window.location.replace("/auth/sign-in");
                     }
                     else{
                         callback(res);
@@ -78,7 +78,7 @@ export const getMiddleware =  (url, callback,auth) => {
             else if(res.status != undefined){
                 if(res.status === 401){
                     localStorage.removeItem("token");
-                    // window.location.replace("/signIn");
+                    window.location.replace("/auth/sign-in");
                 }
                 else{
                     callback(res);

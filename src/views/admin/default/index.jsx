@@ -15,6 +15,8 @@ import DailyTraffic from "views/admin/default/components/DailyTraffic";
 import TaskCard from "views/admin/default/components/TaskCard";
 import tableDataCheck from "./variables/tableDataCheck.json";
 import tableDataComplex from "./variables/tableDataComplex.json";
+import TopPerformer from "./components/TopPerformer";
+import BottomPerformer from "./components/BottomPerformer";
 
 const Dashboard = () => {
   return (
@@ -59,6 +61,10 @@ const Dashboard = () => {
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
         <TotalSpent />
         <WeeklyRevenue />
+      </div>
+      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <TopPerformer />
+        <BottomPerformer/>
       </div>
 
       {/* Tables & Charts */}

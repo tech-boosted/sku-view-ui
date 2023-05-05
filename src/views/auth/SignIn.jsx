@@ -5,8 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
+import { useToast } from '@chakra-ui/react'
+
 
 export default function SignIn() {
+  const toast = useToast()
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,6 +42,16 @@ export default function SignIn() {
 
       localStorage.setItem("token", res.data.token);
       navigate("/admin/");
+
+      toast({
+        title: 'Login Successfull.',
+        status: 'success',
+        duration: 5000,
+        position:    'top-right',
+        variant:'subtle',
+        isClosable: true,
+      })
+
      
     } else {
       const errors = {};
@@ -61,14 +75,7 @@ export default function SignIn() {
     const errors = validate(formValues);
     setFormErrors(errors);
 
-    // if (Object.keys(errors).length === 0) {
-    //   setEmailState("");
-    //   setPasswordState("");
-
-    //   alert("logging In");
-
-      // postMiddleware("/user/login", formValues, callback, false);
-    // }
+    
   };
 
   const validate = (values) => {

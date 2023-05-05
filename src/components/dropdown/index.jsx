@@ -1,4 +1,6 @@
 import React from "react";
+import { useToast } from '@chakra-ui/react'
+
 
 function useOutsideAlerter(ref, setX) {
   React.useEffect(() => {
@@ -20,14 +22,33 @@ function useOutsideAlerter(ref, setX) {
 }
 
 const Dropdown = (props) => {
-  const { button, children, classNames, animation } = props;
+  const toast = useToast()
+
+  const { button, children, classNames, animation,disabled,prerequisite} = props;
   const wrapperRef = React.useRef(null);
   const [openWrapper, setOpenWrapper] = React.useState(false);
   useOutsideAlerter(wrapperRef, setOpenWrapper);
 
+  const handleDisability = ()=>{
+    if(!disabled){
+      setOpenWrapper(!openWrapper);
+    }
+    else{
+      toast({
+        title: 'Dropdown Disabled.',
+        description: `Please first select something in ${prerequisite}.`,
+        status: 'warning',
+        duration: 5000,
+        position:    'top-right',
+        variant:'subtle',
+        isClosable: true,
+      })
+    }
+  }
+
   return (
     <div ref={wrapperRef} className="relative flex">
-      <div className="flex" onMouseDown={() => setOpenWrapper(!openWrapper)}>
+      <div className="flex" onMouseDown={() => handleDisability()}>
         {button}
       </div>
       <div

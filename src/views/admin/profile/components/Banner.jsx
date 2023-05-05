@@ -5,13 +5,33 @@ import Card from "components/card";
 import { useSelector } from "react-redux";
 
 const Banner = () => {
-  const userInfo = useSelector((state) => state.accountData.userInfo);
-  const statusVariable = useSelector(
+  
+  let statusVariable = useSelector(
     (state) => state.accountData.userInfo.credentials
   );
 
+  if (statusVariable === undefined) {
+    statusVariable = {
+      amazon: { connected: true },
+      google: { connected: true },
+      facebook: { connected: true },
+    };
+  }
+
+  let userInfo = useSelector((state) => state.accountData.userInfo);
+  if (userInfo === undefined) {
+    userInfo = {
+      firstname: "never",
+      lastname: "mind",
+      company: "pureNext",
+      phone_number: 123,
+      email: "gus@gmail.com",
+     
+    };
+  }
+
   return (
-    <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
+    <Card extra={"items-center w-full min-h-[370px] h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
       <div
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
@@ -45,7 +65,7 @@ const Banner = () => {
                 : "text-xs font-normal text-red-500 "
             }
           >
-            {userInfo.credentials.google.connected
+            {statusVariable.google.connected
               ? "Connected"
               : "Not Connected"}
           </p>
@@ -58,13 +78,11 @@ const Banner = () => {
           <p
             className={
               statusVariable.amazon.connected
-                ? "text-xs font-normal text-green-500 "
-                : "text-xs font-normal text-red-500 "
+             ? "text-xs font-normal text-green-500 "
+              : "text-xs font-normal text-red-500 "
             }
           >
-            {userInfo.credentials.amazon.connected
-              ? "Connected"
-              : "Not Connected"}
+            {statusVariable.amazon.connected ? "Connected" : "Not Connected"}
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -74,13 +92,11 @@ const Banner = () => {
           <p
             className={
               statusVariable.facebook.connected
-                ? "text-xs font-normal text-green-500 "
-                : "text-xs font-normal text-red-500 "
+              ? "text-xs font-normal text-green-500 "
+              : "text-xs font-normal text-red-500 "
             }
           >
-            {userInfo.credentials.facebook.connected
-              ? "Connected"
-              : "Not Connected"}
+            {statusVariable.facebook.connected ? "Connected" : "Not Connected"}
           </p>
         </div>
       </div>

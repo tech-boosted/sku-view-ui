@@ -1,48 +1,94 @@
-import React from "react";
-import Flatpickr from "react-flatpickr";
+import React, { useEffect, useRef, useState } from "react";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // t
+import { addDays } from "date-fns";
+import format from "date-fns/format";
+import { useToast } from '@chakra-ui/react'
 
-function DatePicker({ callback, customClass }) {
-  const options = {
-    mode: "range",
-    static: true,
-    monthSelectorType: "static",
-    dateFormat: "M j, Y",
-    defaultDate: [new Date(), new Date().setDate(7)],
-    prevArrow:
-      '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
-    nextArrow:
-      '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
-    onReady: (selectedDates, dateStr, instance) => {
-      instance.element.value = dateStr.replace("to", "-");
-    },
-    onChange: (selectedDates, dateStr, instance) => {
-      instance.element.value = dateStr.replace("to", "-");
-      let dateArr = dateStr.split("to");
-      let d1 = new Date(dateArr[0]).toLocaleString().split(",")[0];
-      let d2 = new Date(dateArr[1]).toLocaleString().split(",")[0];
+function RangePicker({ callback ,customClass,disabled,prerequisite}) {
+  const toast = useToast();
 
-      // callback(d1,d2);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: "selection",
     },
+  ]);
+  const [open, setOpen] = useState(false);
+
+  const handleChange = (item) => {
+    setRange([item.selection]);
+
+    if (
+      format(item.selection.startDate, "yyyy-MM-dd") !=
+      format(item.selection.endDate, "yyyy-MM-dd")
+    ) {
+      console.log(format(item.selection.startDate, "yyyy-MM-dd"));
+      console.log(format(item.selection.endDate, "yyyy-MM-dd"));
+      callback(
+        format(item.selection.startDate, "yyyy-MM-dd"),
+        format(item.selection.endDate, "yyyy-MM-dd")
+      );
+      setOpen(false);
+    }
   };
 
+const handleClick = () => {
+
+  if(!disabled){
+    setOpen((open) => !open)
+  }
+  else{
+    toast({
+      title: 'Dropdown Disabled.',
+      description: `Please first select something in ${prerequisite}.`,
+      status: 'warning',
+      duration: 5000,
+      position:    'top-right',
+      variant:'subtle',
+      isClosable: true,
+    })
+  }
+}  
+
   return (
-    <div className={` ${customClass} relative`}>
-      <Flatpickr
-        className={` hover:text-slate-600 focus:border-slate-300 w-74 cursor-pointer rounded-md bg-red-200  px-4  py-2 font-medium`}
-        options={options}
-        value={"Custom"}
-      />
-      hwllo
-      <div className="pointer-events-none absolute inset-0 right-auto flex items-center">
+    <div>
+      <button
+        className=" h-[56px] relative flex items-center rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30"
+        data-ripple-light
+        onClick={() => handleClick()}
+      >
         <svg
-          className="fill-current text-slate-500 ml-3 h-4 w-4"
-          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          id="calendar"
+          className="mr-2 h-[26px] "
         >
-          <path d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+          <path d="M5 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5zM11 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"></path>
+          <path d="M13 14.5H3c-.827 0-1.5-.673-1.5-1.5V4c0-.827.673-1.5 1.5-1.5h10c.827 0 1.5.673 1.5 1.5v9c0 .827-.673 1.5-1.5 1.5zM3 3.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5H3z"></path>
+          <path d="M14 6.5H2a.5.5 0 0 1 0-1h12a.5.5 0 0 1 0 1zM5.5 7.5h1v1h-1zM7.5 7.5h1v1h-1zM9.5 7.5h1v1h-1zM11.5 7.5h1v1h-1zM3.5 9.5h1v1h-1zM5.5 9.5h1v1h-1zM7.5 9.5h1v1h-1zM9.5 9.5h1v1h-1zM11.5 9.5h1v1h-1zM3.5 11.5h1v1h-1zM5.5 11.5h1v1h-1zM7.5 11.5h1v1h-1z"></path>
         </svg>
+        {format(range[0].startDate, "yyyy-MM-dd")} To{" "}
+        {format(range[0].endDate, "yyyy-MM-dd")}
+      </button>
+
+      <div>
+        {open && (
+          <DateRangePicker
+            onChange={(item) => handleChange(item)}
+            editableDateInputs={true}
+            moveRangeOnFirstSelection={false}
+            ranges={range}
+            months={1}
+            direction="horizontal"
+            className={`calendarElement absolute ${customClass} rounded z-50 `}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-export default DatePicker;
+export default RangePicker;

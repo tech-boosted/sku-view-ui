@@ -5,8 +5,12 @@ import Checkbox from "components/checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
+import { useToast } from '@chakra-ui/react'
+
 
 const SignUp = () => {
+  const toast = useToast()
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,6 +54,14 @@ const SignUp = () => {
       });
 
       navigate("/admin/");
+      toast({
+        title: 'Login Successfull.',
+        status: 'success',
+        duration: 5000,
+        position:    'top-right',
+        variant:'subtle',
+        isClosable: true,
+      })
     } else {
       const errors = {};
       var message;

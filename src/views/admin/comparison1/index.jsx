@@ -7,6 +7,8 @@ import { FiChevronDown } from "react-icons/fi";
 import InputField from "components/fields/InputField";
 import Datepicker from "components/datepicker";
 import DatePicker from "react-flatpickr";
+import RangePicker from "components/datepicker";
+import { getMiddleware } from "Middleware";
 
 const Comparison1 = () => {
   // data
@@ -19,62 +21,558 @@ const Comparison1 = () => {
     "FFFFFF",
   ];
 
-  const chartData = dummyChartData;
-  const dates = dateData;
-  const chartOptions = lineChartOptionsTotalSpent;
-  // chartOptions.xaxis.categories = dates;
+  const [chartData, setChartData] = useState([]);
+  const [dates, setDates] = useState([]);
+  const [disable, setDisable] = useState(true);
+
+  useEffect(() => {
+    const callbackForChartData = (res) => {
+      let rawData = res.data.data.dummyChartData;
+      let data = [];
+
+      rawData.forEach((item) => {
+        let skuName = item.skuName;
+
+        item.platform.forEach((platform) => {
+          if (platform.name === "amazon") {
+            let isPresent = data.some(
+              (obj) => obj.platformName === platform.name
+            );
+            let obj = {
+              platformName: platform.name,
+              sku: [{ name: skuName, data: platform.data }],
+            };
+            if (isPresent) {
+              data.forEach((element) => {
+                if (element.platformName === platform.name) {
+                  let temparr = element.sku;
+                  temparr.push(obj.sku[0]);
+                  element.sku = temparr;
+                }
+              });
+            } else {
+              data.push(obj);
+            }
+          }
+          if (platform.name === "google") {
+            let isPresent = data.some(
+              (obj) => obj.platformName === platform.name
+            );
+            let obj = {
+              platformName: platform.name,
+              sku: [{ name: skuName, data: platform.data }],
+            };
+            if (isPresent) {
+              data.forEach((element) => {
+                if (element.platformName === platform.name) {
+                  let temparr = element.sku;
+                  temparr.push(obj.sku[0]);
+                  element.sku = temparr;
+                }
+              });
+            } else {
+              data.push(obj);
+            }
+          }
+          if (platform.name === "facebook") {
+            let isPresent = data.some(
+              (obj) => obj.platformName === platform.name
+            );
+            let obj = {
+              platformName: platform.name,
+              sku: [{ name: skuName, data: platform.data }],
+            };
+            if (isPresent) {
+              data.forEach((element) => {
+                if (element.platformName === platform.name) {
+                  let temparr = element.sku;
+                  temparr.push(obj.sku[0]);
+                  element.sku = temparr;
+                }
+              });
+            } else {
+              data.push(obj);
+            }
+          }
+        });
+      });
+
+      setChartData(data);
+      setDates(res.data.data.dummyDateData);
+    };
+    getMiddleware("/data", callbackForChartData, true);
+  }, []);
+
+  const chartOptions = {
+    legend: {
+      show: true,
+      position: "top",
+    },
+
+    theme: {
+      mode: "light",
+    },
+    chart: {
+      type: "line",
+
+      toolbar: {
+        show: true,
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+        backgroundColor: "#000000",
+      },
+      theme: "dark",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+    grid: {
+      show: true,
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      type: "text",
+      range: undefined,
+      categories: [],
+    },
+
+    yaxis: {
+      show: true,
+      tickAmount: 12,
+      logBase: 10,
+      min: 0,
+      max: 120,
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      forceNiceScale: true,
+      floating: false,
+      decimalsInFloat: undefined,
+    },
+  };
+  const chartOptions2 = {
+    legend: {
+      show: true,
+      position: "top",
+    },
+
+    theme: {
+      mode: "light",
+    },
+    chart: {
+      type: "line",
+
+      toolbar: {
+        show: true,
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+        backgroundColor: "#000000",
+      },
+      theme: "dark",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+    grid: {
+      show: true,
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      type: "text",
+      range: undefined,
+      categories: [],
+    },
+
+    yaxis: {
+      show: true,
+      tickAmount: 12,
+      logBase: 10,
+      min: 0,
+      max: 120,
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      forceNiceScale: true,
+      floating: false,
+      decimalsInFloat: undefined,
+    },
+  };
+  const chartOptions3 = {
+    legend: {
+      show: true,
+      position: "top",
+    },
+
+    theme: {
+      mode: "light",
+    },
+    chart: {
+      type: "line",
+
+      toolbar: {
+        show: true,
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+        backgroundColor: "#000000",
+      },
+      theme: "dark",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+    grid: {
+      show: true,
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      type: "text",
+      range: undefined,
+      categories: [],
+    },
+
+    yaxis: {
+      show: true,
+      tickAmount: 12,
+      logBase: 10,
+      min: 0,
+      max: 120,
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      forceNiceScale: true,
+      floating: false,
+      decimalsInFloat: undefined,
+    },
+  };
+  const chartOptions4 = {
+    legend: {
+      show: true,
+      position: "top",
+    },
+
+    theme: {
+      mode: "light",
+    },
+    chart: {
+      type: "line",
+
+      toolbar: {
+        show: true,
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+        backgroundColor: "#000000",
+      },
+      theme: "dark",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+    grid: {
+      show: true,
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      type: "text",
+      range: undefined,
+      categories: [],
+    },
+
+    yaxis: {
+      show: true,
+      tickAmount: 12,
+      logBase: 10,
+      min: 0,
+      max: 120,
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      forceNiceScale: true,
+      floating: false,
+      decimalsInFloat: undefined,
+    },
+  };
+  const chartOptions5 = {
+    legend: {
+      show: true,
+      position: "top",
+    },
+
+    theme: {
+      mode: "light",
+    },
+    chart: {
+      type: "line",
+
+      toolbar: {
+        show: true,
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+
+    tooltip: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+        backgroundColor: "#000000",
+      },
+      theme: "dark",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+    grid: {
+      show: true,
+    },
+    xaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      type: "text",
+      range: undefined,
+      categories: [],
+    },
+
+    yaxis: {
+      show: true,
+      tickAmount: 12,
+      logBase: 10,
+      min: 0,
+      max: 120,
+      labels: {
+        style: {
+          colors: "#A3AED0",
+          fontSize: "12px",
+          fontWeight: "500",
+        },
+      },
+      forceNiceScale: true,
+      floating: false,
+      decimalsInFloat: undefined,
+    },
+  };
 
   // states
   const [platformDropdownValue, setPlatformDropdownValue] =
     useState("Select Platform");
-  const [startDate, setStartDate] = useState("2023-3-3");
-  const [endDate, setEndDate] = useState("2023-3-12");
-
+  const [startDate, setStartDate] = useState("2023-03-02");
+  const [endDate, setEndDate] = useState("2023-04-03");
   const [SKUArr, setSKUArr] = useState([]);
+  // chart states
   const [impressionsState, setImpressionsState] = useState({
     title: "Impressions",
-    series: {},
-    immutableSeries: {},
+    series: [],
+    immutableSeries: [],
     options: {},
   });
   const [salesState, setSalesState] = useState({
     title: "Sales",
-    series: {},
-    immutableSeries: {},
+    series: [],
+    immutableSeries: [],
     options: {},
   });
   const [spendState, setSpendState] = useState({
     title: "Spend",
-    series: {},
-    immutableSeries: {},
+    series: [],
+    immutableSeries: [],
     options: {},
   });
   const [clicksState, setClicksState] = useState({
     title: "Clicks",
-    series: {},
-    immutableSeries: {},
+    series: [],
+    immutableSeries: [],
     options: {},
   });
   const [ordersState, setOrdersState] = useState({
     title: "Orders",
-    series: {},
-    immutableSeries: {},
+    series: [],
+    immutableSeries: [],
     options: {},
   });
 
-  // useEffect(() => {
-  //   filterDate(startDate, endDate);
-  // }, [startDate, endDate]);
-
-  let getDates = (d1, d2) => {
-    console.log(d1);
-    console.log(d2);
-    setEndDate("2023-3-14");
-    setStartDate("2023-3-3");
-    filterDate(startDate, endDate);
-  };
-
-  // function invoked by the sku dropdown
+  // 🔥🔥 function invoked by the sku dropdown
   const handlePlatformSelection = (e) => {
     setPlatformDropdownValue(e.target.value);
 
@@ -108,23 +606,28 @@ const Comparison1 = () => {
         newData.map((item, index) => {
           series.push(item.series);
         });
-
         impressionsState.series = series;
         impressionsState.immutableSeries = series;
         impressionsState.options = newOptions;
 
         setImpressionsState({ ...impressionsState });
       }
+
+      let newOptions2 = { ...chartOptions2 };
+      newOptions.xaxis.categories = [...dates];
       if (i == 1) {
         let series = [];
         newData.map((item, index) => {
           series.push(item.series);
         });
+
         spendState.series = series;
         spendState.immutableSeries = series;
-        spendState.options = newOptions;
+        spendState.options = newOptions2;
         setSpendState({ ...spendState });
       }
+      let newOptions3 = { ...chartOptions3 };
+      newOptions.xaxis.categories = [...dates];
       if (i == 2) {
         let series = [];
         newData.map((item, index) => {
@@ -132,9 +635,11 @@ const Comparison1 = () => {
         });
         clicksState.series = series;
         clicksState.immutableSeries = series;
-        clicksState.options = newOptions;
+        clicksState.options = newOptions3;
         setClicksState({ ...clicksState });
       }
+      let newOptions4 = { ...chartOptions4 };
+      newOptions.xaxis.categories = [...dates];
       if (i == 3) {
         let series = [];
         newData.map((item, index) => {
@@ -142,9 +647,11 @@ const Comparison1 = () => {
         });
         ordersState.series = series;
         ordersState.immutableSeries = series;
-        ordersState.options = newOptions;
+        ordersState.options = newOptions4;
         setOrdersState({ ...ordersState });
       }
+      let newOptions5 = { ...chartOptions5 };
+      newOptions.xaxis.categories = [...dates];
       if (i == 4) {
         let series = [];
         newData.map((item, index) => {
@@ -152,12 +659,19 @@ const Comparison1 = () => {
         });
         salesState.series = series;
         salesState.immutableSeries = series;
-        salesState.options = newOptions;
+        salesState.options = newOptions5;
         setSalesState({ ...salesState });
       }
     }
 
-    handleSKUSelection(SKUArr);
+    handleEverything(SKUArr, startDate, endDate);
+    setDisable(false);
+  };
+
+  let getDates = (d1, d2) => {
+    setStartDate(d1);
+    setEndDate(d2);
+    handleEverything(SKUArr, d1, d2);
   };
 
   // function invoked by the checkbox dropdown...
@@ -173,87 +687,48 @@ const Comparison1 = () => {
       });
 
       setSKUArr(newArr);
-      handleSKUSelection(newArr);
+      handleEverything(newArr, startDate, endDate);
     } else {
       tempArr.push(value);
       setSKUArr(tempArr);
-      handleSKUSelection(tempArr);
+      handleEverything(tempArr, startDate, endDate);
     }
   };
 
-  // function invoked by the handlecheckboxdropdown function passing an array of selected platforms...
-  const handleSKUSelection = (arr) => {
-    if(arr.length == 0){
-      return;
-    }
-    // filtering according to the selected platform
-    let impressionsSeries = impressionsState.immutableSeries.filter(
-      (item, index) => {
+  const handleEverything = (arr, d1, d2) => {
+    if (arr.length != 0) {
+      var impressionsSeries = impressionsState.immutableSeries.filter(
+        (item, index) => {
+          return arr.includes(item.name);
+        }
+      );
+      var spendSeries = spendState.immutableSeries.filter((item, index) => {
         return arr.includes(item.name);
-      }
-    );
-    let spendSeries = spendState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    let clicksSeries = clicksState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    let ordersSeries = ordersState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    let salesSeries = salesState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
+      });
+      var clicksSeries = clicksState.immutableSeries.filter((item, index) => {
+        return arr.includes(item.name);
+      });
+      var ordersSeries = ordersState.immutableSeries.filter((item, index) => {
+        return arr.includes(item.name);
+      });
+      var salesSeries = salesState.immutableSeries.filter((item, index) => {
+        return arr.includes(item.name);
+      });
+    } else {
+      impressionsSeries = impressionsState.immutableSeries;
+      spendSeries = spendState.immutableSeries;
+      clicksSeries = clicksState.immutableSeries;
+      salesSeries = salesState.immutableSeries;
+      ordersSeries = ordersState.immutableSeries;
 
-    // setting the state for the charts...
-    impressionsState.series = impressionsSeries;
-    setImpressionsState({ ...impressionsState });
+      console.log(impressionsSeries);
+    }
 
-    spendState.series = spendSeries;
-    setSpendState({ ...spendState });
-
-    clicksState.series = clicksSeries;
-    setClicksState({ ...clicksState });
-
-    ordersState.series = ordersSeries;
-    setOrdersState({ ...ordersState });
-
-    salesState.series = salesSeries;
-    setSalesState({ ...salesState });
-  };
-
-  // for date filtration
-  const filterDate = (startDate, endDate) => {
-    const startDateIndex = dates.indexOf(startDate);
-    const endDateIndex = dates.indexOf(endDate);
-    let arr = [...SKUArr];
+    const startDateIndex = dates.indexOf(d1);
+    const endDateIndex = dates.indexOf(d2);
 
     let tempDates = [...dates];
     let filteredDateData = tempDates.slice(startDateIndex, endDateIndex + 1);
-    console.log(filteredDateData);
-    let impressionsSeries = [];
-    let spendSeries = [];
-    let salesSeries = [];
-    let clicksSeries = [];
-    let ordersSeries = [];
-
-    impressionsSeries = impressionsState.immutableSeries.filter(
-      (item, index) => {
-        return arr.includes(item.name);
-      }
-    );
-    spendSeries = spendState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    salesSeries = salesState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    clicksSeries = clicksState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
-    ordersSeries = ordersState.immutableSeries.filter((item, index) => {
-      return arr.includes(item.name);
-    });
 
     let newSeriesImpressions = [];
     let newSeriesSpend = [];
@@ -263,6 +738,7 @@ const Comparison1 = () => {
 
     impressionsSeries.map((item, index) => {
       let data = item.data.slice(startDateIndex, endDateIndex + 1);
+
       let newItem = { ...item };
       newItem.data = data;
       newSeriesImpressions.push(newItem);
@@ -271,7 +747,7 @@ const Comparison1 = () => {
     spendSeries.map((item, index) => {
       let data = item.data.slice(startDateIndex, endDateIndex + 1);
       let newItem = { ...item };
-      newItem.data = [...data];
+      newItem.data = data;
       newSeriesSpend.push(newItem);
     });
     clicksSeries.map((item, index) => {
@@ -296,146 +772,130 @@ const Comparison1 = () => {
     let newOptions = { ...chartOptions };
     newOptions.xaxis.categories = filteredDateData;
 
-    console.log(newOptions);
+    let newOptions2 = { ...chartOptions2 };
+    newOptions2.xaxis.categories = filteredDateData;
+    let newOptions3 = { ...chartOptions3 };
+    newOptions3.xaxis.categories = filteredDateData;
+    let newOptions4 = { ...chartOptions4 };
+    newOptions4.xaxis.categories = filteredDateData;
+    let newOptions5 = { ...chartOptions5 };
+    newOptions5.xaxis.categories = filteredDateData;
 
     impressionsState.series = newSeriesImpressions;
     impressionsState.options = newOptions;
-    console.log(impressionsState);
     setImpressionsState({ ...impressionsState });
 
     spendState.series = newSeriesSpend;
-    impressionsState.options = { ...newOptions };
+    spendState.options = newOptions2;
     setSpendState({ ...spendState });
 
-    salesState.series = newSeriesSales;
-    salesState.options = { ...newOptions };
-    setSalesState({ ...salesState });
+    clicksState.series = newSeriesClicks;
+    clicksState.options = newOptions3;
+    setClicksState({ ...clicksState });
 
     ordersState.series = newSeriesOrders;
-    ordersState.options = { ...newOptions };
+    ordersState.options = { ...newOptions4 };
     setOrdersState({ ...ordersState });
 
-    clicksState.series = newSeriesClicks;
-    clicksState.options = { ...newOptions };
-    setClicksState({ ...clicksState });
+    salesState.series = newSeriesSales;
+    salesState.options = newOptions5;
+    setSalesState({ ...salesState });
   };
 
   return (
     <div>
-      <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6 ">
-        <Dropdown
-          button={
-            <button className="flex items-center rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-              {platformDropdownValue} <FiChevronDown className="ml-2 text-xl" />
-            </button>
-          }
-          children={
-            <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-gray-200 bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-              <button
-                className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
-                value={"amazon"}
-                onClick={(e) => handlePlatformSelection(e)}
-              >
-                amazon
+      <div className="mt-3 flex  justify-between  ">
+        <div className="flex w-[440px] justify-between ">
+          <Dropdown
+          disabled={false}
+          prerequisite={"SKU"}
+            button={
+              <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                {platformDropdownValue}{" "}
+                <FiChevronDown className="ml-2 text-xl" />
               </button>
-              <button
-                className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
-                value={"facebook"}
-                onClick={(e) => handlePlatformSelection(e)}
-              >
-                facebook
-              </button>
-              <button
-                className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
-                onClick={(e) => handlePlatformSelection(e)}
-                value={"amazon"}
-              >
-                amazon
-              </button>
-            </div>
-          }
-          classNames={"py-2 top-12 left-2  w-max"}
-          animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-        />
-        <Dropdown
-          button={
-            <button className="flex items-center rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-              Select SKU <FiChevronDown className="ml-2 text-xl" />
-            </button>
-          }
-          children={
-            <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-gray-200 bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-              <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
-                <input
-                  type="checkbox"
-                  name="l"
-                  id=""
-                  value={"Black T-shirt"}
-                  className="mr-2"
-                  onChange={(e) => handleCheckboxDropdown(e)}
-                />
-                <label>Black T-shirt</label>
+            }
+            children={
+              <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                <button
+                  className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                  value={"amazon"}
+                  onClick={(e) => handlePlatformSelection(e)}
+                >
+                  amazon
+                </button>
+                <button
+                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  value={"facebook"}
+                  onClick={(e) => handlePlatformSelection(e)}
+                >
+                  facebook
+                </button>
+                <button
+                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  onClick={(e) => handlePlatformSelection(e)}
+                  value={"amazon"}
+                >
+                  amazon
+                </button>
               </div>
-              <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
-                <input
-                  type="checkbox"
-                  name=""
-                  id=""
-                  value={"Red T-shirt"}
-                  className="mr-2"
-                  onChange={(e) => handleCheckboxDropdown(e)}
-                />
-                <label htmlFor="">Red T-shirt</label>
-              </div>
-              <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
-                <input
-                  type="checkbox"
-                  name=""
-                  id=""
-                  value={"Pink T-shirt"}
-                  className="mr-2"
-                  onChange={(e) => handleCheckboxDropdown(e)}
-                />
-                <label htmlFor="">Pink T-shirt</label>
-              </div>
-            </div>
-          }
-          classNames={"py-2 top-12 left-2  w-max"}
-          animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-        />
-        {/* <div className="flex w-[500px] items-center">
-          <input
-            disabled={false}
-            type={"Date"}
-            // onChange={(e)=>{handleChange(e)}}
-            placeholder={"Select Date"}
-            name={"startDate"}
-            className={` mt-2 flex h-12 w-[200px] items-center justify-center rounded-xl border bg-white/0 px-5 py-3  text-sm
-          
-        outline-none`}
+            }
+            classNames={"py-2 top-12 left-2  w-max"}
+            animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
           />
-          <div className="mx-4">To</div>
-          <input
-            disabled={false}
-            type={"Date"}
-            // onChange={(e)=>{handleChange(e)}}
-            placeholder={"Select Date"}
-            name={"startDate"}
-            className={`} mt-2 flex h-12 w-[200px] items-center justify-center rounded-xl border bg-white/0 p-3 text-sm
-          
-        outline-none`}
+          <Dropdown
+            disabled={disable}
+            prerequisite={"Platform"}
+            button={
+              <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                Select SKU <FiChevronDown className="ml-2 text-xl" />
+              </button>
+            }
+            children={
+              <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name="l"
+                    id=""
+                    value={"Black T-shirt"}
+                    className="mr-2"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label>Black T-shirt</label>
+                </div>
+                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id=""
+                    value={"Red T-shirt"}
+                    className="mr-2"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label htmlFor="">Red T-shirt</label>
+                </div>
+                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id=""
+                    value={"Pink T-shirt"}
+                    className="mr-2"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label htmlFor="">Pink T-shirt</label>
+                </div>
+              </div>
+            }
+            classNames={"py-2 top-12 left-2  w-max"}
+            animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
           />
         </div>
 
-      <DatePicker customClass="" callback={getDates}/> */}
-
-        <button
-          onClick={() => {
-            filterDate("2023-3-4", "2023-3-20");
-          }}
-        >
-          Click Me
-        </button>
+        <div className=" h-[50px] w-fit ">
+        <RangePicker callback={getDates} customClass={"right-[10px]"} disabled={disable} prerequisite={"Platform"}/>
+        </div>
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">

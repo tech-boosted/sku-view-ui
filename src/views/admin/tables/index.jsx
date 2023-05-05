@@ -13,6 +13,7 @@ import tableDataComplex from "./variables/tableDataComplex.json";
 import DevelopmentTable from "./components/DevelopmentTable";
 import ColumnsTable from "./components/ColumnsTable";
 import ComplexTable from "./components/ComplexTable";
+import TopPerformers from "./components/TopPerformers";
 
 const Tables = () => {
   return (
@@ -35,6 +36,8 @@ const Tables = () => {
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
         />
+      </div>
+      <div>
       </div>
     </div>
   );

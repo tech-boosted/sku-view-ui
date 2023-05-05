@@ -7,7 +7,7 @@ import { lineChartOptionsTotalSpent } from "variables/charts";
 
 const ComparisonCharts = (props) => {
   return (
-    <Card extra="flex flex-col bg-white w-full rounded-3xl py-6 px-2 text-center">
+    <Card extra="flex flex-col bg-white w-full rounded-3xl py-4 px-2 text-center">
       <div className="mb-auto flex items-center justify-between px-6">
         <h2 className="text-xl font-bold text-navy-700 dark:text-white">
           {props.title}

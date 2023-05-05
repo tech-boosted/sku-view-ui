@@ -11,6 +11,7 @@ function CardMenu(props) {
   const [open, setOpen] = React.useState(false);
   return (
     <Dropdown
+    disabled={false}
       button={
         <button
           onClick={() => setOpen(!open)}
