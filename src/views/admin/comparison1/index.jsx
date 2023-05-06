@@ -9,12 +9,20 @@ import Datepicker from "components/datepicker";
 import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
+import { MdOutlineRefresh } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
 const Comparison1 = () => {
+  const dispatch = useDispatch();
   // data
   const colors = [
-    "#4318FF",
-    "#FA5FD4",
+    "#AA00FF",
+    "#60a5fa",
+    "#6366f1",
+    "#3730a3",
+    "#89CFF0",
+    "#72A0C1",
+    "#49219C",
     "#6AD2FF",
     "#5FFA93",
     "#F8FA5F",
@@ -103,14 +111,28 @@ const Comparison1 = () => {
     getMiddleware("/data", callbackForChartData, true);
   }, []);
 
+  useEffect(() => {
+    if (chartData.length > 0) {
+      const value = chartData[0].platformName;
+      handlePlatformSelection({
+        target: {
+          value: value,
+        },
+      });
+    }
+  }, [chartData]);
+
   const chartOptions = {
     legend: {
       show: true,
       position: "top",
+      labels: {
+        colors: "#A3AED0",
+      },
     },
 
     theme: {
-      mode: "light",
+      mode: "dark",
     },
     chart: {
       type: "line",
@@ -151,32 +173,45 @@ const Comparison1 = () => {
     },
     grid: {
       show: true,
+      borderColor: "#A3AED0",
+      strokeDashArray: 0,
+      position: "back",
     },
     xaxis: {
+      tickAmount: 4,
+
       axisBorder: {
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
+        borderType: "solid",
+        color: "#78909C",
+        height: 6,
+        offsetX: 10,
+        offsetY: 0,
+        autoskip: true,
+        maxTicksLimit: 4,
       },
       labels: {
+        show: true,
+        rotate:0,
+        format: "dd/MM",
         style: {
           colors: "#A3AED0",
           fontSize: "12px",
           fontWeight: "500",
         },
       },
-      type: "text",
+      type: "datetime",
       range: undefined,
       categories: [],
     },
 
     yaxis: {
+      // tickAmount:4,
       show: true,
-      tickAmount: 12,
       logBase: 10,
-      min: 0,
-      max: 120,
       labels: {
         style: {
           colors: "#A3AED0",
@@ -184,7 +219,7 @@ const Comparison1 = () => {
           fontWeight: "500",
         },
       },
-      forceNiceScale: true,
+      forceNiceScale: false,
       floating: false,
       decimalsInFloat: undefined,
     },
@@ -193,10 +228,13 @@ const Comparison1 = () => {
     legend: {
       show: true,
       position: "top",
+      labels: {
+        colors: "#A3AED0",
+      },
     },
 
     theme: {
-      mode: "light",
+      mode: "dark",
     },
     chart: {
       type: "line",
@@ -237,32 +275,45 @@ const Comparison1 = () => {
     },
     grid: {
       show: true,
+      borderColor: "#A3AED0",
+      strokeDashArray: 0,
+      position: "back",
     },
     xaxis: {
+      tickAmount: 4,
+
       axisBorder: {
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
+        borderType: "solid",
+        color: "#78909C",
+        height: 6,
+        offsetX: 10,
+        offsetY: 0,
+        autoskip: true,
+        maxTicksLimit: 4,
       },
       labels: {
+        show: true,
+        rotate:0,
+        format: "dd/MM",
         style: {
           colors: "#A3AED0",
           fontSize: "12px",
           fontWeight: "500",
         },
       },
-      type: "text",
+      type: "datetime",
       range: undefined,
       categories: [],
     },
 
     yaxis: {
+      // tickAmount:4,
       show: true,
-      tickAmount: 12,
       logBase: 10,
-      min: 0,
-      max: 120,
       labels: {
         style: {
           colors: "#A3AED0",
@@ -270,7 +321,7 @@ const Comparison1 = () => {
           fontWeight: "500",
         },
       },
-      forceNiceScale: true,
+      forceNiceScale: false,
       floating: false,
       decimalsInFloat: undefined,
     },
@@ -279,10 +330,13 @@ const Comparison1 = () => {
     legend: {
       show: true,
       position: "top",
+      labels: {
+        colors: "#A3AED0",
+      },
     },
 
     theme: {
-      mode: "light",
+      mode: "dark",
     },
     chart: {
       type: "line",
@@ -323,32 +377,45 @@ const Comparison1 = () => {
     },
     grid: {
       show: true,
+      borderColor: "#A3AED0",
+      strokeDashArray: 0,
+      position: "back",
     },
     xaxis: {
+      tickAmount: 4,
+
       axisBorder: {
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
+        borderType: "solid",
+        color: "#78909C",
+        height: 6,
+        offsetX: 10,
+        offsetY: 0,
+        autoskip: true,
+        maxTicksLimit: 4,
       },
       labels: {
+        show: true,
+        rotate:0,
+        format: "dd/MM",
         style: {
           colors: "#A3AED0",
           fontSize: "12px",
           fontWeight: "500",
         },
       },
-      type: "text",
+      type: "datetime",
       range: undefined,
       categories: [],
     },
 
     yaxis: {
+      // tickAmount:4,
       show: true,
-      tickAmount: 12,
       logBase: 10,
-      min: 0,
-      max: 120,
       labels: {
         style: {
           colors: "#A3AED0",
@@ -356,7 +423,7 @@ const Comparison1 = () => {
           fontWeight: "500",
         },
       },
-      forceNiceScale: true,
+      forceNiceScale: false,
       floating: false,
       decimalsInFloat: undefined,
     },
@@ -365,10 +432,13 @@ const Comparison1 = () => {
     legend: {
       show: true,
       position: "top",
+      labels: {
+        colors: "#A3AED0",
+      },
     },
 
     theme: {
-      mode: "light",
+      mode: "dark",
     },
     chart: {
       type: "line",
@@ -409,32 +479,45 @@ const Comparison1 = () => {
     },
     grid: {
       show: true,
+      borderColor: "#A3AED0",
+      strokeDashArray: 0,
+      position: "back",
     },
     xaxis: {
+      tickAmount: 4,
+
       axisBorder: {
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
+        borderType: "solid",
+        color: "#78909C",
+        height: 6,
+        offsetX: 10,
+        offsetY: 0,
+        autoskip: true,
+        maxTicksLimit: 4,
       },
       labels: {
+        show: true,
+        rotate:0,
+        format: "dd/MM",
         style: {
           colors: "#A3AED0",
           fontSize: "12px",
           fontWeight: "500",
         },
       },
-      type: "text",
+      type: "datetime",
       range: undefined,
       categories: [],
     },
 
     yaxis: {
+      // tickAmount:4,
       show: true,
-      tickAmount: 12,
       logBase: 10,
-      min: 0,
-      max: 120,
       labels: {
         style: {
           colors: "#A3AED0",
@@ -442,7 +525,7 @@ const Comparison1 = () => {
           fontWeight: "500",
         },
       },
-      forceNiceScale: true,
+      forceNiceScale: false,
       floating: false,
       decimalsInFloat: undefined,
     },
@@ -451,10 +534,13 @@ const Comparison1 = () => {
     legend: {
       show: true,
       position: "top",
+      labels: {
+        colors: "#A3AED0",
+      },
     },
 
     theme: {
-      mode: "light",
+      mode: "dark",
     },
     chart: {
       type: "line",
@@ -495,32 +581,45 @@ const Comparison1 = () => {
     },
     grid: {
       show: true,
+      borderColor: "#A3AED0",
+      strokeDashArray: 0,
+      position: "back",
     },
     xaxis: {
+      tickAmount: 4,
+
       axisBorder: {
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
+        borderType: "solid",
+        color: "#78909C",
+        height: 6,
+        offsetX: 10,
+        offsetY: 0,
+        autoskip: true,
+        maxTicksLimit: 4,
       },
       labels: {
+        show: true,
+        rotate:0,
+        format: "dd/MM",
         style: {
           colors: "#A3AED0",
           fontSize: "12px",
           fontWeight: "500",
         },
       },
-      type: "text",
+      type: "datetime",
       range: undefined,
       categories: [],
     },
 
     yaxis: {
+      // tickAmount:4,
       show: true,
-      tickAmount: 12,
       logBase: 10,
-      min: 0,
-      max: 120,
       labels: {
         style: {
           colors: "#A3AED0",
@@ -528,7 +627,7 @@ const Comparison1 = () => {
           fontWeight: "500",
         },
       },
-      forceNiceScale: true,
+      forceNiceScale: false,
       floating: false,
       decimalsInFloat: undefined,
     },
@@ -597,7 +696,6 @@ const Comparison1 = () => {
         },
         options: chartOptions,
       }));
-      console.log(newData);
       let newOptions = { ...chartOptions };
       newOptions.xaxis.categories = [...dates];
 
@@ -720,8 +818,6 @@ const Comparison1 = () => {
       clicksSeries = clicksState.immutableSeries;
       salesSeries = salesState.immutableSeries;
       ordersSeries = ordersState.immutableSeries;
-
-      console.log(impressionsSeries);
     }
 
     const startDateIndex = dates.indexOf(d1);
@@ -807,8 +903,8 @@ const Comparison1 = () => {
       <div className="mt-3 flex  justify-between  ">
         <div className="flex w-[440px] justify-between ">
           <Dropdown
-          disabled={false}
-          prerequisite={"SKU"}
+            disabled={false}
+            toastHeading={"Please select the SKU first"}
             button={
               <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
                 {platformDropdownValue}{" "}
@@ -816,7 +912,7 @@ const Comparison1 = () => {
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 <button
                   className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
                   value={"amazon"}
@@ -845,46 +941,46 @@ const Comparison1 = () => {
           />
           <Dropdown
             disabled={disable}
-            prerequisite={"Platform"}
+            toastHeading={"Please select the platform first."}
             button={
               <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
                 Select SKU <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name="l"
-                    id=""
+                    id="Black T-shirt"
                     value={"Black T-shirt"}
                     className="mr-2"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label>Black T-shirt</label>
+                  <label htmlFor="Black T-shirt">Black T-shirt</label>
                 </div>
                 <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
-                    id=""
+                    id="Red T-shirt"
                     value={"Red T-shirt"}
                     className="mr-2"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="">Red T-shirt</label>
+                  <label htmlFor="Red T-shirt">Red T-shirt</label>
                 </div>
                 <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
-                    id=""
+                    id="Pink T-shirt"
                     value={"Pink T-shirt"}
                     className="mr-2"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="">Pink T-shirt</label>
+                  <label htmlFor="Pink T-shirt">Pink T-shirt</label>
                 </div>
               </div>
             }
@@ -893,8 +989,16 @@ const Comparison1 = () => {
           />
         </div>
 
-        <div className=" h-[50px] w-fit ">
-        <RangePicker callback={getDates} customClass={"right-[10px]"} disabled={disable} prerequisite={"Platform"}/>
+        <div className=" flex h-[50px] w-fit gap-4">
+          <button className="!linear z-[1] flex h-[56px] w-[56px] items-center justify-center rounded-lg bg-white p-2 text-brand-500 !transition !duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10">
+            <MdOutlineRefresh className="h-6 w-6" />
+          </button>
+          <RangePicker
+            callback={getDates}
+            customClass={"right-[10px]"}
+            disabled={disable}
+            toastHeading={"Please select the platform first"}
+          />
         </div>
       </div>
 

@@ -71,16 +71,7 @@ const General = () => {
           </p>
         </div>
 
-        <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-          <p className="text-sm text-gray-600">Channels</p>
-          <p className="text-base font-medium text-navy-700 dark:text-white">
-            <ul className="flex list-decimal gap-6 px-2">
-             <li>Google</li>
-             <li>Amazon</li>
-             <li>Facebook</li>
-            </ul>
-          </p>
-        </div>
+       
       </div>
     </Card>
   );

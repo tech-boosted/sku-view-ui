@@ -30,7 +30,10 @@ export const lineChartOptionsTotalSpent = {
 
   legend: {
     show: true,
-    position:'top'
+    position:'top',
+    labels:{
+      colors: "#A3AED0",
+    }
   },
 
   theme: {

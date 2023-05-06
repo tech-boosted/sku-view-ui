@@ -3,7 +3,7 @@ import Dropdown from "components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import navbarimage from "assets/img/layout/Navbar.png";
-import { BsArrowBarUp } from "react-icons/bs";
+import { BsArrowBarUp, BsFillPersonFill, BsPerson } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import {
@@ -165,11 +165,9 @@ const Navbar = (props) => {
         <Dropdown
         disabled={false}
           button={
-            <img
-              className="h-10 w-10 rounded-full"
-              src={avatar}
-              alt="Elon Musk"
-            />
+           
+            <BsFillPersonFill className="h-[30px] w-[30px] text-brand-500"  />
+
           }
           children={
             <div className="flex h-32  w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
@@ -183,12 +181,12 @@ const Navbar = (props) => {
               <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
 
               <div className="mt-3 ml-4 flex flex-col">
-                <a
-                  href=" "
+                <Link
+                  to={"/admin/profile"}
                   className="text-sm text-gray-800 dark:text-white hover:dark:text-white"
                 >
                   Settings
-                </a>
+                </Link>
                 <button
                   className="mt-3 text-left text-sm font-medium text-red-500 hover:text-red-500"
                   onClick={handleLogout}

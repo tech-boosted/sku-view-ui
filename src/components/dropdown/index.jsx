@@ -24,7 +24,7 @@ function useOutsideAlerter(ref, setX) {
 const Dropdown = (props) => {
   const toast = useToast()
 
-  const { button, children, classNames, animation,disabled,prerequisite} = props;
+  const { button, children, classNames, animation,disabled,toastHeading} = props;
   const wrapperRef = React.useRef(null);
   const [openWrapper, setOpenWrapper] = React.useState(false);
   useOutsideAlerter(wrapperRef, setOpenWrapper);
@@ -35,8 +35,7 @@ const Dropdown = (props) => {
     }
     else{
       toast({
-        title: 'Dropdown Disabled.',
-        description: `Please first select something in ${prerequisite}.`,
+        title: `${toastHeading}`,
         status: 'warning',
         duration: 5000,
         position:    'top-right',

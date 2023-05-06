@@ -5,43 +5,55 @@ import React, { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { MdVerified } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
+import InputField from "components/fields/InputField";
 
 const Channels = () => {
+  const [amazonProfiles, setAmazonProfiles] = useState([]);
+  const [amazonProfileId, setAmazonProfileId] = useState("NA");
+  const [disableAmazonDropdown, setDisableAmazonDropdown] = useState(false);
 
-  const [amazonProfiles,setAmazonProfiles] = useState([]);
-  const toast = useToast()
 
-  
-  useEffect(()=>{
+  const [showGoogleID, setShowGoogleID] = useState(false);
+  const [googleCustomerId, setGoogleCustomerId] = useState("NA");
+  const [displayFormError, setDisplayFormError] = useState(false);
+  const toast = useToast();
+
+  useEffect(() => {
     const callback = (res) => {
-      if(res == undefined){
-        setAmazonProfiles([{
-          accountInfo:{marketplaceStringId: 'A2Q3Y263D00KWC', id: 'AZS2MGJJ0FCTD', type: 'seller', name: 'FIVE Stars', validPaymentMethod: false},
-          countryCode: "BR"
-          ,currencyCode: "BRL",
-          dailyBudget: 999999999,
-          profileId: 3999774442873617,
-          timezone: "America/Sao_Paulo",
-        }])
+      if (res == undefined) {
+        setAmazonProfiles([
+          {
+            accountInfo: {
+              marketplaceStringId: "A2Q3Y263D00KWC",
+              id: "AZS2MGJJ0FCTD",
+              type: "seller",
+              name: "FIVE Stars",
+              validPaymentMethod: false,
+            },
+            countryCode: "BR",
+            currencyCode: "BRL",
+            dailyBudget: 999999999,
+            profileId: 3999774442873617,
+            timezone: "America/Sao_Paulo",
+          },
+        ]);
 
         toast({
-          title: 'Internal Server Error',
+          title: "Internal Server Error",
           description: `Please try after sometime.`,
-          status: 'error',
+          status: "error",
           duration: 5000,
-          position:    'top-right',
-          variant:'subtle',
+          position: "top-right",
+          variant: "subtle",
           isClosable: true,
-        })
-
-      }
-      else{
+        });
+      } else {
         setAmazonProfiles(res.data.data);
       }
-    }
-    getMiddleware("/link/amazon/listProfiles",callback,true);
-  },[])
+    };
+    getMiddleware("/link/amazon/listProfiles", callback, true);
+  }, []);
 
   const profiles = [
     { id: "Profile Id 1" },
@@ -68,28 +80,53 @@ const Channels = () => {
     };
   }
 
-  const callbackForSettingId = (res)=>{
-    console.log(res);
-  }
-
   const handleClick = (item) => {
     let id = item.profileId;
     let name = item.accountInfo.name;
 
-    if (window.confirm("By clicking Ok you will set this profile Id as your main profile Id and this step is Irreversible Your Profile ID is : "+id + " and the name is " + name)) {
-     postMiddleware("/link/amazon/setProfile",{profile_id:id},callbackForSettingId,true)
-    } 
+    const callbackForSettingId = (res) => {
+      console.log(res);
+      if (res.status === 200) {
+        setAmazonProfileId(id);
+        setDisableAmazonDropdown(true);
+      }
+    };
 
-
+    if (
+      window.confirm(
+        "By clicking Ok you will set this profile Id as your main profile Id and this step is Irreversible Your Profile ID is : " +
+          id +
+          " and the name is " +
+          name
+      )
+    ) {
+      postMiddleware(
+        "/link/amazon/setProfile",
+        { profile_id: id },
+        callbackForSettingId,
+        true
+      );
+    }
   };
 
- 
+  const handleGoggleCustomerIdChange = (e) => {
+    setGoogleCustomerId(e.target.value);
+  };
+  const handleGoogleCustomerId = (id) => {
+    if (id.length == 12) {
+      setDisplayFormError(false);
+      setShowGoogleID(true);
+      alert("Ok successtruye");
+    } else {
+      setDisplayFormError(true);
+    }
+  };
 
   return (
     <>
       <div className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-3">
         {/* Google */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white">
+        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -121,32 +158,53 @@ const Channels = () => {
                     : "Not Connected"}
                 </span>
               </span>
-              <p>Profile Id : NA</p>
+              {showGoogleID ? (
+                <p>Profile Id : {googleCustomerId} </p>
+              ) : (
+                <p>Profile Id : NA</p>
+              )}
             </div>
 
-            <Dropdown
-            disabled={false}
-              button={
-                <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                  Profile Id
-                  <FiChevronDown className="ml-2 text-xl" />
-                </button>
-              }
-              children={
-                <div className="flex h-fit w-44 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat px-5 py-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                  {profiles.map((item, index) => (
+            {!showGoogleID && (
+              <Dropdown
+                disabled={false}
+                button={
+                  <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                    Profile Id
+                    <FiChevronDown className="ml-2 text-xl" />
+                  </button>
+                }
+                children={
+                  <div className="flex h-fit w-fit items-center justify-start gap-4 rounded-xl bg-white bg-cover bg-no-repeat px-5 py-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                    <div>
+                      <InputField
+                        variant="auth"
+                        extra="flex items-center mb-2"
+                        placeholder="Enter the customer Id"
+                        id="password"
+                        type="number"
+                        value={googleCustomerId}
+                        handleChange={handleGoggleCustomerIdChange}
+                      />
+                      {displayFormError && (
+                        <p className="ml-3 mb-2 text-sm font-medium text-red-300 dark:text-red-600">
+                          *Please Enter Valid Customer ID
+                        </p>
+                      )}
+                    </div>
+
                     <button
-                      className=" text-black hover:text-black py-2 text-left  text-base font-medium  hover:font-bold "
-                      value={"amazon"}
+                      onClick={() => handleGoogleCustomerId(googleCustomerId)}
+                      className="h-[46px] rounded-xl bg-brand-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
                     >
-                      {item.id}
+                      Done
                     </button>
-                  ))}
-                </div>
-              }
-              classNames={"py-2 top-12 left-2  w-max"}
-              animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-            />
+                  </div>
+                }
+                classNames={"py-2 top-12 left-2  w-max"}
+                animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
+              />
+            )}
           </div>
           {!statusVariable.google.connected ? (
             <button
@@ -165,7 +223,7 @@ const Channels = () => {
           )}
         </div>
         {/* Facebook */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white">
+        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -199,30 +257,6 @@ const Channels = () => {
               </span>
               <p>Profile Id : NA</p>
             </div>
-
-            <Dropdown
-            disabled={false}
-              button={
-                <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                  Profile Id
-                  <FiChevronDown className="ml-2 text-xl" />
-                </button>
-              }
-              children={
-                <div className="flex h-fit w-44 flex-col justify-start  rounded-[20px] bg-white bg-cover bg-no-repeat px-5 py-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                  {profiles.map((item, index) => (
-                    <button
-                      className=" text-black hover:text-black py-2 text-left  text-base font-medium  hover:font-bold "
-                      value={"amazon"}
-                    >
-                      {item.id}
-                    </button>
-                  ))}
-                </div>
-              }
-              classNames={"py-2 top-12 left-2  w-max"}
-              animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-            />
           </div>
           {!statusVariable.facebook.connected ? (
             <button
@@ -241,7 +275,7 @@ const Channels = () => {
           )}
         </div>
         {/* Amazon */}
-        <div className="dark:bg-inherit flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white">
+        <div className="dark:bg-inherit flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -271,11 +305,12 @@ const Channels = () => {
                     : "Not Connected"}
                 </span>
               </span>
-              <p>Profile Id : NA</p>
+              <p>Profile Id : {amazonProfileId}</p>
             </div>
 
-            <Dropdown
-            disabled={false}
+           {!disableAmazonDropdown && <Dropdown
+              disabled={disableAmazonDropdown}
+              toastHeading={"Profile Id is already selected."}
               button={
                 <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
                   Profile Id
@@ -298,7 +333,7 @@ const Channels = () => {
               }
               classNames={"py-2 top-12 left-2  w-max"}
               animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-            />
+            />}
           </div>
           {!statusVariable.amazon.connected ? (
             <button

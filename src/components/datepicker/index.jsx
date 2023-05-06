@@ -6,7 +6,7 @@ import { addDays } from "date-fns";
 import format from "date-fns/format";
 import { useToast } from '@chakra-ui/react'
 
-function RangePicker({ callback ,customClass,disabled,prerequisite}) {
+function RangePicker({ callback ,customClass,disabled,toastHeading}) {
   const toast = useToast();
 
   const [range, setRange] = useState([
@@ -42,8 +42,7 @@ const handleClick = () => {
   }
   else{
     toast({
-      title: 'Dropdown Disabled.',
-      description: `Please first select something in ${prerequisite}.`,
+      title: `${toastHeading}`,
       status: 'warning',
       duration: 5000,
       position:    'top-right',
