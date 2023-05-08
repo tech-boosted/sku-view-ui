@@ -4,21 +4,30 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "components/dropdown";
 import { BsThreeDots } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
 
 const TopPerformer = () => {
+  const [performerSkuData, setPerformerSkuData] = useState([]);
+  
+  let data = useSelector((state) => state.insightsData.data);
+
+  useEffect(() => {
+    if(data.length > 1){
+      setPerformerSkuData(data);
+    }
+  }, [data]);
+
+
   let skuProperty = useSelector((state) => state.insightsData.skuColumns);
 
   let propertyArr = [...skuProperty];
   propertyArr.splice(1, 0, "Platform");
 
   const [open, setOpen] = useState(false);
+  const [dropdownValue,setDropdownValue] = useState("Impression");
   const [tableHeaders, setTableHeaders] = useState([]);
   const [tableDataRows, setTableDataRows] = useState([]);
   const [performerTableData, setPerformerTableData] = useState([]);
   const [index, setIndex] = useState(2);
-
-  const performerSkuData = useSelector((state) => state.insightsData.data);
 
   let impressions = [];
   let clicks = [];
@@ -41,6 +50,7 @@ const TopPerformer = () => {
             }
           });
 
+          console.log(maxPlatformImpressions);
           let impressionsObj = {
             property: "impressions",
             skuName: item.name,
@@ -108,12 +118,13 @@ const TopPerformer = () => {
           };
           orders.push(OrdersObj);
 
+          console.log(item);
           return {
             rowData: [
               item.name,
               item.platform[0].name,
               item.platform[0].data[index],
-              ...item.total,
+              // ...item.total,
             ],
           };
         }),
@@ -176,14 +187,13 @@ const TopPerformer = () => {
     // 🔥 state which were passed to generic table...
     setTableHeaders(newHeader);
     setTableDataRows(newDataRows);
-  }, [index, setIndex]);
-
+  }, [performerSkuData,setPerformerSkuData,index, setIndex]);
 
   const handlePropertySelection = (value) => {
     let indexOfProperty = performerTableData[0].headers.indexOf(value);
+    setDropdownValue(value);
     setIndex(indexOfProperty);
   };
-  console.log(skuProperty);
 
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6"}>
@@ -202,15 +212,15 @@ const TopPerformer = () => {
               rounded-lg bg-lightPrimary p-2 text-xl font-bold text-brand-500 transition duration-200
           hover:cursor-pointer hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
             >
-              <BsThreeDots className="h-6 w-6" />
+             {dropdownValue}
             </button>
           }
           animation={"origin-top-right transition-all duration-300 ease-in-out"}
-          classNames={` top-[40px] right-0 w-max`}
+          classNames={` top-[48px] right-0 w-max`}
           children={
-            <div className="z-50 w-max rounded-xl bg-gray-200 py-3 px-4 text-sm shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <div className="z-50 w-max rounded-lg bg-white py-3 px-4 text-sm shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p className=" hover:text-black flex cursor-pointer items-center gap-2 py-2 px-3 text-gray-600 hover:font-medium">
-                <button onClick={() => handlePropertySelection("Impressions")} >
+                <button onClick={() => handlePropertySelection("Impressions")}>
                   Impressions
                 </button>
               </p>

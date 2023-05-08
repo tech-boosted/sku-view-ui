@@ -54,15 +54,15 @@ const Comparison2 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
+    
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -156,15 +156,15 @@ const Comparison2 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
+    
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -258,15 +258,15 @@ const Comparison2 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
+    
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -360,15 +360,15 @@ const Comparison2 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
+    
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -462,15 +462,15 @@ const Comparison2 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
+    
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,

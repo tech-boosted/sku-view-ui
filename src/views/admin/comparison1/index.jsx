@@ -131,15 +131,14 @@ const Comparison1 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -195,7 +194,7 @@ const Comparison1 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -233,15 +232,14 @@ const Comparison1 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -297,7 +295,7 @@ const Comparison1 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -335,15 +333,14 @@ const Comparison1 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -399,7 +396,7 @@ const Comparison1 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -437,15 +434,14 @@ const Comparison1 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -501,7 +497,7 @@ const Comparison1 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -539,15 +535,14 @@ const Comparison1 = () => {
       },
     },
 
-    theme: {
-      mode: "dark",
-    },
     chart: {
       type: "line",
 
       toolbar: {
         show: true,
-        show: true,
+        style: {
+          fontSize: "12px",
+        },
         tools: {
           download: true,
           selection: false,
@@ -603,7 +598,7 @@ const Comparison1 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",

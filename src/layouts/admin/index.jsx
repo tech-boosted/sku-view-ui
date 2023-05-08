@@ -18,7 +18,7 @@ export default function Admin(props) {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
     );
-    const callback = (res) => {
+    const callbackForUserData = (res) => {
       if (res) {
         console.log(res);
         if (res.data) {
@@ -32,12 +32,39 @@ export default function Admin(props) {
       }
     };
 
-    getMiddleware("/user/userInfo", callback, true);
+    const callbackForChartData = (res) => {
+      let sumArray = (arr) => {
+        let sum = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          sum += arr[i];
+        }
+
+        return sum;
+      };
+
+      let performersData = [];
+      let data = res.data.data.dummyChartData;
+      data.map((item) => {
+        let mainObj = { name: item.skuName, platform: [] };
+        item.platform.map((platform) => {
+          let innerObj = { name: platform.name, data: [] };
+          platform.data.map((property) => {
+            let sum = sumArray(property.data);
+            innerObj.data.push(sum);
+          });
+          mainObj.platform.push(innerObj);
+        });
+
+        performersData.push(mainObj);
+      });
+      dispatch({ type: "loadPerformersData", payload: performersData });
+    };
+
+    getMiddleware("/user/userInfo", callbackForUserData, true);
+    getMiddleware("/data", callbackForChartData, true);
   }, []);
 
-
- 
-  
   React.useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);

@@ -13,11 +13,14 @@ const Channels = () => {
   const [amazonProfileId, setAmazonProfileId] = useState("NA");
   const [disableAmazonDropdown, setDisableAmazonDropdown] = useState(false);
 
-
   const [showGoogleID, setShowGoogleID] = useState(false);
   const [googleCustomerId, setGoogleCustomerId] = useState("NA");
   const [displayFormError, setDisplayFormError] = useState(false);
   const toast = useToast();
+
+  const amazonCredentialsFromStore = useSelector(
+    (state) => state.accountData.userInfo.credentials
+  );
 
   useEffect(() => {
     const callback = (res) => {
@@ -52,6 +55,18 @@ const Channels = () => {
         setAmazonProfiles(res.data.data);
       }
     };
+
+    if (amazonCredentialsFromStore) {
+      console.log("here we are");
+      let amazonProfileIdFromStore =
+        amazonCredentialsFromStore.amazon.profile_id;
+
+      if (amazonProfileIdFromStore) {
+        setAmazonProfileId(amazonProfileIdFromStore);
+        setDisableAmazonDropdown(true);
+      }
+    }
+
     getMiddleware("/link/amazon/listProfiles", callback, true);
   }, []);
 
@@ -126,7 +141,7 @@ const Channels = () => {
     <>
       <div className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-3">
         {/* Google */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
+        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -223,7 +238,7 @@ const Channels = () => {
           )}
         </div>
         {/* Facebook */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
+        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -275,7 +290,7 @@ const Channels = () => {
           )}
         </div>
         {/* Amazon */}
-        <div className="dark:bg-inherit flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:text-white dark:bg-navy-700">
+        <div className="dark:bg-inherit flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -308,32 +323,34 @@ const Channels = () => {
               <p>Profile Id : {amazonProfileId}</p>
             </div>
 
-           {!disableAmazonDropdown && <Dropdown
-              disabled={disableAmazonDropdown}
-              toastHeading={"Profile Id is already selected."}
-              button={
-                <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                  Profile Id
-                  <FiChevronDown className="ml-2 text-xl" />
-                </button>
-              }
-              children={
-                <div className="flex h-[200px] w-44 flex-col justify-start overflow-scroll rounded-[20px] bg-white bg-cover bg-no-repeat px-5 py-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                  {amazonProfiles.map((item, index) => (
-                    <button
-                      className=" text-black hover:text-black py-2 text-left  text-base font-medium  hover:font-bold "
-                      value={"amazon"}
-                      onClick={() => handleClick(item)}
-                      key={index}
-                    >
-                      {item.accountInfo.name}
-                    </button>
-                  ))}
-                </div>
-              }
-              classNames={"py-2 top-12 left-2  w-max"}
-              animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
-            />}
+            {!disableAmazonDropdown && (
+              <Dropdown
+                disabled={disableAmazonDropdown}
+                toastHeading={"Profile Id is already selected."}
+                button={
+                  <button className="flex h-[52px] min-w-[150px] items-center justify-between rounded-xl bg-gray-200 px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                    Profile Id
+                    <FiChevronDown className="ml-2 text-xl" />
+                  </button>
+                }
+                children={
+                  <div className="flex h-[200px] w-44 flex-col justify-start overflow-scroll rounded-[20px] bg-white bg-cover bg-no-repeat px-5 py-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                    {amazonProfiles.map((item, index) => (
+                      <button
+                        className=" text-black hover:text-black py-2 text-left  text-base font-medium  hover:font-bold "
+                        value={"amazon"}
+                        onClick={() => handleClick(item)}
+                        key={index}
+                      >
+                        {item.accountInfo.name}
+                      </button>
+                    ))}
+                  </div>
+                }
+                classNames={"py-2 top-12 left-2  w-max"}
+                animation="origin-top-left md:origin-top-left transition-all duration-300 ease-in-out"
+              />
+            )}
           </div>
           {!statusVariable.amazon.connected ? (
             <button
