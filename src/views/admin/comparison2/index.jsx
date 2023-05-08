@@ -11,7 +11,9 @@ import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
 
-const Comparison2 = () => {
+const Comparison2 = (props) => {
+
+  let platformPropArr = props.platforms;
   // data
   const colors = [
     "#4318FF",
@@ -44,7 +46,6 @@ const Comparison2 = () => {
     }
   }, [chartData]);
 
- 
   const chartOptions = {
     legend: {
       show: true,
@@ -54,7 +55,6 @@ const Comparison2 = () => {
       },
     },
 
-    
     chart: {
       type: "line",
 
@@ -118,7 +118,7 @@ const Comparison2 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -156,7 +156,6 @@ const Comparison2 = () => {
       },
     },
 
-    
     chart: {
       type: "line",
 
@@ -220,7 +219,7 @@ const Comparison2 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -258,7 +257,6 @@ const Comparison2 = () => {
       },
     },
 
-    
     chart: {
       type: "line",
 
@@ -322,7 +320,7 @@ const Comparison2 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -360,7 +358,6 @@ const Comparison2 = () => {
       },
     },
 
-    
     chart: {
       type: "line",
 
@@ -424,7 +421,7 @@ const Comparison2 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -462,7 +459,6 @@ const Comparison2 = () => {
       },
     },
 
-    
     chart: {
       type: "line",
 
@@ -526,7 +522,7 @@ const Comparison2 = () => {
       },
       labels: {
         show: true,
-        rotate:0,
+        rotate: 0,
         format: "dd/MM",
         style: {
           colors: "#A3AED0",
@@ -606,6 +602,7 @@ const Comparison2 = () => {
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
       newData = temp[0].platform.map((platformItem, index) => ({
+
         series: {
           name: platformItem.name,
           data: platformItem.data[i].data,
@@ -869,39 +866,20 @@ const Comparison2 = () => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name="l"
-                    id="google"
-                    value={"google"}
-                    className="mr-2"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label htmlFor="google">Google</label>
-                </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="amazon"
-                    value={"amazon"}
-                    className="mr-2"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label htmlFor="amazon">Amazon</label>
-                </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="facebook"
-                    value={"facebook"}
-                    className="mr-2"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label htmlFor="facebook">Facebook</label>
-                </div>
+                {platformPropArr.map((item, index) => (
+                  <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                    <input
+                      type="checkbox"
+                      name="l"
+                      id={item}
+                      value={item}
+                      className="mr-2"
+                      onChange={(e) => handleCheckboxDropdown(e)}
+                    />
+                    <label htmlFor={item} className="text-lg">{item}</label>
+                  </div>
+                ))}
+
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}

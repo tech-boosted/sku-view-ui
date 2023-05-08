@@ -45,6 +45,7 @@ export default function Admin(props) {
 
       let performersData = [];
       let data = res.data.data.dummyChartData;
+      console.log(data);
       data.map((item) => {
         let mainObj = { name: item.skuName, platform: [] };
         item.platform.map((platform) => {

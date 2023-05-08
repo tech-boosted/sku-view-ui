@@ -25,38 +25,70 @@ import {
   MdAdsClick
 } from "react-icons/md";
 import Channels from "views/admin/channels";
+import PPCDashboard from "views/admin/ppcDashboard/PPCDashboard";
+import SocialDashboard from "views/admin/socialDashboard/SocialDashboard";
+import DSPDashboard from "views/admin/dspDashboard/DSPDashboard";
+import NativeDashboard from "views/admin/nativeDashboard/NativeDashboard";
 
 
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Collective Dashboard",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
   },
   {
-    name: "Data Tables",
+    name: "Across PPC",
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
-    path: "data-tables",
-    component: <DataTables />,
+    path: "PPC-dashboard",
+    component: <PPCDashboard />,
   },
   {
-    name: "Platform - Multi SKU",
+    name: "Across Social",
     layout: "/admin",
-    icon: <MdAnalytics className="h-6 w-6" />,
-    path: "comparison1",
-    component: <Comparison1 />,
+    icon: <MdBarChart className="h-6 w-6" />,
+    path: "social-dashboard",
+    component: <SocialDashboard />,
   },
   {
-    name: "SKU - Multi Platform",
+    name: "Across DSP",
     layout: "/admin",
-    icon: <MdAnalytics className="h-6 w-6" />,
-    path: "comparison2",
-    component: <Comparison2/>,
+    icon: <MdBarChart className="h-6 w-6" />,
+    path: "dsp-dashboard",
+    component: <DSPDashboard />,
   },
+  {
+    name: "Across Native",
+    layout: "/admin",
+    icon: <MdBarChart className="h-6 w-6" />,
+    path: "native-dashboard",
+    component: <NativeDashboard />,
+  },
+  // {
+  //   name: "Data Tables",
+  //   layout: "/admin",
+  //   icon: <MdBarChart className="h-6 w-6" />,
+  //   path: "data-tables",
+  //   component: <DataTables />,
+  // },
+  // {
+  //   name: "Platform - Multi SKU",
+  //   layout: "/admin",
+  //   icon: <MdAnalytics className="h-6 w-6" />,
+  //   path: "comparison1",
+  //   component: <Comparison1 />,
+  // },
+  // {
+  //   name: "SKU - Multi Platform",
+  //   layout: "/admin",
+  //   icon: <MdAnalytics className="h-6 w-6" />,
+  //   path: "comparison2",
+  //   component: <Comparison2/>,
+  // },
   {
     name: "Channels",
     layout: "/admin",
@@ -89,6 +121,9 @@ const routes = [
     icon: <MdLockOpen className="h-6 w-6" />,
     component: <SignUp />,
   },
+
+
+  
  
 ];
 export default routes;

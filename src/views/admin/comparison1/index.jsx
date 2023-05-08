@@ -12,7 +12,7 @@ import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
 import { useDispatch } from "react-redux";
 
-const Comparison1 = () => {
+const Comparison1 = (props) => {
   const dispatch = useDispatch();
   // data
   const colors = [
@@ -33,6 +33,13 @@ const Comparison1 = () => {
   const [dates, setDates] = useState([]);
   const [disable, setDisable] = useState(true);
 
+  let platformArr = props.platforms;
+  console.log(platformArr);
+
+  platformArr.map((item) => {
+    console.log(item);
+  });
+
   useEffect(() => {
     const callbackForChartData = (res) => {
       let rawData = res.data.data.dummyChartData;
@@ -42,7 +49,7 @@ const Comparison1 = () => {
         let skuName = item.skuName;
 
         item.platform.forEach((platform) => {
-          if (platform.name === "amazon") {
+          if (platform.name === platformArr[0]) {
             let isPresent = data.some(
               (obj) => obj.platformName === platform.name
             );
@@ -908,27 +915,15 @@ const Comparison1 = () => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <button
-                  className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
-                  value={"amazon"}
-                  onClick={(e) => handlePlatformSelection(e)}
-                >
-                  amazon
-                </button>
-                <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
-                  value={"facebook"}
-                  onClick={(e) => handlePlatformSelection(e)}
-                >
-                  facebook
-                </button>
-                <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
-                  onClick={(e) => handlePlatformSelection(e)}
-                  value={"amazon"}
-                >
-                  amazon
-                </button>
+                {platformArr.map((item, index) => (
+                  <button
+                    className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                    value={item}
+                    onClick={(e) => handlePlatformSelection(e)}
+                  >
+                    {item}
+                  </button>
+                ))}
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}
