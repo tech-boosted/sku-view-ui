@@ -12,16 +12,16 @@ import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
 
 const Comparison2 = (props) => {
-
   let platformPropArr = props.platforms;
   // data
   const colors = [
-    "#4318FF",
-    "#6AD2FF",
-    "#F8FA5F",
-    "#5FFA93",
-    "#FA5FD4",
-    "FFFFFF",
+    "#AA00FF",
+    "#49219C",
+    "#00AAFF",
+    "#FAFA33",
+    "#082063",
+    "#AAFF01",
+   
   ];
   const [chartData, setChartData] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -598,11 +598,12 @@ const Comparison2 = (props) => {
       return item.skuName === e.target.value;
     });
     let newData;
-
+    let f = temp[0].platform.filter((item) => {
+      return platformPropArr.includes(item.name);
+    });
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
       newData = temp[0].platform.map((platformItem, index) => ({
-
         series: {
           name: platformItem.name,
           data: platformItem.data[i].data,
@@ -876,10 +877,11 @@ const Comparison2 = (props) => {
                       className="mr-2"
                       onChange={(e) => handleCheckboxDropdown(e)}
                     />
-                    <label htmlFor={item} className="text-lg">{item}</label>
+                    <label htmlFor={item} className="text-lg">
+                      {item}
+                    </label>
                   </div>
                 ))}
-
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}

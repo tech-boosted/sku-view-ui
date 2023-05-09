@@ -17,16 +17,12 @@ const Comparison1 = (props) => {
   // data
   const colors = [
     "#AA00FF",
-    "#60a5fa",
-    "#6366f1",
-    "#3730a3",
-    "#89CFF0",
-    "#72A0C1",
     "#49219C",
-    "#6AD2FF",
-    "#5FFA93",
-    "#F8FA5F",
-    "FFFFFF",
+    "#00AAFF",
+    "#FAFA33",
+    "#082063",
+    "#AAFF01",
+   
   ];
 
   const [chartData, setChartData] = useState([]);

@@ -2,27 +2,27 @@ export const lineChartDataTotalSpent = [
   {
     name: "Revenue",
     data:  [ 92, 57, 1, 49, 32, 99],
-    color: "#4318FF",
+    color:  "#49219C",
   },
   {
     name: "Profit",
     data:   [ 8, 17, 29, 6, 90, 45],
-    color: "#6AD2FF",
+    color:  "#00AAFF",
   },
   {
     name: "Sales",
     data:   [ 58, 85, 94, 84, 48, 12 ],
-    color: "#F8FA5F",
+    color: "#FAFA33",
   },
   {
     name: "Orders",
     data:  [ 85, 26, 10, 34, 84, 85 ],
-    color: "#5FFA93",
+    color: "#082063",
   },
   {
     name: "Impressions",
     data:   [ 90, 67, 52, 21, 60, 35],
-    color: "#FA5FD4",
+    color: "#AAFF01",
   },
 ];
 
@@ -32,7 +32,7 @@ export const lineChartOptionsTotalSpent = {
     show: true,
     position:'top',
     labels:{
-      colors: "#A3AED0",
+      // colors: "#A3AED0",
     }
   },
 
@@ -202,7 +202,9 @@ export const barChartOptionsDailyTraffic = {
         [
           {
             offset: 0,
-            color: "#4318FF",
+            color: "#AA00FF"
+          
+            ,
             opacity: 1,
           },
           {
@@ -227,7 +229,9 @@ export const barChartOptionsDailyTraffic = {
 
 export const pieChartOptions = {
   labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  colors: [ "#AA00FF",
+  // "#49219C",
+  "#00AAFF"],
   chart: {
     width: "50px",
   },
@@ -256,7 +260,9 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#AA00FF",
+    "#49219C",
+    "#00AAFF"],
   },
   tooltip: {
     enabled: true,
@@ -275,17 +281,18 @@ export const barChartDataWeeklyRevenue = [
   {
     name: "PRODUCT A",
     data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
-    color: "#6AD2Fa",
+    color: "#AA00FF"
+    ,
   },
   {
     name: "PRODUCT B",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
-    color: "#4318FF",
+    data: [500, 370, 330, 390, 320, 350, 360, 320, 380],
+    color: "#49219C",
   },
   {
     name: "PRODUCT C",
     data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
-    color: "#EFF4FB",
+    color: "#00AAFF",
   },
 ];
 

@@ -2,11 +2,8 @@ import React from "react";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
-import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
-import DataTables from "views/admin/tables";
-import Comparison1 from "views/admin/comparison1";
-import Comparison2 from "views/admin/comparison2";
+
 
 // Auth Imports
 import SignIn from "views/auth/SignIn";
@@ -17,6 +14,7 @@ import {
   MdHome,
   MdOutlineShoppingCart,
   MdBarChart,
+  MdSocialDistance,
   MdPerson,
   MdLock,
   MdLockOpen,
@@ -29,6 +27,8 @@ import PPCDashboard from "views/admin/ppcDashboard/PPCDashboard";
 import SocialDashboard from "views/admin/socialDashboard/SocialDashboard";
 import DSPDashboard from "views/admin/dspDashboard/DSPDashboard";
 import NativeDashboard from "views/admin/nativeDashboard/NativeDashboard";
+import { IoIosAnalytics } from "react-icons/io";
+import { SiGoogleanalytics } from "react-icons/si";
 
 
 
@@ -50,21 +50,21 @@ const routes = [
   {
     name: "Across Social",
     layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
+    icon: <MdSocialDistance className="h-6 w-6" />,
     path: "social-dashboard",
     component: <SocialDashboard />,
   },
   {
     name: "Across DSP",
     layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
+    icon: <SiGoogleanalytics className="h-6 w-6" />,
     path: "dsp-dashboard",
     component: <DSPDashboard />,
   },
   {
     name: "Across Native",
     layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
+    icon: <IoIosAnalytics className="h-6 w-6" />,
     path: "native-dashboard",
     component: <NativeDashboard />,
   },
