@@ -35,7 +35,19 @@ const Comparison1 = (props) => {
     console.log(item);
   });
 
+  const saveDates = () =>{
+    const today = new Date();
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const startDate = sevenDaysAgo.toISOString().split('T')[0];
+    const endDate = today.toISOString().split('T')[0];
+
+    setStartDate(startDate);
+    setEndDate(endDate);
+    
+  }
+
   useEffect(() => {
+    saveDates();
     const callbackForChartData = (res) => {
       let rawData = res.data.data.dummyChartData;
       let data = [];

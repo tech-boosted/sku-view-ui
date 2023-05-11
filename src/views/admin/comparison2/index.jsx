@@ -24,18 +24,29 @@ const Comparison2 = (props) => {
     "#FAFA33",
     "#082063",
     "#AAFF01",
-   
   ];
   const [chartData, setChartData] = useState([]);
   const [disable, setDisable] = useState(true);
   const [dates, setDates] = useState([]);
+  const [startDate, setStartDate] = useState("2023-03-02");
+  const [endDate, setEndDate] = useState("2023-04-03");
+
+  const saveDates = () => {
+    const today = new Date();
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const startDate = sevenDaysAgo.toISOString().split("T")[0];
+    const endDate = today.toISOString().split("T")[0];
+
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
 
   useEffect(() => {
+    saveDates();
     const callbackForChartData = (res) => {
       setChartData(res.data.data.dummyChartData);
-      
+
       setDates(res.data.data.dummyDateData);
-      
     };
     getMiddleware("/data", callbackForChartData, true);
   }, []);
@@ -559,8 +570,6 @@ const Comparison2 = (props) => {
 
   // states
   const [SKUDropdownValue, setSKUDropdownValue] = useState("Select SKU");
-  const [startDate, setStartDate] = useState("2023-03-02");
-  const [endDate, setEndDate] = useState("2023-04-03");
   const [platformArr, setPlatformArr] = useState([]);
 
   const [impressionsState, setImpressionsState] = useState({
@@ -606,16 +615,15 @@ const Comparison2 = (props) => {
     let filteredAccordingToPropsArr = temp[0].platform.filter((item) => {
       return platformPropArr.includes(item.name);
     });
-  
+
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
-      newData = filteredAccordingToPropsArr.map((platformItem, index) => (
-        {
-          series: {
-            name: platformItem.name,
-            data: platformItem.data[i].data,
-            color: colors[index],
-          },
+      newData = filteredAccordingToPropsArr.map((platformItem, index) => ({
+        series: {
+          name: platformItem.name,
+          data: platformItem.data[i].data,
+          color: colors[index],
+        },
         immutableSeries: {
           name: platformItem.name,
           data: platformItem.data[i].data,
