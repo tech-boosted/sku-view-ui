@@ -10,8 +10,11 @@ import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
 const Comparison2 = (props) => {
+  const dispatch = useDispatch();
+
   let platformPropArr = props.platforms;
   // data
   const colors = [
@@ -21,15 +24,28 @@ const Comparison2 = (props) => {
     "#FAFA33",
     "#082063",
     "#AAFF01",
-   
   ];
   const [chartData, setChartData] = useState([]);
   const [disable, setDisable] = useState(true);
   const [dates, setDates] = useState([]);
+  const [startDate, setStartDate] = useState("2023-03-02");
+  const [endDate, setEndDate] = useState("2023-04-03");
+
+  const saveDates = () => {
+    const today = new Date();
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const startDate = sevenDaysAgo.toISOString().split("T")[0];
+    const endDate = today.toISOString().split("T")[0];
+
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
 
   useEffect(() => {
+    saveDates();
     const callbackForChartData = (res) => {
       setChartData(res.data.data.dummyChartData);
+
       setDates(res.data.data.dummyDateData);
     };
     getMiddleware("/data", callbackForChartData, true);
@@ -554,8 +570,6 @@ const Comparison2 = (props) => {
 
   // states
   const [SKUDropdownValue, setSKUDropdownValue] = useState("Select SKU");
-  const [startDate, setStartDate] = useState("2023-03-02");
-  const [endDate, setEndDate] = useState("2023-04-03");
   const [platformArr, setPlatformArr] = useState([]);
 
   const [impressionsState, setImpressionsState] = useState({
@@ -598,12 +612,13 @@ const Comparison2 = (props) => {
       return item.skuName === e.target.value;
     });
     let newData;
-    let f = temp[0].platform.filter((item) => {
+    let filteredAccordingToPropsArr = temp[0].platform.filter((item) => {
       return platformPropArr.includes(item.name);
     });
+
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
-      newData = temp[0].platform.map((platformItem, index) => ({
+      newData = filteredAccordingToPropsArr.map((platformItem, index) => ({
         series: {
           name: platformItem.name,
           data: platformItem.data[i].data,
@@ -831,21 +846,21 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 <button
-                  className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
                   value={"Red T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Red T-shirt
                 </button>
                 <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
                   value={"Black T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Black T-shirt
                 </button>
                 <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
                   onClick={(e) => handleSKUSelection(e)}
                   value={"Pink T-shirt"}
                 >
@@ -868,16 +883,16 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformPropArr.map((item, index) => (
-                  <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                  <div className="flex cursor-pointer text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold">
                     <input
                       type="checkbox"
                       name="l"
                       id={item}
                       value={item}
-                      className="mr-2"
+                      className="mr-2 cursor-pointer "
                       onChange={(e) => handleCheckboxDropdown(e)}
                     />
-                    <label htmlFor={item} className="text-lg">
+                    <label htmlFor={item} className="text-base cursor-pointer ">
                       {item}
                     </label>
                   </div>

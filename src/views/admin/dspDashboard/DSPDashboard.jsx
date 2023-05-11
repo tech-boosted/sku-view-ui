@@ -1,20 +1,29 @@
 import React from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
+import Card from "components/card";
 import Comparison1 from "../comparison1";
 import Comparison2 from "../comparison2";
 import ChartsAndTable from "components/chartsAndSKUTable";
+import InsightsTable from "components/insights/InsightsTable";
 
 const DSPDashboard = () => {
+  var Platforms = ["Amazon", "Google","Criteo"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">
         <Tabs variant="soft-rounded" colorScheme="purple" className="w-f">
-        <TabList className="flex w-full justify-between ">
+          <TabList className="flex w-full justify-between ">
             <div className="flex w-full justify-between">
               <div className="flex">
                 <Tab>Overview</Tab>
-                <Tab>Platform - Multi SKU</Tab>
-                <Tab>SKU - Multi Platform</Tab>
+                <Tab>Insights</Tab>
+                <Tab>Compare</Tab>
               </div>
               <div className="flex gap-4">
                 <img
@@ -22,13 +31,13 @@ const DSPDashboard = () => {
                   alt="google"
                   className="h-[40px] rounded-[50px]"
                 />
-                  <img
-                src="https://static.vecteezy.com/system/resources/previews/014/018/561/non_2x/amazon-logo-on-transparent-background-free-vector.jpg"
-                alt="amazon"
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/014/018/561/non_2x/amazon-logo-on-transparent-background-free-vector.jpg"
+                  alt="amazon"
                   className="h-[40px] rounded-[50px]"
                 />
                 <img
-                src="https://media.licdn.com/dms/image/C4D0BAQFiWqZbbEmQZw/company-logo_200_200/0/1622720669686?e=2147483647&v=beta&t=-lq18RgFQkZiuhif5h6bM3TB0yIMqbzDLe8n8jN6eQI"
+                  src="https://media.licdn.com/dms/image/C4D0BAQFiWqZbbEmQZw/company-logo_200_200/0/1622720669686?e=2147483647&v=beta&t=-lq18RgFQkZiuhif5h6bM3TB0yIMqbzDLe8n8jN6eQI"
                   alt="criteo"
                   className="h-[40px] rounded-[50px]"
                 />
@@ -37,7 +46,6 @@ const DSPDashboard = () => {
                   alt="add roll"
                   className="h-[40px] rounded-[50px]"
                 />
-              
               </div>
             </div>
           </TabList>
@@ -46,10 +54,27 @@ const DSPDashboard = () => {
               <ChartsAndTable />
             </TabPanel>
             <TabPanel>
-              <Comparison1 platforms={["amazon", "google"]} />
+              <InsightsTable platforms={Platforms} />
             </TabPanel>
             <TabPanel>
-              <Comparison2 platforms={["amazon", "google"]} />
+              <div>
+                <Card extra={"mt-3 px-4 rounded-3xl"}>
+                  <header className="relative mx-4 flex items-center justify-between pt-4">
+                    <div className="text-xl font-bold text-navy-700 dark:text-white">
+                      Channel - SKUs
+                    </div>
+                  </header>
+                  <Comparison1 platforms={Platforms} />
+                </Card>
+                <Card extra={"mt-5 px-4 rounded-3xl"}>
+                  <header className="relative mx-4 flex items-center justify-between pt-4">
+                    <div className="text-xl font-bold text-navy-700 dark:text-white">
+                      SKU - Channels
+                    </div>
+                  </header>
+                  <Comparison2 platforms={Platforms} />
+                </Card>
+              </div>
             </TabPanel>
           </TabPanels>
         </Tabs>

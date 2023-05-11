@@ -151,7 +151,7 @@ const Channels = () => {
               alt="Elon Musk"
             />
 
-            <div className="flex w-full flex-col px-4 py-2  text-left">
+            <div className="flex w-full flex-col px-4 text-left">
               <h2 className=" flex items-center text-xl">
                 Google{" "}
                 <span className="ml-2 text-blue-500">
@@ -248,7 +248,7 @@ const Channels = () => {
               alt="Elon Musk"
             />
 
-            <div className="flex w-full flex-col px-4 py-2  text-left">
+            <div className="flex w-full flex-col px-4 text-left">
               <h2 className=" flex items-center text-xl">
                 Facebook{" "}
                 <span className="ml-2 text-blue-500">
@@ -298,7 +298,7 @@ const Channels = () => {
               alt="Elon Musk"
             />
 
-            <div className="flex w-full flex-col px-4 py-2  text-left">
+            <div className="flex w-full flex-col px-4 text-left">
               <h2 className=" flex items-center text-xl">
                 Amazon{" "}
                 <span className="ml-2 text-blue-500">

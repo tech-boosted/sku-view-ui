@@ -59,7 +59,47 @@ export default function Admin(props) {
 
         performersData.push(mainObj);
       });
+
+      // for insights table
+
+      let ArrSum = (arr) => {
+        let sum = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          sum += arr[i];
+        }
+        return sum;
+      };
+
+      let dataForInsights = [];
+      if (res.data.data.dummyChartData !== undefined) {
+        let obj;
+        res.data.data.dummyChartData.map((item) => {
+          item.platform.map((platfrom) => {
+            obj = {};
+            obj.data = [];
+            obj.property = [];
+
+            platfrom.data.map((properties) => {
+              let val = properties.property;
+              obj.sku = item.skuName;
+              obj.platform = platfrom.name;
+              let summedVal = ArrSum(properties.data);
+              obj.data.push(summedVal);
+              obj[val] = summedVal;
+              obj.property.push(properties.property);
+            });
+            dataForInsights.push(obj);
+          });
+        });
+      }
+
+      dispatch({ type: "loadInsightsData", payload: dataForInsights });
       dispatch({ type: "loadPerformersData", payload: performersData });
+      dispatch({
+        type: "loadChartData",
+        payload: res.data.data.dummyChartData,
+      });
     };
 
     getMiddleware("/user/userInfo", callbackForUserData, true);

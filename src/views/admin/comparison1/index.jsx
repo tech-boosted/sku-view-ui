@@ -22,7 +22,6 @@ const Comparison1 = (props) => {
     "#FAFA33",
     "#082063",
     "#AAFF01",
-   
   ];
 
   const [chartData, setChartData] = useState([]);
@@ -36,7 +35,19 @@ const Comparison1 = (props) => {
     console.log(item);
   });
 
+  const saveDates = () =>{
+    const today = new Date();
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const startDate = sevenDaysAgo.toISOString().split('T')[0];
+    const endDate = today.toISOString().split('T')[0];
+
+    setStartDate(startDate);
+    setEndDate(endDate);
+    
+  }
+
   useEffect(() => {
+    saveDates();
     const callbackForChartData = (res) => {
       let rawData = res.data.data.dummyChartData;
       let data = [];
@@ -45,64 +56,26 @@ const Comparison1 = (props) => {
         let skuName = item.skuName;
 
         item.platform.forEach((platform) => {
-          if (platform.name === platformArr[0]) {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
-            }
-          }
-          if (platform.name === "google") {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
-            }
-          }
-          if (platform.name === "facebook") {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
+          for (let i = 0; i < platformArr.length; i++) {
+            if (platform.name === platformArr[i]) {
+              let isPresent = data.some(
+                (obj) => obj.platformName === platform.name
+              );
+              let obj = {
+                platformName: platform.name,
+                sku: [{ name: skuName, data: platform.data }],
+              };
+              if (isPresent) {
+                data.forEach((element) => {
+                  if (element.platformName === platform.name) {
+                    let temparr = element.sku;
+                    temparr.push(obj.sku[0]);
+                    element.sku = temparr;
+                  }
+                });
+              } else {
+                data.push(obj);
+              }
             }
           }
         });
@@ -119,7 +92,7 @@ const Comparison1 = (props) => {
       const value = chartData[0].platformName;
       handlePlatformSelection({
         target: {
-          value: value,
+          value: platformArr[0],
         },
       });
     }
@@ -910,10 +883,10 @@ const Comparison1 = (props) => {
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformArr.map((item, index) => (
                   <button
-                    className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                    className="cursor-pointer text-black hover:text-black text-left pt-2 text-base font-medium  hover:font-bold "
                     value={item}
                     onClick={(e) => handlePlatformSelection(e)}
                   >
@@ -935,38 +908,38 @@ const Comparison1 = (props) => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name="l"
                     id="Black T-shirt"
                     value={"Black T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Black T-shirt">Black T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Black T-shirt">Black T-shirt</label>
                 </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
                     id="Red T-shirt"
                     value={"Red T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Red T-shirt">Red T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Red T-shirt">Red T-shirt</label>
                 </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
                     id="Pink T-shirt"
                     value={"Pink T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Pink T-shirt">Pink T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Pink T-shirt">Pink T-shirt</label>
                 </div>
               </div>
             }
