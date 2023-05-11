@@ -14,6 +14,7 @@ import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 
 const SocialDashboard = () => {
+  var Platforms = ["Facebook","Instagram","Tiktok"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">
@@ -23,7 +24,7 @@ const SocialDashboard = () => {
               <div className="flex">
               <Tab>Overview</Tab>
                 <Tab>Insights</Tab>
-                <Tab>Comparison</Tab>
+                <Tab>Compare</Tab>
               </div>
               <div className="flex gap-4">
                 <img
@@ -54,7 +55,7 @@ const SocialDashboard = () => {
               <ChartsAndTable />
             </TabPanel>
             <TabPanel>
-              <InsightsTable platforms={["facebook"]} />
+              <InsightsTable platforms={Platforms} />
             </TabPanel>
             <TabPanel>
               <div>
@@ -64,7 +65,7 @@ const SocialDashboard = () => {
                       Channel - SKUs
                     </div>
                   </header>
-                  <Comparison1 platforms={["facebook"]} />
+                  <Comparison1 platforms={Platforms} />
                 </Card>
 
                 <Card extra={"mt-5 px-4 rounded-3xl"}>
@@ -73,7 +74,7 @@ const SocialDashboard = () => {
                       SKU - Channels
                     </div>
                   </header>
-                  <Comparison2 platforms={["facebook"]} />
+                  <Comparison2 platforms={Platforms} />
                 </Card>
               </div>
             </TabPanel>

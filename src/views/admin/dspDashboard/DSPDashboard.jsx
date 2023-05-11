@@ -13,6 +13,7 @@ import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 
 const DSPDashboard = () => {
+  var Platforms = ["Amazon", "Google","Criteo"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">
@@ -22,7 +23,7 @@ const DSPDashboard = () => {
               <div className="flex">
                 <Tab>Overview</Tab>
                 <Tab>Insights</Tab>
-                <Tab>Comparison</Tab>
+                <Tab>Compare</Tab>
               </div>
               <div className="flex gap-4">
                 <img
@@ -53,7 +54,7 @@ const DSPDashboard = () => {
               <ChartsAndTable />
             </TabPanel>
             <TabPanel>
-              <InsightsTable platforms={["amazon", "google"]} />
+              <InsightsTable platforms={Platforms} />
             </TabPanel>
             <TabPanel>
               <div>
@@ -63,7 +64,7 @@ const DSPDashboard = () => {
                       Channel - SKUs
                     </div>
                   </header>
-                  <Comparison1 platforms={["amazon", "google"]} />
+                  <Comparison1 platforms={Platforms} />
                 </Card>
                 <Card extra={"mt-5 px-4 rounded-3xl"}>
                   <header className="relative mx-4 flex items-center justify-between pt-4">
@@ -71,7 +72,7 @@ const DSPDashboard = () => {
                       SKU - Channels
                     </div>
                   </header>
-                  <Comparison2 platforms={["amazon", "google"]} />
+                  <Comparison2 platforms={Platforms} />
                 </Card>
               </div>
             </TabPanel>

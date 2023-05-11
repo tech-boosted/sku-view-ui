@@ -846,21 +846,21 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 <button
-                  className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
                   value={"Red T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Red T-shirt
                 </button>
                 <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
                   value={"Black T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Black T-shirt
                 </button>
                 <button
-                  className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold "
+                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
                   onClick={(e) => handleSKUSelection(e)}
                   value={"Pink T-shirt"}
                 >
@@ -883,16 +883,16 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformPropArr.map((item, index) => (
-                  <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                  <div className="flex cursor-pointer text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold">
                     <input
                       type="checkbox"
                       name="l"
                       id={item}
                       value={item}
-                      className="mr-2"
+                      className="mr-2 cursor-pointer "
                       onChange={(e) => handleCheckboxDropdown(e)}
                     />
-                    <label htmlFor={item} className="text-lg">
+                    <label htmlFor={item} className="text-base cursor-pointer ">
                       {item}
                     </label>
                   </div>

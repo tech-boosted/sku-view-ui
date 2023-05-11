@@ -883,10 +883,10 @@ const Comparison1 = (props) => {
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformArr.map((item, index) => (
                   <button
-                    className=" text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                    className="cursor-pointer text-black hover:text-black text-left pt-2 text-base font-medium  hover:font-bold "
                     value={item}
                     onClick={(e) => handlePlatformSelection(e)}
                   >
@@ -908,38 +908,38 @@ const Comparison1 = (props) => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <div className="text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name="l"
                     id="Black T-shirt"
                     value={"Black T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Black T-shirt">Black T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Black T-shirt">Black T-shirt</label>
                 </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
                     id="Red T-shirt"
                     value={"Red T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Red T-shirt">Red T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Red T-shirt">Red T-shirt</label>
                 </div>
-                <div className="text-black hover:text-black mt-3 text-left  text-base font-medium  hover:font-bold">
+                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
                     id="Pink T-shirt"
                     value={"Pink T-shirt"}
-                    className="mr-2"
+                    className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label htmlFor="Pink T-shirt">Pink T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Pink T-shirt">Pink T-shirt</label>
                 </div>
               </div>
             }
