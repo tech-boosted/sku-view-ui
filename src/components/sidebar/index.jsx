@@ -24,11 +24,11 @@ const Sidebar = ({ open, onClose }) => {
         <HiX />
       </span>
 
-      <div className={`mx-[10px] mt-[5px] flex items-center p-10`}>
+      <div className={`items-center px-16 py-10`}>
         <img
           src={sidebarLogo}
           alt="Sidebar Across logo"
-          className="w-[180px] object-contain"
+          className="w-[140px] object-contain"
         />
         {/* <div className="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
           <span className="font-medium"></span>
