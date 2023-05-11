@@ -22,7 +22,6 @@ const Comparison1 = (props) => {
     "#FAFA33",
     "#082063",
     "#AAFF01",
-   
   ];
 
   const [chartData, setChartData] = useState([]);
@@ -45,64 +44,26 @@ const Comparison1 = (props) => {
         let skuName = item.skuName;
 
         item.platform.forEach((platform) => {
-          if (platform.name === platformArr[0]) {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
-            }
-          }
-          if (platform.name === "google") {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
-            }
-          }
-          if (platform.name === "facebook") {
-            let isPresent = data.some(
-              (obj) => obj.platformName === platform.name
-            );
-            let obj = {
-              platformName: platform.name,
-              sku: [{ name: skuName, data: platform.data }],
-            };
-            if (isPresent) {
-              data.forEach((element) => {
-                if (element.platformName === platform.name) {
-                  let temparr = element.sku;
-                  temparr.push(obj.sku[0]);
-                  element.sku = temparr;
-                }
-              });
-            } else {
-              data.push(obj);
+          for (let i = 0; i < platformArr.length; i++) {
+            if (platform.name === platformArr[i]) {
+              let isPresent = data.some(
+                (obj) => obj.platformName === platform.name
+              );
+              let obj = {
+                platformName: platform.name,
+                sku: [{ name: skuName, data: platform.data }],
+              };
+              if (isPresent) {
+                data.forEach((element) => {
+                  if (element.platformName === platform.name) {
+                    let temparr = element.sku;
+                    temparr.push(obj.sku[0]);
+                    element.sku = temparr;
+                  }
+                });
+              } else {
+                data.push(obj);
+              }
             }
           }
         });
@@ -119,7 +80,7 @@ const Comparison1 = (props) => {
       const value = chartData[0].platformName;
       handlePlatformSelection({
         target: {
-          value: value,
+          value: platformArr[0],
         },
       });
     }

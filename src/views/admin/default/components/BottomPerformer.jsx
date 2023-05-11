@@ -12,8 +12,6 @@ const BottomPerformer = () => {
   useEffect(() => {
     if(data.length > 1){
       setPerformerSkuData(data);
-      console.log('yo man');
-      console.log(data);
     }
   }, [data]);
 
@@ -136,12 +134,10 @@ const BottomPerformer = () => {
     clicks = clicks.slice(0, 5);
 
     if (index == 2) {
-      console.log(impressions);
       impressions.map((item, index) => {
         let obj = { rowData: [item.skuName, item.name, item.data[0]] };
         newDataRows.push(obj);
       });
-      console.log(newDataRows);
     }
     if (index == 3) {
       clicks.map((item, index) => {

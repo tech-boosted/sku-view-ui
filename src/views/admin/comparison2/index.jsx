@@ -10,8 +10,11 @@ import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
 const Comparison2 = (props) => {
+  const dispatch = useDispatch();
+
   let platformPropArr = props.platforms;
   // data
   const colors = [
@@ -30,7 +33,9 @@ const Comparison2 = (props) => {
   useEffect(() => {
     const callbackForChartData = (res) => {
       setChartData(res.data.data.dummyChartData);
+      
       setDates(res.data.data.dummyDateData);
+      
     };
     getMiddleware("/data", callbackForChartData, true);
   }, []);
@@ -598,17 +603,19 @@ const Comparison2 = (props) => {
       return item.skuName === e.target.value;
     });
     let newData;
-    let f = temp[0].platform.filter((item) => {
+    let filteredAccordingToPropsArr = temp[0].platform.filter((item) => {
       return platformPropArr.includes(item.name);
     });
+  
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
-      newData = temp[0].platform.map((platformItem, index) => ({
-        series: {
-          name: platformItem.name,
-          data: platformItem.data[i].data,
-          color: colors[index],
-        },
+      newData = filteredAccordingToPropsArr.map((platformItem, index) => (
+        {
+          series: {
+            name: platformItem.name,
+            data: platformItem.data[i].data,
+            color: colors[index],
+          },
         immutableSeries: {
           name: platformItem.name,
           data: platformItem.data[i].data,

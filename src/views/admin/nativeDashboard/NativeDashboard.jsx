@@ -3,6 +3,8 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Comparison1 from "../comparison1";
 import Comparison2 from "../comparison2";
 import ChartsAndTable from "components/chartsAndSKUTable";
+import InsightsTable from "components/insights/InsightsTable";
+import Card from "components/card";
 
 const NativeDashboard = () => {
   return (
@@ -12,9 +14,9 @@ const NativeDashboard = () => {
           <TabList className="flex w-full justify-between ">
             <div className="flex w-full justify-between">
               <div className="flex">
-                <Tab>Overview</Tab>
-                <Tab>Platform - Multi SKU</Tab>
-                <Tab>SKU - Multi Platform</Tab>
+              <Tab>Overview</Tab>
+                <Tab>Insights</Tab>
+                <Tab>Comparison</Tab>
               </div>
               <div className="flex gap-4">
                 <img
@@ -45,10 +47,27 @@ const NativeDashboard = () => {
               <ChartsAndTable />
             </TabPanel>
             <TabPanel>
-              <Comparison1 platforms={["amazon", "google"]} />
+              <InsightsTable platforms={["amazon", "google"]} />
             </TabPanel>
             <TabPanel>
-              <Comparison2 platforms={["amazon", "google"]} />
+              <div>
+                <Card extra={"mt-3 px-4 rounded-3xl"}>
+                  <header className="relative mx-4 flex items-center justify-between pt-4">
+                    <div className="text-xl font-bold text-navy-700 dark:text-white">
+                      Channel - SKUs
+                    </div>
+                  </header>
+                  <Comparison1 platforms={["amazon", "google"]} />
+                </Card>
+                <Card extra={"mt-5 px-4 rounded-3xl"}>
+                  <header className="relative mx-4 flex items-center justify-between pt-4">
+                    <div className="text-xl font-bold text-navy-700 dark:text-white">
+                      SKU - Channels
+                    </div>
+                  </header>
+                  <Comparison2 platforms={["amazon", "google"]} />
+                </Card>
+              </div>
             </TabPanel>
           </TabPanels>
         </Tabs>

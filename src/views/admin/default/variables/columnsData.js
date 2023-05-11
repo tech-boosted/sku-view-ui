@@ -23,7 +23,7 @@ export const columnsDataCheck = [
     accessor: "name",
   },
   {
-    Header: "PROGRESS",
+    Header: "THRESHOLD",
     accessor: "progress",
   },
   {

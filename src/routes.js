@@ -34,35 +34,35 @@ import { SiGoogleanalytics } from "react-icons/si";
 
 const routes = [
   {
-    name: "Collective Dashboard",
+    name: "Acros Ads",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
   },
   {
-    name: "Across PPC",
+    name: "Acros PPC",
     layout: "/admin",
     icon: <MdBarChart className="h-6 w-6" />,
     path: "PPC-dashboard",
     component: <PPCDashboard />,
   },
   {
-    name: "Across Social",
+    name: "Acros Social",
     layout: "/admin",
     icon: <MdSocialDistance className="h-6 w-6" />,
     path: "social-dashboard",
     component: <SocialDashboard />,
   },
   {
-    name: "Across DSP",
+    name: "Acros DSP",
     layout: "/admin",
     icon: <SiGoogleanalytics className="h-6 w-6" />,
     path: "dsp-dashboard",
     component: <DSPDashboard />,
   },
   {
-    name: "Across Native",
+    name: "Acros Native",
     layout: "/admin",
     icon: <IoIosAnalytics className="h-6 w-6" />,
     path: "native-dashboard",

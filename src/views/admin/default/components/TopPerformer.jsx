@@ -50,7 +50,6 @@ const TopPerformer = () => {
             }
           });
 
-          console.log(maxPlatformImpressions);
           let impressionsObj = {
             property: "impressions",
             skuName: item.name,
@@ -118,7 +117,6 @@ const TopPerformer = () => {
           };
           orders.push(OrdersObj);
 
-          console.log(item);
           return {
             rowData: [
               item.name,
@@ -133,6 +131,7 @@ const TopPerformer = () => {
 
     setPerformerTableData(temp);
 
+
     let newHeader = temp[0].headers.slice(0, 2);
 
     newHeader.push(temp[0].headers[index]);
@@ -146,12 +145,10 @@ const TopPerformer = () => {
     clicks = clicks.slice(0, 5);
 
     if (index == 2) {
-      console.log(impressions);
       impressions.map((item, index) => {
         let obj = { rowData: [item.skuName, item.name, item.data[0]] };
         newDataRows.push(obj);
       });
-      console.log(newDataRows);
     }
     if (index == 3) {
       clicks.map((item, index) => {
