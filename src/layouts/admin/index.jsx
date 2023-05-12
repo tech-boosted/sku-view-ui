@@ -93,6 +93,7 @@ export default function Admin(props) {
           });
         });
       }
+      console.log(dataForInsights);
 
       dispatch({ type: "loadInsightsData", payload: dataForInsights });
       dispatch({ type: "loadPerformersData", payload: performersData });
