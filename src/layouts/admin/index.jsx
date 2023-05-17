@@ -111,7 +111,6 @@ export default function Admin(props) {
           dataForInsights.push(obj);
         });
       }
-      console.log(dataForInsights);
 
       dispatch({ type: "loadInsightsData", payload: dataForInsights });
       dispatch({ type: "loadPerformersData", payload: performersData });
@@ -160,16 +159,9 @@ export default function Admin(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        console.log(prop.path);
-
-          return (
-            <Route
-            path={`/${prop.path}/*`}
-            element={prop.component}
-            key={key}
-            />
-            );
-            
+        return (
+          <Route path={`/${prop.path}/*`} element={prop.component} key={key} />
+        );
       } else {
         return null;
       }

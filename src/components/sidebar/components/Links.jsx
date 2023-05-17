@@ -25,7 +25,6 @@ export function SidebarLinks(props) {
         route.layout === "/rtl"
       ) {
         if (route.subRoutes) {
-          console.log("link is here only...");
           return (
             <SideBarMenu
               route={route}

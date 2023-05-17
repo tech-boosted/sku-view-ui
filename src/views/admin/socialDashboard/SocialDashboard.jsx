@@ -20,7 +20,7 @@ const SocialDashboard = () => {
                 <Tab>Insights</Tab>
                 <Tab>Compare</Tab>
               </div>
-              <div className="flex gap-4">
+              {/* <div className="flex gap-4">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
                   alt="facebook"
@@ -41,7 +41,7 @@ const SocialDashboard = () => {
                   alt="tiktok"
                   className="h-[40px] rounded-[50px]"
                 />
-              </div>
+              </div> */}
             </div>
           </TabList>
           <TabPanels>

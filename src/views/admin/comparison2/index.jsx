@@ -45,20 +45,16 @@ const Comparison2 = (props) => {
   const dateDataFromStore = useSelector((state) => state.appData.dateData);
   useEffect(() => {
     saveDates();
-    console.log("Intentions");
 
     if (chartDataFromStore != undefined) {
       setChartData(chartDataFromStore);
       setDates(dateDataFromStore);
-      console.log("dua lipa");
-      console.log(chartDataFromStore);
-    }         
+    }
   }, [chartDataFromStore]);
 
   useEffect(() => {
     if (chartData.length > 0) {
       const value = chartData[0].skuName;
-      console.log("Hello");
       handleSKUSelection({
         target: {
           value: value,
@@ -880,8 +876,7 @@ const Comparison2 = (props) => {
             toastHeading={"Please select the SKU first."}
             button={
               <button className="flex h-[56px] min-w-[190px] items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                Select Platform{" "}
-                <FiChevronDown read-only className="ml-2 text-xl" />
+                Select Platform <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={

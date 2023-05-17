@@ -45,7 +45,6 @@ const Comparison1 = (props) => {
   const dateDataFromStore = useSelector((state) => state.appData.dateData);
   useEffect(() => {
     saveDates();
-    console.log("Intentions");
     if (chartDataFromStore !== undefined) {
       let rawData = chartDataFromStore;
       let data = [];

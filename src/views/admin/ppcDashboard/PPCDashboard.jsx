@@ -42,81 +42,9 @@ const PPCDashboard = () => {
           path="/compare"
           element={<Compare platforms={[...Platforms]} />}
         />
-        {/* <Route
-          path="/"
-          element={<ChartsAndTable platfroms={[...Platforms]} />}
-        /> */}
       </Routes>
     </div>
   );
 };
 
 export default PPCDashboard;
-
-{
-  /* <div className=" lg:!mb-0">
-        <Tabs variant="soft-rounded" colorScheme="purple" className="w-f">
-          <TabList className="flex w-full justify-between ">
-            <div className="flex w-full justify-between">
-              <div className="flex">
-              <Tab>Overview</Tab>
-                <Tab>Insights</Tab>
-                <Tab>Compare</Tab>
-              </div>
-              <div className="flex gap-4">
-                <img
-                  src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
-                  alt="google"
-                  className="h-[40px]  rounded-[50px]"
-                />
-                <img
-                  src="https://static.vecteezy.com/system/resources/previews/014/018/561/non_2x/amazon-logo-on-transparent-background-free-vector.jpg"
-                  alt="amazon"
-                  className="h-[40px] rounded-[50px]"
-                />
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/888/888848.png"
-                  alt="ebay"
-                  className="h-[40px] rounded-[50px]"
-                />
-                <img
-                  src="https://www.freepnglogos.com/uploads/walmart-logo-24.jpg"
-                  alt="walmart"
-                  className="h-[40px] rounded-[50px]"
-                />
-              </div>
-            </div>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <ChartsAndTable />
-            </TabPanel>
-            <TabPanel>
-              <InsightsTable platforms={Platforms} />
-            </TabPanel>
-            <TabPanel>
-              <div>
-                <Card extra={"mt-5 px-4 rounded-3xl"}>
-                  <header className="relative mx-4 flex items-center justify-between pt-4">
-                    <div className="text-xl font-bold text-navy-700 dark:text-white">
-                      SKU - Channels
-                    </div>
-                  </header>
-                  <Comparison1 platforms={Platforms} />
-
-                </Card>
-                <Card extra={"mt-5 px-4 rounded-3xl"}>
-                  <header className="relative mx-4 flex items-center justify-between pt-4">
-                    <div className="text-xl font-bold text-navy-700 dark:text-white">
-                      Channel - SKUs
-                    </div>
-                  </header>
-                  <Comparison2 platforms={Platforms} />
-
-                </Card>
-              </div>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div> */
-}

@@ -25,7 +25,6 @@ const InsightsTable = (props) => {
     for (let i = 0; i < arr.length; i++) {
       sum += arr[i];
     }
-    console.log(sum);
     return sum;
   };
 
@@ -83,11 +82,7 @@ const InsightsTable = (props) => {
   let TableData = [...filteredData];
 
   if (TableData !== undefined) {
-    console.log(TableData);
-    TableData.map((item) => {
-      console.log(item);
-      console.log(item.platform);
-    });
+    TableData.map((item) => {});
   }
   let renderData = () => {
     let result = [];
@@ -270,8 +265,8 @@ const InsightsTable = (props) => {
 
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6 mt-5 py-5"}>
-      <header className="relative flex items-center justify-between items-start">
-        <div className="text-xl font-bold text-navy-700 dark:text-white items-start">
+      <header className="relative flex items-start items-center justify-between">
+        <div className="items-start text-xl font-bold text-navy-700 dark:text-white">
           Business Insights
         </div>
         <div>
@@ -283,37 +278,37 @@ const InsightsTable = (props) => {
         <table className="min-w-full ">
           <thead className="">
             <tr className="border-b border-gray-200 pb-[10px]">
-              <th className=" border-b border-gray-200 pb-[10px] w-[28%] text-center dark:!border-navy-700">
+              <th className=" w-[28%] border-b border-gray-200 pb-[10px] text-center dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase   text-gray-600 lg:text-xs">
                   SKU
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-start dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-start dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
                   Platform
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-end dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
                   Impressions
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-end dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
                   Clicks
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-end dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
                   Orders
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-end dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
                   Sales
                 </div>
               </th>
-              <th className=" border-b border-gray-200 w-[12%] pb-[10px] text-end dark:!border-navy-700">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
                 <div className="text-xs font-bold uppercase tracking-wide text-gray-600 lg:text-xs">
                   Spend
                 </div>
