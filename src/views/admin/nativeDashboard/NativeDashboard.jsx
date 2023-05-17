@@ -19,7 +19,7 @@ const NativeDashboard = () => {
                 <Tab>Insights</Tab>
                 <Tab>Compare</Tab>
               </div>
-              <div className="flex gap-4">
+              {/* <div className="flex gap-4">
                 <img
                   src="https://www.exchange4media.com/news-photo/106897-inmobilogo11.png"
                   alt="inmobi"
@@ -40,7 +40,7 @@ const NativeDashboard = () => {
                   alt="outbrain"
                   className="h-[40px] rounded-[50px]"
                 />
-              </div>
+              </div> */}
             </div>
           </TabList>
           <TabPanels>

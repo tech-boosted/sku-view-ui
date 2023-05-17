@@ -23,7 +23,7 @@ const PPCDashboard = () => {
                 <Tab>Insights</Tab>
                 <Tab>Compare</Tab>
               </div>
-              <div className="flex gap-4">
+              {/* <div className="flex gap-4">
                 <img
                   src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
                   alt="google"
@@ -44,7 +44,7 @@ const PPCDashboard = () => {
                   alt="walmart"
                   className="h-[40px] rounded-[50px]"
                 />
-              </div>
+              </div> */}
             </div>
           </TabList>
           <TabPanels>
