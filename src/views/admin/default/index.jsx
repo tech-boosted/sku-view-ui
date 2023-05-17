@@ -17,8 +17,11 @@ import tableDataCheck from "./variables/tableDataCheck.json";
 import tableDataComplex from "./variables/tableDataComplex.json";
 import TopPerformer from "./components/TopPerformer";
 import BottomPerformer from "./components/BottomPerformer";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const userInfo = useSelector(state=>state.accountData.userInfo);
+
   return (
     <div>
       {/* Card widget */}
@@ -29,11 +32,11 @@ const Dashboard = () => {
           title={"Earnings"}
           subtitle={"$340.5"}
         />
-        <Widget
+       {userInfo.subscription && <Widget
           icon={<IoDocuments className="h-6 w-6" />}
           title={"Spend this month"}
           subtitle={"$642.39"}
-        />
+        />}
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
           title={"Sales"}

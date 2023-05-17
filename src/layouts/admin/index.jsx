@@ -6,6 +6,7 @@ import Footer from "components/footer/Footer";
 import routes from "routes.js";
 import { getMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
+import { es } from "date-fns/locale";
 
 export default function Admin(props) {
   const { ...rest } = props;
@@ -20,7 +21,6 @@ export default function Admin(props) {
     );
     const callbackForUserData = (res) => {
       if (res) {
-        console.log(res);
         if (res.data) {
           dispatch({
             type: "loadUser",
@@ -45,7 +45,6 @@ export default function Admin(props) {
 
       let performersData = [];
       let data = res.data.data.dummyChartData;
-      console.log(data);
       data.map((item) => {
         let mainObj = { name: item.skuName, platform: [] };
         item.platform.map((platform) => {
@@ -75,22 +74,41 @@ export default function Admin(props) {
       if (res.data.data.dummyChartData !== undefined) {
         let obj;
         res.data.data.dummyChartData.map((item) => {
-          item.platform.map((platfrom) => {
-            obj = {};
-            obj.data = [];
-            obj.property = [];
+          obj = {};
+          obj.platform = [];
+          obj.impressions = [];
+          obj.clicks = [];
+          obj.orders = [];
+          obj.sales = [];
+          obj.spend = [];
 
-            platfrom.data.map((properties) => {
-              let val = properties.property;
+          item.platform.map((platform) => {
+            obj.platform.push(platform.name);
+            platform.data.map((properties, i) => {
               obj.sku = item.skuName;
-              obj.platform = platfrom.name;
-              let summedVal = ArrSum(properties.data);
-              obj.data.push(summedVal);
-              obj[val] = summedVal;
-              obj.property.push(properties.property);
+              if (i === 0) {
+                let summedVal = ArrSum(properties.data);
+                obj.impressions.push(summedVal);
+              }
+              if (i === 1) {
+                let summedVal = ArrSum(properties.data);
+                obj.spend.push(summedVal);
+              }
+              if (i === 2) {
+                let summedVal = ArrSum(properties.data);
+                obj.clicks.push(summedVal);
+              }
+              if (i === 3) {
+                let summedVal = ArrSum(properties.data);
+                obj.orders.push(summedVal);
+              }
+              if (i === 4) {
+                let summedVal = ArrSum(properties.data);
+                obj.sales.push(summedVal);
+              }
             });
-            dataForInsights.push(obj);
           });
+          dataForInsights.push(obj);
         });
       }
       console.log(dataForInsights);
@@ -100,6 +118,10 @@ export default function Admin(props) {
       dispatch({
         type: "loadChartData",
         payload: res.data.data.dummyChartData,
+      });
+      dispatch({
+        type: "loadDateData",
+        payload: res.data.data.dummyDateData,
       });
     };
 
@@ -138,9 +160,16 @@ export default function Admin(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        return (
-          <Route path={`/${prop.path}`} element={prop.component} key={key} />
-        );
+        console.log(prop.path);
+
+          return (
+            <Route
+            path={`/${prop.path}/*`}
+            element={prop.component}
+            key={key}
+            />
+            );
+            
       } else {
         return null;
       }
@@ -155,7 +184,7 @@ export default function Admin(props) {
       <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
         {/* Main Content */}
         <main
-          className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
+          className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[287px]`}
         >
           {/* Routes */}
           <div className="h-full">
@@ -166,7 +195,7 @@ export default function Admin(props) {
               secondary={getActiveNavbar(routes)}
               {...rest}
             />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
+            <div className="pt-5s  mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
               <Routes>
                 {getRoutes(routes)}
 

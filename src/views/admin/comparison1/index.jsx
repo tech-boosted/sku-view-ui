@@ -10,7 +10,7 @@ import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Comparison1 = (props) => {
   const dispatch = useDispatch();
@@ -29,27 +29,25 @@ const Comparison1 = (props) => {
   const [disable, setDisable] = useState(true);
 
   let platformArr = props.platforms;
-  console.log(platformArr);
 
-  platformArr.map((item) => {
-    console.log(item);
-  });
-
-  const saveDates = () =>{
+  const saveDates = () => {
     const today = new Date();
+    const onefourdaysAgo = new Date(today.getTime() - 14 * 24 * 60 * 60 * 1000);
     const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const startDate = sevenDaysAgo.toISOString().split('T')[0];
-    const endDate = today.toISOString().split('T')[0];
+    const startDate = onefourdaysAgo.toISOString().split("T")[0];
+    const endDate = sevenDaysAgo.toISOString().split("T")[0];
+    
 
     setStartDate(startDate);
     setEndDate(endDate);
-    
-  }
-
+  };
+  const chartDataFromStore = useSelector((state) => state.appData.chartData);
+  const dateDataFromStore = useSelector((state) => state.appData.dateData);
   useEffect(() => {
     saveDates();
-    const callbackForChartData = (res) => {
-      let rawData = res.data.data.dummyChartData;
+    console.log("Intentions");
+    if (chartDataFromStore !== undefined) {
+      let rawData = chartDataFromStore;
       let data = [];
 
       rawData.forEach((item) => {
@@ -82,9 +80,11 @@ const Comparison1 = (props) => {
       });
 
       setChartData(data);
-      setDates(res.data.data.dummyDateData);
-    };
-    getMiddleware("/data", callbackForChartData, true);
+      setDates(dateDataFromStore);
+    }
+    else{
+      alert("Wrong");
+    }
   }, []);
 
   useEffect(() => {
@@ -607,8 +607,8 @@ const Comparison1 = (props) => {
   // states
   const [platformDropdownValue, setPlatformDropdownValue] =
     useState("Select Platform");
-  const [startDate, setStartDate] = useState("2023-03-02");
-  const [endDate, setEndDate] = useState("2023-04-03");
+  const [startDate, setStartDate] = useState("2023-05-02");
+  const [endDate, setEndDate] = useState("2023-04-18");
   const [SKUArr, setSKUArr] = useState([]);
   // chart states
   const [impressionsState, setImpressionsState] = useState({
@@ -886,7 +886,7 @@ const Comparison1 = (props) => {
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformArr.map((item, index) => (
                   <button
-                    className="cursor-pointer text-black hover:text-black text-left pt-2 text-base font-medium  hover:font-bold "
+                    className="text-black hover:text-black cursor-pointer pt-2 text-left text-base font-medium  hover:font-bold "
                     value={item}
                     onClick={(e) => handlePlatformSelection(e)}
                   >
@@ -908,7 +908,7 @@ const Comparison1 = (props) => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <div className="cursor-pointer flex pt-2 text-black hover:text-black  text-left  text-base font-medium  hover:font-bold">
+                <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name="l"
@@ -917,9 +917,11 @@ const Comparison1 = (props) => {
                     className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label className="cursor-pointer" htmlFor="Black T-shirt">Black T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Black T-shirt">
+                    Black T-shirt
+                  </label>
                 </div>
-                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
+                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
@@ -928,9 +930,11 @@ const Comparison1 = (props) => {
                     className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label className="cursor-pointer" htmlFor="Red T-shirt">Red T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Red T-shirt">
+                    Red T-shirt
+                  </label>
                 </div>
-                <div className="cursor-pointer flex pt-2 text-black hover:text-black text-left  text-base font-medium  hover:font-bold">
+                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name=""
@@ -939,7 +943,9 @@ const Comparison1 = (props) => {
                     className="mr-2 cursor-pointer"
                     onChange={(e) => handleCheckboxDropdown(e)}
                   />
-                  <label className="cursor-pointer" htmlFor="Pink T-shirt">Pink T-shirt</label>
+                  <label className="cursor-pointer" htmlFor="Pink T-shirt">
+                    Pink T-shirt
+                  </label>
                 </div>
               </div>
             }

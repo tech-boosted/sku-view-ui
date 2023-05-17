@@ -7,7 +7,7 @@ import InsightsTable from "components/insights/InsightsTable";
 import Card from "components/card";
 
 const NativeDashboard = () => {
-  var Platforms = ["Amazon", "Google"];
+  var Platforms = ["Amazon", "Google","AddRoll","Criteo"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">

@@ -13,7 +13,7 @@ import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 
 const DSPDashboard = () => {
-  var Platforms = ["Amazon", "Google","Criteo"];
+  var Platforms = ["Amazon", "Google","Criteo","Walmart"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Card from "components/card";
 
 import Comparison1 from "../comparison1";
@@ -14,7 +8,7 @@ import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 
 const SocialDashboard = () => {
-  var Platforms = ["Facebook","Instagram","Tiktok"];
+  var Platforms = ["Facebook", "Instagram", "Tiktok"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
       <div className=" lg:!mb-0">
@@ -22,7 +16,7 @@ const SocialDashboard = () => {
           <TabList className="flex w-full justify-between ">
             <div className="flex w-full justify-between">
               <div className="flex">
-              <Tab>Overview</Tab>
+                <Tab>Overview</Tab>
                 <Tab>Insights</Tab>
                 <Tab>Compare</Tab>
               </div>

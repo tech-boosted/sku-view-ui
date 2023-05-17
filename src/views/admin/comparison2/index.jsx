@@ -10,7 +10,7 @@ import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
 import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Comparison2 = (props) => {
   const dispatch = useDispatch();
@@ -33,27 +33,32 @@ const Comparison2 = (props) => {
 
   const saveDates = () => {
     const today = new Date();
+    const onefourdaysAgo = new Date(today.getTime() - 14 * 24 * 60 * 60 * 1000);
     const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const startDate = sevenDaysAgo.toISOString().split("T")[0];
-    const endDate = today.toISOString().split("T")[0];
+    const startDate = onefourdaysAgo.toISOString().split("T")[0];
+    const endDate = sevenDaysAgo.toISOString().split("T")[0];
 
     setStartDate(startDate);
     setEndDate(endDate);
   };
-
+  const chartDataFromStore = useSelector((state) => state.appData.chartData);
+  const dateDataFromStore = useSelector((state) => state.appData.dateData);
   useEffect(() => {
     saveDates();
-    const callbackForChartData = (res) => {
-      setChartData(res.data.data.dummyChartData);
+    console.log("Intentions");
 
-      setDates(res.data.data.dummyDateData);
-    };
-    getMiddleware("/data", callbackForChartData, true);
-  }, []);
+    if (chartDataFromStore != undefined) {
+      setChartData(chartDataFromStore);
+      setDates(dateDataFromStore);
+      console.log("dua lipa");
+      console.log(chartDataFromStore);
+    }         
+  }, [chartDataFromStore]);
 
   useEffect(() => {
     if (chartData.length > 0) {
       const value = chartData[0].skuName;
+      console.log("Hello");
       handleSKUSelection({
         target: {
           value: value,
@@ -606,7 +611,6 @@ const Comparison2 = (props) => {
   // 🔥🔥 function invoked by the sku dropdown
   const handleSKUSelection = (e) => {
     setSKUDropdownValue(e.target.value);
-
     // filtering the data from the dummyChartData for the selected SKU so now we got the data for selected SKU
     let temp = chartData.filter(function (item) {
       return item.skuName === e.target.value;
@@ -846,21 +850,21 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 <button
-                  className="cursor-pointer  text-black hover:text-black text-left  text-base font-medium  hover:font-bold "
+                  className="text-black  hover:text-black cursor-pointer text-left  text-base font-medium  hover:font-bold "
                   value={"Red T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Red T-shirt
                 </button>
                 <button
-                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
+                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
                   value={"Black T-shirt"}
                   onClick={(e) => handleSKUSelection(e)}
                 >
                   Black T-shirt
                 </button>
                 <button
-                  className="cursor-pointer  text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold "
+                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
                   onClick={(e) => handleSKUSelection(e)}
                   value={"Pink T-shirt"}
                 >
@@ -883,7 +887,7 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformPropArr.map((item, index) => (
-                  <div className="flex cursor-pointer text-black hover:text-black pt-2 text-left  text-base font-medium  hover:font-bold">
+                  <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
                     <input
                       type="checkbox"
                       name="l"
@@ -892,7 +896,7 @@ const Comparison2 = (props) => {
                       className="mr-2 cursor-pointer "
                       onChange={(e) => handleCheckboxDropdown(e)}
                     />
-                    <label htmlFor={item} className="text-base cursor-pointer ">
+                    <label htmlFor={item} className="cursor-pointer text-base ">
                       {item}
                     </label>
                   </div>

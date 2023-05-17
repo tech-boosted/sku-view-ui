@@ -57,7 +57,6 @@ const Channels = () => {
     };
 
     if (amazonCredentialsFromStore) {
-      console.log("here we are");
       let amazonProfileIdFromStore =
         amazonCredentialsFromStore.amazon.profile_id;
 
@@ -77,7 +76,6 @@ const Channels = () => {
   ];
 
   const callback = (res) => {
-    console.log(res);
     if (res.data.url !== undefined) {
       window.location.replace(res.data.url);
     }
@@ -100,7 +98,6 @@ const Channels = () => {
     let name = item.accountInfo.name;
 
     const callbackForSettingId = (res) => {
-      console.log(res);
       if (res.status === 200) {
         setAmazonProfileId(id);
         setDisableAmazonDropdown(true);

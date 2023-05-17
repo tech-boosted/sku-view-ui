@@ -20,7 +20,8 @@ import {
   MdLockOpen,
   MdSettings,
   MdAnalytics,
-  MdAdsClick
+  MdAdsClick,
+  MdPaid
 } from "react-icons/md";
 import Channels from "views/admin/channels";
 import PPCDashboard from "views/admin/ppcDashboard/PPCDashboard";
@@ -29,6 +30,8 @@ import DSPDashboard from "views/admin/dspDashboard/DSPDashboard";
 import NativeDashboard from "views/admin/nativeDashboard/NativeDashboard";
 import { IoIosAnalytics } from "react-icons/io";
 import { SiGoogleanalytics } from "react-icons/si";
+import Plans from "views/admin/Plans";
+import Overview from "views/admin/ppcDashboard/components/Overview";
 
 
 
@@ -46,6 +49,28 @@ const routes = [
     icon: <MdBarChart className="h-6 w-6" />,
     path: "PPC-dashboard",
     component: <PPCDashboard />,
+    subRoutes:[
+      {
+      name:"Overview",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"overview",
+      component:<Overview/>
+    },
+      {
+      name:"Insights",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"insights"
+    },
+      {
+      name:"Compare ",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"compare"
+    },
+      
+  ]
   },
   {
     name: "Acros Social",
@@ -67,6 +92,14 @@ const routes = [
     icon: <IoIosAnalytics className="h-6 w-6" />,
     path: "native-dashboard",
     component: <NativeDashboard />,
+  },
+  {
+    name: "Plans",
+    layout: "/admin",
+    icon: <MdPaid className="h-6 w-6" />,
+    path: "plans",
+    component: <Plans/>,
+
   },
   // {
   //   name: "Data Tables",
