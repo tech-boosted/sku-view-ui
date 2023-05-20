@@ -12,12 +12,12 @@ import {
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
 import { postMiddleware } from "Middleware";
-import { useSelector } from "react-redux";
-import { useToast } from '@chakra-ui/react'
-
+import { useDispatch, useSelector } from "react-redux";
+import { useToast } from "@chakra-ui/react";
 
 const Navbar = (props) => {
-  const toast = useToast()
+  const toast = useToast();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const userInfo = useSelector((state) => state.accountData.userInfo);
@@ -32,21 +32,22 @@ const Navbar = (props) => {
   const handleLogout = () => {
     postMiddleware("/user/logout", {}, callback, true);
     localStorage.removeItem("token");
+    dispatch({ type: "clearAppData" });
+    dispatch({ type: "clearUser" });
 
     navigate("/auth/");
 
     toast({
-      title: 'Logout successful.',
-      description:"User logged out successfully",
-      status: 'warning',
+      title: "Logout successful.",
+      description: "User logged out successfully",
+      status: "warning",
       duration: 5000,
-      position:    'top-right',
-      variant:'subtle',
+      position: "top-right",
+      variant: "subtle",
       isClosable: true,
-    })
+    });
   };
 
- 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
@@ -79,10 +80,9 @@ const Navbar = (props) => {
       </div>
 
       <div
-        className="xl:w-[145px] relative mt-[3px] flex h-[61px] w-[145px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[145px] md:flex-grow-0
-        md:gap-1 xl:gap-2"
+        className="relative mt-[3px] flex h-[61px] w-[145px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[145px] md:flex-grow-0 md:gap-1
+        xl:w-[145px] xl:gap-2"
       >
-        
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
           onClick={onOpenSidenav}
@@ -91,7 +91,7 @@ const Navbar = (props) => {
         </span>
         {/* start Notification */}
         <Dropdown
-        disabled={false}
+          disabled={false}
           button={
             <p className="cursor-pointer">
               <IoMdNotificationsOutline className="h-4 w-4 text-gray-600 dark:text-white" />
@@ -140,8 +140,6 @@ const Navbar = (props) => {
           }
           classNames={"py-2 top-4 -left-[230px] md:-left-[440px] w-max"}
         />
-      
-
 
         <div
           className="cursor-pointer text-gray-600"
@@ -163,11 +161,9 @@ const Navbar = (props) => {
         </div>
         {/* Profile & Dropdown */}
         <Dropdown
-        disabled={false}
+          disabled={false}
           button={
-           
-            <BsFillPersonFill className="cursor-pointer h-[30px] w-[30px] text-brand-500"  />
-
+            <BsFillPersonFill className="h-[30px] w-[30px] cursor-pointer text-brand-500" />
           }
           children={
             <div className="flex h-32  w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">

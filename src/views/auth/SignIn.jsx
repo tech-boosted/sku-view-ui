@@ -1,7 +1,7 @@
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ export default function SignIn() {
   const toast = useToast()
 
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const initialValue = { email: "techOne@boosted.in", password: "password123" };
@@ -41,7 +42,7 @@ export default function SignIn() {
       });
 
       localStorage.setItem("token", res.data.token);
-      navigate("/admin/");
+      navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
 
       toast({
         title: 'Login Successfull.',

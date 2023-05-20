@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
 import { useToast } from '@chakra-ui/react'
@@ -13,6 +13,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const initialValue = {
     email: "",
@@ -53,7 +54,7 @@ const SignUp = () => {
         },
       });
 
-      navigate("/admin/");
+      navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
       toast({
         title: 'Login Successfull.',
         status: 'success',

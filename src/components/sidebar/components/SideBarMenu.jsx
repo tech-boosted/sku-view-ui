@@ -25,7 +25,7 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
         >
           <div className="relative mb-3 flex hover:cursor-pointer">
             <li
-              className="my-[3px] ml-4 flex cursor-pointer items-center px-8"
+              className="my-[3px] ml-10 flex cursor-pointer items-center px-8"
               key={index}
             >
               {/* <span

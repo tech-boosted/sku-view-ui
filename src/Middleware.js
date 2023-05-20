@@ -1,5 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { get, post } from "./API";
-
 export const postMiddleware =  (url, data, callback,auth) => {
     const baseURL = process.env.REACT_APP_BASE_URL;
     let completeurl = baseURL + url;

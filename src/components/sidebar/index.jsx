@@ -4,7 +4,6 @@ import { HiX } from "react-icons/hi";
 import Links from "./components/Links";
 import sidebarLogo from "../../assets/svg/sidebar/LOGO_ACROS-2.svg";
 
-import SidebarCard from "components/sidebar/componentsrtl/SidebarCard";
 import routes from "routes.js";
 
 const Sidebar = ({ open, onClose }) => {

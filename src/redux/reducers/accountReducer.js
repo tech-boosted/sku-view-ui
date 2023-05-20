@@ -12,6 +12,8 @@ registerUser:(state,action)=>{
 },
 loadUser:(state,action)=>{
   state.userInfo = action.payload.userData;
+},
+clearUser:(state,action)=>{
+  state.userInfo = {};
 }
-
 })

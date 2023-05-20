@@ -31,7 +31,6 @@ import NativeDashboard from "views/admin/nativeDashboard/NativeDashboard";
 import { IoIosAnalytics } from "react-icons/io";
 import { SiGoogleanalytics } from "react-icons/si";
 import Plans from "views/admin/Plans";
-import Overview from "views/admin/ppcDashboard/components/Overview";
 
 
 
@@ -54,20 +53,19 @@ const routes = [
       name:"Overview",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"overview",
-      component:<Overview/>
+      path:"overview-ppc",
     },
       {
       name:"Insights",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"insights"
+      path:"insights-ppc"
     },
       {
       name:"Compare ",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"compare"
+      path:"compare-ppc"
     },
       
   ]
@@ -78,6 +76,27 @@ const routes = [
     icon: <MdSocialDistance className="h-6 w-6" />,
     path: "social-dashboard",
     component: <SocialDashboard />,
+    subRoutes:[
+      {
+      name:"Overview",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"overview-social",
+    },
+      {
+      name:"Insights",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"insights-social"
+    },
+      {
+      name:"Compare ",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"compare-social"
+    },
+      
+  ]
   },
   {
     name: "Acros DSP",
@@ -85,6 +104,27 @@ const routes = [
     icon: <SiGoogleanalytics className="h-6 w-6" />,
     path: "dsp-dashboard",
     component: <DSPDashboard />,
+    subRoutes:[
+      {
+      name:"Overview",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"overview-dsp",
+    },
+      {
+      name:"Insights",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"insights-dsp"
+    },
+      {
+      name:"Compare ",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"compare-dsp"
+    },
+      
+  ]
   },
   {
     name: "Acros Native",
@@ -92,6 +132,27 @@ const routes = [
     icon: <IoIosAnalytics className="h-6 w-6" />,
     path: "native-dashboard",
     component: <NativeDashboard />,
+    subRoutes:[
+      {
+      name:"Overview",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"overview-native",
+    },
+      {
+      name:"Insights",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"insights-native"
+    },
+      {
+      name:"Compare ",
+      layout:"/admin",
+      icon: <MdPaid className="h-6 w-6" />,
+      path:"compare-native"
+    },
+      
+  ]
   },
   {
     name: "Plans",

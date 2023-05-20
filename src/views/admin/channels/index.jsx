@@ -7,6 +7,7 @@ import { MdVerified } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import InputField from "components/fields/InputField";
+import { useLocation } from "react-router-dom";
 
 const Channels = () => {
   const [amazonProfiles, setAmazonProfiles] = useState([]);
@@ -17,6 +18,7 @@ const Channels = () => {
   const [googleCustomerId, setGoogleCustomerId] = useState("NA");
   const [displayFormError, setDisplayFormError] = useState(false);
   const toast = useToast();
+  const location = useLocation();
 
   const amazonCredentialsFromStore = useSelector(
     (state) => state.accountData.userInfo.credentials

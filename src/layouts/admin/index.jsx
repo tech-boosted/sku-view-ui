@@ -7,6 +7,9 @@ import routes from "routes.js";
 import { getMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
 import { es } from "date-fns/locale";
+import Protected from "components/routing/Protected";
+import SusbcribedRoute from "components/routing/SusbcribedRoute";
+import SubscriptionModal from "components/subscription/SubscriptionModal";
 
 export default function Admin(props) {
   const { ...rest } = props;
@@ -159,9 +162,25 @@ export default function Admin(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        return (
-          <Route path={`/${prop.path}/*`} element={prop.component} key={key} />
-        );
+        if (prop.name !== "Settings" && prop.name !== "Channels") {
+          return (
+            <Route
+              path={`/${prop.path}/*`}
+              element={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return (
+            <Route element={<SusbcribedRoute path={prop.path} />}>
+              <Route
+                path={`/${prop.path}/*`}
+                element={<SubscriptionModal />}
+                key={4}
+              />
+            </Route>
+          );
+        }
       } else {
         return null;
       }
@@ -189,12 +208,14 @@ export default function Admin(props) {
             />
             <div className="pt-5s  mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
               <Routes>
-                {getRoutes(routes)}
+                <Route element={<Protected />}>
+                  {getRoutes(routes)}
 
-                <Route
-                  path="/"
-                  element={<Navigate to="/admin/default" replace />}
-                />
+                  <Route
+                    path="/"
+                    element={<Navigate to="/admin/default" replace />}
+                  />
+                </Route>
               </Routes>
             </div>
             <div className="p-3">
