@@ -3,12 +3,10 @@ import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 import {
   Link,
-  Navigate,
   Route,
   Routes,
   useLocation,
   useNavigate,
-  useParams,
 } from "react-router-dom";
 import Compare from "../components/Compare";
 

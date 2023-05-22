@@ -1,14 +1,8 @@
 import Dropdown from "components/dropdown";
 import React, { useEffect, useState } from "react";
 import ComparisonCharts from "../comparison2/components/ComparisonCharts";
-import { dateData, dummyChartData } from "./variables";
-import { lineChartOptionsTotalSpent } from "variables/charts";
 import { FiChevronDown } from "react-icons/fi";
-import InputField from "components/fields/InputField";
-import Datepicker from "components/datepicker";
-import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
-import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -4,7 +4,7 @@ import Dropdown from "components/dropdown";
 import React, { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { MdVerified } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import InputField from "components/fields/InputField";
 import { useLocation } from "react-router-dom";

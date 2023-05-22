@@ -2,15 +2,11 @@ import React from "react";
 import Dropdown from "components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import navbarimage from "assets/img/layout/Navbar.png";
-import { BsArrowBarUp, BsFillPersonFill, BsPerson } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
+import { BsFillPersonFill} from "react-icons/bs";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import {
   IoMdNotificationsOutline,
-  IoMdInformationCircleOutline,
 } from "react-icons/io";
-import avatar from "assets/img/avatars/avatar4.png";
 import { postMiddleware } from "Middleware";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";

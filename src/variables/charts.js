@@ -27,34 +27,32 @@ export const lineChartDataTotalSpent = [
 ];
 
 export const lineChartOptionsTotalSpent = {
-
   legend: {
     show: true,
-    position:'top',
-    labels:{
-      // colors: "#A3AED0",
-    }
+    position: "top",
+    labels: {
+      colors: "#A3AED0",
+    },
   },
 
-  theme: {
-    mode: "light",
-  },
   chart: {
     type: "line",
 
     toolbar: {
       show: true,
-      show: true,
-         tools: {
-          download: true,
-          selection: false,
-          zoom: false,
-          zoomin: true,
-          zoomout: true,
-          pan: false,
-          reset:  false| '<img src="/static/icons/reset.png" width="20">',
-          customIcons: []
-        },
+      style: {
+        fontSize: "12px",
+      },
+      tools: {
+        download: true,
+        selection: false,
+        zoom: false,
+        zoomin: true,
+        zoomout: true,
+        pan: false,
+        reset: false | '<img src="/static/icons/reset.png" width="20">',
+        customIcons: [],
+      },
     },
   },
 
@@ -69,42 +67,54 @@ export const lineChartOptionsTotalSpent = {
     style: {
       fontSize: "12px",
       fontFamily: undefined,
-      backgroundColor: "#000000"
+      backgroundColor: "#000000",
     },
-    theme: 'dark',
+    theme: "dark",
     x: {
       format: "dd/MM/yy HH:mm",
     },
   },
   grid: {
     show: true,
+    borderColor: "#A3AED0",
+    strokeDashArray: 0,
+    position: "back",
   },
   xaxis: {
+    tickAmount: 4,
+
     axisBorder: {
       show: false,
     },
     axisTicks: {
-      show: false,
+      show: true,
+      borderType: "solid",
+      color: "#78909C",
+      height: 6,
+      offsetX: 10,
+      offsetY: 0,
+      autoskip: true,
+      maxTicksLimit: 4,
     },
     labels: {
+      show: true,
+      rotate: 0,
+      format: "dd/MM",
       style: {
         colors: "#A3AED0",
         fontSize: "12px",
         fontWeight: "500",
       },
     },
-    type: "text",
+    type: "datetime",
     range: undefined,
-    categories: []
-    ,
+    categories: [1,2,3,4,5,6],
   },
 
   yaxis: {
+    // tickAmount:4,
     show: true,
-    tickAmount: 12,
     logBase: 10,
-    min: 0,
-    max: 120,
     labels: {
       style: {
         colors: "#A3AED0",
@@ -112,14 +122,11 @@ export const lineChartOptionsTotalSpent = {
         fontWeight: "500",
       },
     },
-    forceNiceScale: true,
+    forceNiceScale: false,
     floating: false,
     decimalsInFloat: undefined,
   },
 };
-
-
-
 
 export const barChartDataDailyTraffic = [
   {

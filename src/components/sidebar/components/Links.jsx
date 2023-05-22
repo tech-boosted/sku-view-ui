@@ -30,6 +30,7 @@ export function SidebarLinks(props) {
               route={route}
               index={index}
               activeRoute={activeRoute}
+              key={index}
             />
           );
         } else {

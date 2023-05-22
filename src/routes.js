@@ -12,17 +12,16 @@ import SignUp from "views/auth/SignUp";
 // Icon Imports
 import {
   MdHome,
-  MdOutlineShoppingCart,
   MdBarChart,
   MdSocialDistance,
-  MdPerson,
   MdLock,
   MdLockOpen,
   MdSettings,
-  MdAnalytics,
   MdAdsClick,
   MdPaid
 } from "react-icons/md";
+
+// components imports
 import Channels from "views/admin/channels";
 import PPCDashboard from "views/admin/ppcDashboard/PPCDashboard";
 import SocialDashboard from "views/admin/socialDashboard/SocialDashboard";

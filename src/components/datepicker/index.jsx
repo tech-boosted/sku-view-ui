@@ -49,7 +49,7 @@ function RangePicker({ callback, customClass, disabled, toastHeading }) {
   };
 
   return (
-    <div>
+    <div className="z-50">
       <button
         className=" relative flex h-[56px] items-center rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30"
         data-ripple-light
@@ -70,7 +70,7 @@ function RangePicker({ callback, customClass, disabled, toastHeading }) {
         {format(range[0].endDate, "MMM dd, yyyy")}
       </button>
 
-      <div>
+      <div className="z-50">
         {open && (
           <DateRangePicker
             onChange={(item) => handleChange(item)}

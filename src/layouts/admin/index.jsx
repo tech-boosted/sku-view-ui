@@ -6,7 +6,6 @@ import Footer from "components/footer/Footer";
 import routes from "routes.js";
 import { getMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
-import { es } from "date-fns/locale";
 import Protected from "components/routing/Protected";
 import SusbcribedRoute from "components/routing/SusbcribedRoute";
 import SubscriptionModal from "components/subscription/SubscriptionModal";
@@ -24,14 +23,14 @@ export default function Admin(props) {
     );
     const callbackForUserData = (res) => {
       if (res) {
-        if (res.data) {
-          dispatch({
-            type: "loadUser",
-            payload: {
-              userData: res.data,
-            },
-          });
-        }
+        // if (res.data) {
+        //   dispatch({
+        //     type: "loadUser",
+        //     payload: {
+        //       userData: res.data,
+        //     },
+        //   });
+        // }
       }
     };
 
@@ -60,6 +59,7 @@ export default function Admin(props) {
         });
 
         performersData.push(mainObj);
+
       });
 
       // for insights table
@@ -115,6 +115,7 @@ export default function Admin(props) {
         });
       }
 
+
       dispatch({ type: "loadInsightsData", payload: dataForInsights });
       dispatch({ type: "loadPerformersData", payload: performersData });
       dispatch({
@@ -125,7 +126,12 @@ export default function Admin(props) {
         type: "loadDateData",
         payload: res.data.data.dummyDateData,
       });
+  
+
+
     };
+
+    
 
     getMiddleware("/user/userInfo", callbackForUserData, true);
     getMiddleware("/data", callbackForChartData, true);
@@ -176,7 +182,7 @@ export default function Admin(props) {
               <Route
                 path={`/${prop.path}/*`}
                 element={<SubscriptionModal />}
-                key={4}
+                key={904}
               />
             </Route>
           );

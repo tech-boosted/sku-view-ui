@@ -19,9 +19,8 @@ const SubscriptionModal = () => {
   console.log(location.state);
 
   const handleClose = () => {
-    console.log(location);
-    // onClose();
-    // navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
+    onClose();
+    navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

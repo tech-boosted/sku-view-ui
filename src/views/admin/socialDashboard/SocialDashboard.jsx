@@ -1,9 +1,4 @@
 import React from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import Card from "components/card";
-
-import Comparison1 from "../comparison1";
-import Comparison2 from "../comparison2";
 import ChartsAndTable from "components/chartsAndSKUTable";
 import InsightsTable from "components/insights/InsightsTable";
 import { Link, Route, Routes } from "react-router-dom";
