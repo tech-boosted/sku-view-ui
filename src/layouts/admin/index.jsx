@@ -59,7 +59,6 @@ export default function Admin(props) {
         });
 
         performersData.push(mainObj);
-
       });
 
       // for insights table
@@ -115,7 +114,6 @@ export default function Admin(props) {
         });
       }
 
-
       dispatch({ type: "loadInsightsData", payload: dataForInsights });
       dispatch({ type: "loadPerformersData", payload: performersData });
       dispatch({
@@ -126,12 +124,7 @@ export default function Admin(props) {
         type: "loadDateData",
         payload: res.data.data.dummyDateData,
       });
-  
-
-
     };
-
-    
 
     getMiddleware("/user/userInfo", callbackForUserData, true);
     getMiddleware("/data", callbackForChartData, true);
@@ -168,7 +161,7 @@ export default function Admin(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        if (prop.name !== "Settings" && prop.name !== "Channels") {
+        if (true) {
           return (
             <Route
               path={`/${prop.path}/*`}

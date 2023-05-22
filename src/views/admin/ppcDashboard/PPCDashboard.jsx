@@ -17,7 +17,7 @@ const PPCDashboard = () => {
 
   return (
     <div className="mt-5 flex w-full flex-col ">
-      <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
+      {/* <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
         <Link
           to={"/admin/PPC-dashboard/overview-ppc"}
           className="rounded-[20px] bg-purple-100 px-5 py-2 text-base font-medium text-brand-600 transition duration-200   "
@@ -41,7 +41,7 @@ const PPCDashboard = () => {
         >
           Compare
         </Link>
-      </div>
+      </div> */}
       <Routes>
         <Route
           path="/overview-ppc"

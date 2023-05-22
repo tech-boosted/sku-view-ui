@@ -25,7 +25,9 @@ input.defaultCheckbox::before {
   left: 50%;
   transform: translate(-50%, 0px);
 }
-
+div{
+  zoom:0.977;
+}
 input:checked.defaultCheckbox::before {
   opacity: 1;
 }

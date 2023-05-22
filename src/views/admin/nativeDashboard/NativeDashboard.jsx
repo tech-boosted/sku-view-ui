@@ -8,7 +8,7 @@ const NativeDashboard = () => {
   var Platforms = ["Amazon", "Google", "AddRoll", "Criteo"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
-      <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
+      {/* <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
         <Link
           to="/admin/native-dashboard/overview-native"
           state={{ from: "/admin/native-dashboard/overview" }}
@@ -28,7 +28,7 @@ const NativeDashboard = () => {
         >
           Compare
         </Link>
-      </div>
+      </div> */}
       <Routes>
         <Route
           path="/overview-native"

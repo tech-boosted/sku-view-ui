@@ -34,8 +34,8 @@ export function SidebarLinks(props) {
             />
           );
         } else {
-          return (
-            <Link key={index} to={route.layout + "/" + route.path}>
+          return (  
+            <Link key={index} to={route.layout + "/" + route.path} state={{prevPath:window.location.pathname}}>
               <div className="relative mb-3 flex hover:cursor-pointer">
                 <li
                   className="my-[3px] flex cursor-pointer items-center px-8"

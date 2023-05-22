@@ -3,7 +3,7 @@ import Card from "components/card";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "components/dropdown";
-import { BsThreeDots } from "react-icons/bs";
+import { BsChevronDown, BsThreeDots } from "react-icons/bs";
 
 const TopPerformer = () => {
   const [performerSkuData, setPerformerSkuData] = useState([]);
@@ -206,10 +206,10 @@ const TopPerformer = () => {
               onClick={() => setOpen(!open)}
               open={open}
               className={`linear flex items-center justify-center 
-              rounded-lg bg-lightPrimary p-2 text-xl font-bold text-brand-500 transition duration-200
+              rounded-lg border border-gray-200  py-2 px-4 text-md text-brand-500 transition duration-200
           hover:cursor-pointer hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
             >
-             {dropdownValue}
+             {dropdownValue} <BsChevronDown className="ml-2 font-semibold w-3 h-3"/>
             </button>
           }
           animation={"origin-top-right transition-all duration-300 ease-in-out"}

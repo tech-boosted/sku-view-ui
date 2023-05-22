@@ -8,7 +8,7 @@ const SocialDashboard = () => {
   var Platforms = ["Facebook", "Instagram", "Tiktok"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
-    <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
+    {/* <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
      <Link
        to="/admin/dsp-dashboard/overview-social"
        state={{ from: "/admin/dsp-dashboard/overview" }}
@@ -28,7 +28,7 @@ const SocialDashboard = () => {
      >
        Compare
      </Link>
-   </div>
+    </div> */}
    <Routes>
      <Route
        path="/overview-social"

@@ -8,7 +8,7 @@ const DSPDashboard = () => {
   var Platforms = ["Amazon", "Google", "Criteo", "Walmart"];
   return (
     <div className="mt-5 flex w-full flex-col gap-5">
-      <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
+      {/* <div className="mb-5  flex w-full items-center gap-5  rounded-[20px] px-5">
         <Link
           to="/admin/dsp-dashboard/overview-dsp"
           state={{ from: "/admin/dsp-dashboard/overview" }}
@@ -28,7 +28,7 @@ const DSPDashboard = () => {
         >
           Compare
         </Link>
-      </div>
+      </div> */}
       <Routes>
         <Route
           path="/overview-dsp"
