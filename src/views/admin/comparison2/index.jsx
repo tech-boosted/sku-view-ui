@@ -28,6 +28,7 @@ const Comparison2 = (props) => {
   const [chartData, setChartData] = useState([]);
   const [disable, setDisable] = useState(true);
   const [dates, setDates] = useState([]);
+  const [SKUList, setSKUList] = useState([]);
   const [startDate, setStartDate] = useState("2023-03-02");
   const [endDate, setEndDate] = useState("2023-04-03");
 
@@ -54,6 +55,11 @@ const Comparison2 = (props) => {
 
   useEffect(() => {
     if (chartData.length > 0) {
+      let allSkus = [];
+      for (let i = 0; i < chartData.length; i++) {
+        allSkus.push(chartData[i].skuName);
+      }
+      setSKUList([...allSkus]);
       const value = chartData[0].skuName;
       handleSKUSelection({
         target: {
@@ -839,33 +845,22 @@ const Comparison2 = (props) => {
             disabled={false}
             toastHeading={"Please select the platform first."}
             button={
-              <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                {SKUDropdownValue} <FiChevronDown className="ml-2 text-xl" />
+              <button className="flex h-[56px] w-auto items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap	">{SKUDropdownValue}</span>
+                <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <button
-                  className="text-black  hover:text-black cursor-pointer text-left  text-base font-medium  hover:font-bold "
-                  value={"Red T-shirt"}
-                  onClick={(e) => handleSKUSelection(e)}
-                >
-                  Red T-shirt
-                </button>
-                <button
-                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
-                  value={"Black T-shirt"}
-                  onClick={(e) => handleSKUSelection(e)}
-                >
-                  Black T-shirt
-                </button>
-                <button
-                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
-                  onClick={(e) => handleSKUSelection(e)}
-                  value={"Pink T-shirt"}
-                >
-                  Pink T-shirt
-                </button>
+              <div className="flex h-fit w-65 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                {SKUList.map((sku) => (
+                  <button
+                    className="text-black pt-2 hover:text-black cursor-pointer text-left  text-base font-medium  hover:font-bold "
+                    value={sku}
+                    onClick={(e) => handleSKUSelection(e)}
+                  >
+                    {sku}
+                  </button>
+                ))}
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}
@@ -875,8 +870,10 @@ const Comparison2 = (props) => {
             disabled={disable}
             toastHeading={"Please select the SKU first."}
             button={
-              <button className="flex h-[56px] min-w-[190px] items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                Select Platform <FiChevronDown className="ml-2 text-xl" />
+              <button className="flex h-[56px] w-auto items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap">Select Platform </span>
+                <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={

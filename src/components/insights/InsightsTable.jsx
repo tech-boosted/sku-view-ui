@@ -99,40 +99,40 @@ const InsightsTable = (props) => {
           result.push(
             <tr className="">
               <td
-                className=" pb-[16px] pt-[14px] text-center dark:!border-navy-700"
+                className=" py-3 text-center dark:!border-navy-700"
                 rowSpan={item.platform.length + 2}
               >
-                <p className="text-sm font-bold text-navy-700 dark:text-white">
+                <p className="text-base font-bold text-navy-700 dark:text-white">
                   {item.sku}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-start dark:!border-navy-700">
-                <p className="text-sm font-bold text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base text-navy-700 dark:text-white">
                   {item.platform[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.impressions[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.clicks[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.orders[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.sales[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.spend[i]}
                 </p>
               </td>
@@ -146,33 +146,33 @@ const InsightsTable = (props) => {
 
           result.push(
             <tr className={extraClass}>
-              <td className=" pb-[16px] pt-[14px] text-start dark:!border-navy-700">
-                <p className="text-sm font-bold text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base text-navy-700 dark:text-white">
                   {item.platform[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.impressions[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.clicks[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.orders[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.sales[i]}
                 </p>
               </td>
-              <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-                <p className="text-sm  text-navy-700 dark:text-white">
+              <td className=" py-3 text-end dark:!border-navy-700">
+                <p className="text-base  text-navy-700 dark:text-white">
                   {item.spend[i]}
                 </p>
               </td>
@@ -184,67 +184,67 @@ const InsightsTable = (props) => {
       result.push(
         <>
           <tr className={""}>
-            <td className=" pb-[16px] pt-[14px] text-start dark:!border-navy-700 ">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700 ">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {"Total"}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {impressionsTotalVar}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {clicksTotalVar}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {ordersTotalVar}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {salesTotalVar}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {spendTotalVar}
               </p>
             </td>
           </tr>
           <tr className={"border-b border-b border-gray-200 "}>
-            <td className=" pb-[16px] pt-[14px] text-start dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {"Average"}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {parseFloat(impressionsTotalVar / item.platform.length).toFixed(
                   2
                 )}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {parseFloat(clicksTotalVar / item.platform.length).toFixed(2)}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {parseFloat(ordersTotalVar / item.platform.length).toFixed(2)}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {parseFloat(salesTotalVar / item.platform.length).toFixed(2)}
               </p>
             </td>
-            <td className=" pb-[16px] pt-[14px] text-end dark:!border-navy-700">
-              <p className="text-sm font-bold text-navy-700 dark:text-white">
+            <td className=" py-3 text-end dark:!border-navy-700">
+              <p className="text-base font-bold text-navy-700 dark:text-white">
                 {parseFloat(spendTotalVar / item.platform.length).toFixed(2)}
               </p>
             </td>
@@ -278,38 +278,38 @@ const InsightsTable = (props) => {
         <table className="min-w-full ">
           <thead className="">
             <tr className="border-b border-gray-200 pb-[10px]">
-              <th className=" w-[28%] border-b border-gray-200 pb-[10px] text-center dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase   text-gray-600 lg:text-xs">
+              <th className=" w-[25%] border-b border-gray-200 pb-[10px] text-center dark:!border-navy-700">
+                <div className="text-lg font-bold  text-black lg:text-base">
                   SKU
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-start dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
+              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-lg font-bold text-black lg:text-lg">
                   Platform
                 </div>
               </th>
               <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
+                <div className="text-lg font-bold text-black lg:text-lg">
                   Impressions
                 </div>
               </th>
               <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
+                <div className="text-lg font-bold text-black lg:text-lg">
                   Clicks
                 </div>
               </th>
               <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
+                <div className="text-lg font-bold text-black lg:text-lg">
                   Orders
                 </div>
               </th>
               <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase  text-gray-600 lg:text-xs">
+                <div className="text-lg font-bold text-black lg:text-lg">
                   Sales
                 </div>
               </th>
               <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-xs font-bold uppercase tracking-wide text-gray-600 lg:text-xs">
+                <div className="text-lg font-boldtracking-wide text-black lg:text-lg">
                   Spend
                 </div>
               </th>

@@ -19,6 +19,7 @@ const Comparison1 = (props) => {
   ];
 
   const [chartData, setChartData] = useState([]);
+  const [SKUList, setSKUList] = useState([]);
   const [dates, setDates] = useState([]);
   const [disable, setDisable] = useState(true);
 
@@ -30,7 +31,6 @@ const Comparison1 = (props) => {
     const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     const startDate = onefourdaysAgo.toISOString().split("T")[0];
     const endDate = sevenDaysAgo.toISOString().split("T")[0];
-    
 
     setStartDate(startDate);
     setEndDate(endDate);
@@ -40,6 +40,12 @@ const Comparison1 = (props) => {
   useEffect(() => {
     saveDates();
     if (chartDataFromStore !== undefined) {
+      
+      let allSkus = [];
+      for (let i = 0; i < chartDataFromStore.length; i++) {
+        allSkus.push(chartDataFromStore[i].skuName);
+      }
+
       let rawData = chartDataFromStore;
       let data = [];
 
@@ -72,10 +78,10 @@ const Comparison1 = (props) => {
         });
       });
 
+      setSKUList([...allSkus]);
       setChartData(data);
       setDates(dateDataFromStore);
-    }
-    else{
+    } else {
       alert("Wrong");
     }
   }, []);
@@ -901,7 +907,22 @@ const Comparison1 = (props) => {
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
+                {SKUList.map((sku) => (
+                  <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
+                    <input
+                      type="checkbox"
+                      name="l"
+                      id={sku}
+                      value={sku}
+                      className="mr-2 cursor-pointer"
+                      onChange={(e) => handleCheckboxDropdown(e)}
+                    />
+                    <label className="cursor-pointer" htmlFor={sku}>
+                      {sku}
+                    </label>
+                  </div>
+                ))}
+                {/* <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
                   <input
                     type="checkbox"
                     name="l"
@@ -939,7 +960,7 @@ const Comparison1 = (props) => {
                   <label className="cursor-pointer" htmlFor="Pink T-shirt">
                     Pink T-shirt
                   </label>
-                </div>
+                </div> */}
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}
