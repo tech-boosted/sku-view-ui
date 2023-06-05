@@ -40,7 +40,6 @@ const Comparison1 = (props) => {
   useEffect(() => {
     saveDates();
     if (chartDataFromStore !== undefined) {
-      
       let allSkus = [];
       for (let i = 0; i < chartDataFromStore.length; i++) {
         allSkus.push(chartDataFromStore[i].skuName);
@@ -974,7 +973,7 @@ const Comparison1 = (props) => {
           </button>
           <RangePicker
             callback={getDates}
-            customClass={"right-[10px]"}
+            customClass={"right-[10px] dark:bg-white/10 "}
             disabled={disable}
             toastHeading={"Please select the platform first"}
           />
@@ -983,14 +982,19 @@ const Comparison1 = (props) => {
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
         <ComparisonCharts
-          title={impressionsState.title}
-          options={impressionsState.options}
-          series={impressionsState.series}
+          title={salesState.title}
+          options={salesState.options}
+          series={salesState.series}
         />
         <ComparisonCharts
           title={spendState.title}
           options={spendState.options}
           series={spendState.series}
+        />
+        <ComparisonCharts
+          title={impressionsState.title}
+          options={impressionsState.options}
+          series={impressionsState.series}
         />
         <ComparisonCharts
           title={clicksState.title}
@@ -1001,11 +1005,6 @@ const Comparison1 = (props) => {
           title={ordersState.title}
           options={ordersState.options}
           series={ordersState.series}
-        />
-        <ComparisonCharts
-          title={salesState.title}
-          options={salesState.options}
-          series={salesState.series}
         />
       </div>
     </div>

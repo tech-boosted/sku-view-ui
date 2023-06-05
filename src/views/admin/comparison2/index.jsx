@@ -846,15 +846,17 @@ const Comparison2 = (props) => {
             toastHeading={"Please select the platform first."}
             button={
               <button className="flex h-[56px] w-auto items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap	">{SKUDropdownValue}</span>
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap	">
+                  {SKUDropdownValue}
+                </span>
                 <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={
-              <div className="flex h-fit w-65 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="w-65 flex h-fit flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {SKUList.map((sku) => (
                   <button
-                    className="text-black pt-2 hover:text-black cursor-pointer text-left  text-base font-medium  hover:font-bold "
+                    className="text-black hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
                     value={sku}
                     onClick={(e) => handleSKUSelection(e)}
                   >
@@ -871,8 +873,9 @@ const Comparison2 = (props) => {
             toastHeading={"Please select the SKU first."}
             button={
               <button className="flex h-[56px] w-auto items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap">Select Platform </span>
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                  Select Platform{" "}
+                </span>
                 <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
@@ -915,14 +918,19 @@ const Comparison2 = (props) => {
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
         <ComparisonCharts
-          title={impressionsState.title}
-          options={impressionsState.options}
-          series={impressionsState.series}
+          title={salesState.title}
+          options={salesState.options}
+          series={salesState.series}
         />
         <ComparisonCharts
           title={spendState.title}
           options={spendState.options}
           series={spendState.series}
+        />
+        <ComparisonCharts
+          title={impressionsState.title}
+          options={impressionsState.options}
+          series={impressionsState.series}
         />
         <ComparisonCharts
           title={clicksState.title}
@@ -933,11 +941,6 @@ const Comparison2 = (props) => {
           title={ordersState.title}
           options={ordersState.options}
           series={ordersState.series}
-        />
-        <ComparisonCharts
-          title={salesState.title}
-          options={salesState.options}
-          series={salesState.series}
         />
       </div>
     </div>

@@ -59,11 +59,12 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
 
   return (
     <>
-      <div className="relative mb-3 flex justify-between hover:cursor-pointer ">
+      <div className="relative mb-3 flex justify-between hover:cursor-pointer "
+          onClick={() => handleClick()}
+          >
         <li
           className="my-[3px] flex w-full cursor-pointer items-center px-8 "
           key={index}
-          onClick={() => handleClick()}
         >
           <span
             className={`${

@@ -51,12 +51,12 @@ const Dashboard = () => {
         <Widget
           icon={<HiTrendingUp className="h-6 w-6" />}
           title={"ROI"}
-          subtitle={"5X"}
+          subtitle={"5x"}
         />
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
           title={"CVR"}
-          subtitle={"145"}
+          subtitle={"1.45"}
         />
         <Widget
           icon={<TbClick className="h-6 w-6" />}
