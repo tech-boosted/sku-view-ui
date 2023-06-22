@@ -1,7 +1,7 @@
 import Card from "components/card";
 import React from "react";
-import Comparison1 from "../comparison1";
-import Comparison2 from "../comparison2";
+import Comparison2 from "components/comparison/comparison2";
+import Comparison1 from "components/comparison/comparison1";
 
 const Compare = (props) => {
   let Platforms = props.platforms;

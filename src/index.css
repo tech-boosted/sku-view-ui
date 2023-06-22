@@ -14,6 +14,15 @@
     letter-spacing: -0.5px;
   }
 }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
 
 input.defaultCheckbox::before {
   content: url(../src/assets/svg/checked.svg);

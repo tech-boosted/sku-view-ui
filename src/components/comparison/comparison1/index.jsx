@@ -1,21 +1,12 @@
 import Dropdown from "components/dropdown";
 import React, { useEffect, useState } from "react";
-import ComparisonCharts from "./components/ComparisonCharts";
-import { dateData, dummyChartData } from "./variables";
-import { lineChartOptionsTotalSpent } from "variables/charts";
+import ComparisonCharts from "../comparison2/components/ComparisonCharts";
 import { FiChevronDown } from "react-icons/fi";
-import InputField from "components/fields/InputField";
-import Datepicker from "components/datepicker";
-import DatePicker from "react-flatpickr";
 import RangePicker from "components/datepicker";
-import { getMiddleware } from "Middleware";
 import { MdOutlineRefresh } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
-const Comparison2 = (props) => {
-  const dispatch = useDispatch();
-
-  let platformPropArr = props.platforms;
+const Comparison1 = (props) => {
   // data
   const colors = [
     "#AA00FF",
@@ -25,11 +16,12 @@ const Comparison2 = (props) => {
     "#082063",
     "#AAFF01",
   ];
+
   const [chartData, setChartData] = useState([]);
-  const [disable, setDisable] = useState(true);
   const [dates, setDates] = useState([]);
-  const [startDate, setStartDate] = useState("2023-03-02");
-  const [endDate, setEndDate] = useState("2023-04-03");
+  const [disable, setDisable] = useState(true);
+
+  let platformArr = props.platforms;
 
   const saveDates = () => {
     const today = new Date();
@@ -37,6 +29,7 @@ const Comparison2 = (props) => {
     const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     const startDate = onefourdaysAgo.toISOString().split("T")[0];
     const endDate = sevenDaysAgo.toISOString().split("T")[0];
+    
 
     setStartDate(startDate);
     setEndDate(endDate);
@@ -45,19 +38,53 @@ const Comparison2 = (props) => {
   const dateDataFromStore = useSelector((state) => state.appData.dateData);
   useEffect(() => {
     saveDates();
+    if (chartDataFromStore !== undefined) {
+      let rawData = chartDataFromStore;
+      let data = [];
 
-    if (chartDataFromStore != undefined) {
-      setChartData(chartDataFromStore);
+      rawData.forEach((item) => {
+        let skuName = item.skuName;
+
+        item.platform.forEach((platform) => {
+          for (let i = 0; i < platformArr.length; i++) {
+            if (platform.name === platformArr[i]) {
+              let isPresent = data.some(
+                (obj) => obj.platformName === platform.name
+              );
+              let obj = {
+                platformName: platform.name,
+                sku: [{ name: skuName, data: platform.data }],
+              };
+              if (isPresent) {
+                data.forEach((element) => {
+                  if (element.platformName === platform.name) {
+                    let temparr = element.sku;
+                    temparr.push(obj.sku[0]);
+                    element.sku = temparr;
+                  }
+                });
+              } else {
+                data.push(obj);
+              }
+            }
+          }
+        });
+      });
+
+      setChartData(data);
       setDates(dateDataFromStore);
     }
-  }, [chartDataFromStore]);
+    else{
+      alert("Wrong");
+    }
+  }, []);
 
   useEffect(() => {
     if (chartData.length > 0) {
-      const value = chartData[0].skuName;
-      handleSKUSelection({
+      const value = chartData[0].platformName;
+      handlePlatformSelection({
         target: {
-          value: value,
+          value: platformArr[0],
         },
       });
     }
@@ -570,9 +597,12 @@ const Comparison2 = (props) => {
   };
 
   // states
-  const [SKUDropdownValue, setSKUDropdownValue] = useState("Select SKU");
-  const [platformArr, setPlatformArr] = useState([]);
-
+  const [platformDropdownValue, setPlatformDropdownValue] =
+    useState("Select Platform");
+  const [startDate, setStartDate] = useState("2023-05-02");
+  const [endDate, setEndDate] = useState("2023-04-18");
+  const [SKUArr, setSKUArr] = useState([]);
+  // chart states
   const [impressionsState, setImpressionsState] = useState({
     title: "Impressions",
     series: [],
@@ -605,33 +635,30 @@ const Comparison2 = (props) => {
   });
 
   // 🔥🔥 function invoked by the sku dropdown
-  const handleSKUSelection = (e) => {
-    setSKUDropdownValue(e.target.value);
+  const handlePlatformSelection = (e) => {
+    setPlatformDropdownValue(e.target.value);
+
     // filtering the data from the dummyChartData for the selected SKU so now we got the data for selected SKU
     let temp = chartData.filter(function (item) {
-      return item.skuName === e.target.value;
+      return item.platformName === e.target.value;
     });
     let newData;
-    let filteredAccordingToPropsArr = temp[0].platform.filter((item) => {
-      return platformPropArr.includes(item.name);
-    });
 
     for (let i = 0; i < 5; i++) {
       // creating a new object which will have all the necessary filtered data
-      newData = filteredAccordingToPropsArr.map((platformItem, index) => ({
+      newData = temp[0].sku.map((skuItem, index) => ({
         series: {
-          name: platformItem.name,
-          data: platformItem.data[i].data,
+          name: skuItem.name,
+          data: skuItem.data[i].data,
           color: colors[index],
         },
         immutableSeries: {
-          name: platformItem.name,
-          data: platformItem.data[i].data,
+          name: skuItem.name,
+          data: skuItem.data[i].data,
           color: colors[index],
         },
         options: chartOptions,
       }));
-
       let newOptions = { ...chartOptions };
       newOptions.xaxis.categories = [...dates];
 
@@ -640,27 +667,28 @@ const Comparison2 = (props) => {
         newData.map((item, index) => {
           series.push(item.series);
         });
-
         impressionsState.series = series;
         impressionsState.immutableSeries = series;
         impressionsState.options = newOptions;
 
         setImpressionsState({ ...impressionsState });
       }
+
       let newOptions2 = { ...chartOptions2 };
-      newOptions2.xaxis.categories = [...dates];
+      newOptions.xaxis.categories = [...dates];
       if (i == 1) {
         let series = [];
         newData.map((item, index) => {
           series.push(item.series);
         });
+
         spendState.series = series;
         spendState.immutableSeries = series;
         spendState.options = newOptions2;
         setSpendState({ ...spendState });
       }
       let newOptions3 = { ...chartOptions3 };
-      newOptions3.xaxis.categories = [...dates];
+      newOptions.xaxis.categories = [...dates];
       if (i == 2) {
         let series = [];
         newData.map((item, index) => {
@@ -672,7 +700,7 @@ const Comparison2 = (props) => {
         setClicksState({ ...clicksState });
       }
       let newOptions4 = { ...chartOptions4 };
-      newOptions4.xaxis.categories = [...dates];
+      newOptions.xaxis.categories = [...dates];
       if (i == 3) {
         let series = [];
         newData.map((item, index) => {
@@ -684,7 +712,7 @@ const Comparison2 = (props) => {
         setOrdersState({ ...ordersState });
       }
       let newOptions5 = { ...chartOptions5 };
-      newOptions5.xaxis.categories = [...dates];
+      newOptions.xaxis.categories = [...dates];
       if (i == 4) {
         let series = [];
         newData.map((item, index) => {
@@ -697,19 +725,21 @@ const Comparison2 = (props) => {
       }
     }
 
-    handleEverything(platformArr, startDate, endDate);
+    handleEverything(SKUArr, startDate, endDate);
     setDisable(false);
   };
 
   let getDates = (d1, d2) => {
-    setEndDate(d2);
     setStartDate(d1);
-    handleEverything(platformArr, d1, d2);
+    setEndDate(d2);
+    handleEverything(SKUArr, d1, d2);
   };
+
   // function invoked by the checkbox dropdown...
+
   const handleCheckboxDropdown = (e) => {
     const value = e.target.value;
-    let tempArr = [...platformArr];
+    let tempArr = [...SKUArr];
     const index = tempArr.indexOf(value);
 
     if (index !== -1) {
@@ -717,11 +747,11 @@ const Comparison2 = (props) => {
         return item !== value;
       });
 
-      setPlatformArr(newArr);
+      setSKUArr(newArr);
       handleEverything(newArr, startDate, endDate);
     } else {
       tempArr.push(value);
-      setPlatformArr(tempArr);
+      setSKUArr(tempArr);
       handleEverything(tempArr, startDate, endDate);
     }
   };
@@ -776,7 +806,7 @@ const Comparison2 = (props) => {
     spendSeries.map((item, index) => {
       let data = item.data.slice(startDateIndex, endDateIndex + 1);
       let newItem = { ...item };
-      newItem.data = [...data];
+      newItem.data = data;
       newSeriesSpend.push(newItem);
     });
     clicksSeries.map((item, index) => {
@@ -837,35 +867,24 @@ const Comparison2 = (props) => {
         <div className="flex w-[440px] justify-between ">
           <Dropdown
             disabled={false}
-            toastHeading={"Please select the platform first."}
+            toastHeading={"Please select the SKU first"}
             button={
               <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                {SKUDropdownValue} <FiChevronDown className="ml-2 text-xl" />
+                {platformDropdownValue}{" "}
+                <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                <button
-                  className="text-black  hover:text-black cursor-pointer text-left  text-base font-medium  hover:font-bold "
-                  value={"Red T-shirt"}
-                  onClick={(e) => handleSKUSelection(e)}
-                >
-                  Red T-shirt
-                </button>
-                <button
-                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
-                  value={"Black T-shirt"}
-                  onClick={(e) => handleSKUSelection(e)}
-                >
-                  Black T-shirt
-                </button>
-                <button
-                  className="text-black  hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
-                  onClick={(e) => handleSKUSelection(e)}
-                  value={"Pink T-shirt"}
-                >
-                  Pink T-shirt
-                </button>
+              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                {platformArr.map((item, index) => (
+                  <button
+                    className="text-black hover:text-black cursor-pointer pt-2 text-left text-base font-medium  hover:font-bold "
+                    value={item}
+                    onClick={(e) => handlePlatformSelection(e)}
+                  >
+                    {item}
+                  </button>
+                ))}
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}
@@ -873,29 +892,53 @@ const Comparison2 = (props) => {
           />
           <Dropdown
             disabled={disable}
-            toastHeading={"Please select the SKU first."}
+            toastHeading={"Please select the platform first."}
             button={
-              <button className="flex h-[56px] min-w-[190px] items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
-                Select Platform <FiChevronDown className="ml-2 text-xl" />
+              <button className="flex h-[56px] min-w-[190px] items-center justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+                Select SKU <FiChevronDown className="ml-2 text-xl" />
               </button>
             }
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                {platformPropArr.map((item, index) => (
-                  <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
-                    <input
-                      type="checkbox"
-                      name="l"
-                      id={item}
-                      value={item}
-                      className="mr-2 cursor-pointer "
-                      onChange={(e) => handleCheckboxDropdown(e)}
-                    />
-                    <label htmlFor={item} className="cursor-pointer text-base ">
-                      {item}
-                    </label>
-                  </div>
-                ))}
+                <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name="l"
+                    id="Black T-shirt"
+                    value={"Black T-shirt"}
+                    className="mr-2 cursor-pointer"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label className="cursor-pointer" htmlFor="Black T-shirt">
+                    Black T-shirt
+                  </label>
+                </div>
+                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id="Red T-shirt"
+                    value={"Red T-shirt"}
+                    className="mr-2 cursor-pointer"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label className="cursor-pointer" htmlFor="Red T-shirt">
+                    Red T-shirt
+                  </label>
+                </div>
+                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id="Pink T-shirt"
+                    value={"Pink T-shirt"}
+                    className="mr-2 cursor-pointer"
+                    onChange={(e) => handleCheckboxDropdown(e)}
+                  />
+                  <label className="cursor-pointer" htmlFor="Pink T-shirt">
+                    Pink T-shirt
+                  </label>
+                </div>
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}
@@ -911,7 +954,7 @@ const Comparison2 = (props) => {
             callback={getDates}
             customClass={"right-[10px]"}
             disabled={disable}
-            toastHeading={"Please select the SKU first"}
+            toastHeading={"Please select the platform first"}
           />
         </div>
       </div>
@@ -947,4 +990,4 @@ const Comparison2 = (props) => {
   );
 };
 
-export default Comparison2;
+export default Comparison1;

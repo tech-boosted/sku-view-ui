@@ -5,14 +5,14 @@ import { Link, Route, Routes } from "react-router-dom";
 
 const SusbcribedRoute = ({ children, path, key }) => {
   const userInfo = useSelector((state) => state.accountData.userInfo);
-
   return (
     <>
       {userInfo.subscription ? (
         { children }
+        
       ) : (
         <Routes>
-          <Route path={path} element={<SubscriptionModal />} key={"unique"} />
+          <Route path={window.location.pathname} element={<SubscriptionModal />} key={"unique"} />
         </Routes>
       )}
     </>

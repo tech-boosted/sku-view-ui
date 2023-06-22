@@ -23,10 +23,10 @@ import {
 
 // components imports
 import Channels from "views/admin/channels";
-import PPCDashboard from "views/admin/ppcDashboard/PPCDashboard";
-import SocialDashboard from "views/admin/socialDashboard/SocialDashboard";
+import PPCDashboard from "views/admin/ppc/PPCDashboard";
+import SocialDashboard from "views/admin/social/SocialDashboard"
 import DSPDashboard from "views/admin/dspDashboard/DSPDashboard";
-import NativeDashboard from "views/admin/nativeDashboard/NativeDashboard";
+import NativeDashboard from "views/admin/native/NativeDashboard";
 import { IoIosAnalytics } from "react-icons/io";
 import { SiGoogleanalytics } from "react-icons/si";
 import Plans from "views/admin/Plans";

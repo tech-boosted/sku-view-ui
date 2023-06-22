@@ -10,14 +10,13 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
 
   const handleClick = () => {
     setOpen((prev) => !prev);
-    // navigate("/admin/PPC-dashboard/overview");
   };
   const renderSubRoutes = () => {
     var result = [];
     route.subRoutes.map((subRoute, i) => {
       result.push(
         <Link
-          key={index}
+          key={i}
           to={{
             pathname: route.layout + "/" + route.path + "/" + subRoute.path,
           }}
@@ -28,21 +27,15 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
               className="my-[3px] ml-10 flex cursor-pointer items-center px-8"
               key={index}
             >
-              {/* <span
-                className={`${
-                  activeRoute(subRoute.path) === true
-                    ? "font-bold text-brand-500 dark:text-white"
-                    : "font-medium text-gray-600"
-                }`}
-              >
-                {subRoute.icon ? subRoute.icon : <DashIcon />}{" "}
-              </span> */}
+            
               <p
-                className={`leading-1 ml-4 flex ${
+                className={`hover:text-brand-500 leading-1 ml-4 flex 
+                ${
                   activeRoute(subRoute.path) === true
                     ? "font-bold text-navy-700 dark:text-white"
                     : "font-medium text-gray-600"
-                }`}
+                }
+                `}
               >
                 {subRoute.name}
               </p>
@@ -61,7 +54,7 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
     <>
       <div className="relative mb-3 flex justify-between hover:cursor-pointer ">
         <li
-          className="my-[3px] flex w-full cursor-pointer items-center px-8 "
+          className="my-[3px] flex w-full  cursor-pointer items-center px-8 "
           key={index}
           onClick={() => handleClick()}
         >
@@ -75,7 +68,7 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
             {route.icon ? route.icon : <DashIcon />}{" "}
           </span>
           <p
-            className={`leading-1 ml-4 flex ${
+            className={`leading-1 ml-4 flex hover:text-brand-500 ${
               activeRoute(route.path) === true
                 ? "font-bold text-navy-700 dark:text-white"
                 : "font-medium text-gray-600"
@@ -110,7 +103,7 @@ const SideBarMenu = ({ route, index, activeRoute }) => {
           </span>
         )}
       </div>
-      {open && <div>{renderSubRoutes()}</div>}
+      <div className = {` h-[0px] ease-in-out duration-300 ${open ? "h-[120px] block origin-top-right transition-all duration-500 ease-in-out" : "translate-x-full"} ${open ? "scale-100" : "scale-0"}`}> {renderSubRoutes()} </div>
     </>
   );
 };
