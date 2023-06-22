@@ -10,7 +10,7 @@ const Compare = (props) => {
       <Card extra={"mt-5 px-4 rounded-3xl"}>
         <header className="relative mx-4 flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
-            SKU - Channels
+            Platform - SKUs
           </div>
         </header>
         <Comparison1 platforms={Platforms} />
@@ -18,7 +18,7 @@ const Compare = (props) => {
       <Card extra={"mt-5 px-4 rounded-3xl"}>
         <header className="relative mx-4 flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
-            Channel - SKUs
+            SKU - Platform
           </div>
         </header>
         <Comparison2 platforms={Platforms} />

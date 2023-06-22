@@ -2,7 +2,7 @@
 
 import { HiX } from "react-icons/hi";
 import Links from "./components/Links";
-import sidebarLogo from "../../assets/svg/sidebar/LOGO_ACROS-2.svg";
+import sidebarLogo from "../../assets/svg/sidebar/acros-logo.svg";
 
 import routes from "routes.js";
 
@@ -23,11 +23,11 @@ const Sidebar = ({ open, onClose }) => {
         <HiX />
       </span>
 
-      <div className={`items-center px-16 py-10`}>
+      <div className={`flex justify-center w-[16em] h-[8em]`}>
         <img
           src={sidebarLogo}
           alt="Sidebar Across logo"
-          className="w-[140px] object-contain"
+          className="w-[165px] object-contain self-center"
         />
         {/* <div className="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
           <span className="font-medium"></span>

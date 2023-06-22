@@ -40,42 +40,42 @@ const Dashboard = () => {
         <Widget
           icon={<RiExchangeDollarFill className="h-7 w-7" />}
           title={"Sales"}
-          subtitle={"$340.5"}
+          subtitle={"$3570.00"}
         />
         <Widget
           icon={<BiDollarCircle className="h-6 w-6" />}
           title={"Spend"}
-          subtitle={"$642.39"}
+          subtitle={"$702.76"}
         />
         <Widget
           icon={<AiFillGift className="h-7 w-7" />}
           title={"Orders"}
-          subtitle={"$574.34"}
+          subtitle={"574"}
         />
         <Widget
           icon={<HiTrendingUp className="h-6 w-6" />}
           title={"ROI"}
-          subtitle={"$1,000"}
+          subtitle={"5x"}
         />
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
           title={"CVR"}
-          subtitle={"145"}
+          subtitle={"1.45"}
         />
         <Widget
           icon={<TbClick className="h-6 w-6" />}
           title={"CPC"}
-          subtitle={"$2433"}
+          subtitle={"$2.4"}
         />
         <Widget
           icon={<FaFileInvoiceDollar className="h-6 w-6" />}
           title={"Profitability"}
-          subtitle={"$2433"}
+          subtitle={"+30%"}
         />
         <Widget
           icon={<AiTwotoneThunderbolt className="h-6 w-6" />}
           title={"Threshold"}
-          subtitle={"$2433"}
+          subtitle={"73%"}
         />
       </div>
 
