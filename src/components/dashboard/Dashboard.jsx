@@ -17,7 +17,7 @@ const Dashboard = (props) => {
       <Tab route={route} />
 
       <Routes>
-        <Route element={<SusbcribedRoute path={"/"} key={"1232f"}/>}>
+        {/* <Route element={<SusbcribedRoute path={"/"} key={"1232f"}/>}> */}
          
           <Route
             path={route[0].subRoutes[1].path}
@@ -27,7 +27,7 @@ const Dashboard = (props) => {
             path={route[0].subRoutes[2].path}
             element={<Compare platforms={[...props.platforms]} />}
           />
-        </Route>
+        {/* </Route> */}
         <Route
             path={route[0].subRoutes[0].path}
             element={<ChartsAndTable platforms={[...props.platforms]} />}

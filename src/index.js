@@ -16,9 +16,9 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <ChakraProvider>
-        <PersistGate persistor={persistor}>
+        {/* <PersistGate persistor={persistor}> */}
           <App />
-        </PersistGate>
+        {/* </PersistGate> */}
       </ChakraProvider>
     </BrowserRouter>
   </Provider>

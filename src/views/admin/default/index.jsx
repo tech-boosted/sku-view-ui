@@ -24,19 +24,13 @@ import tableDataComplex from "./variables/tableDataComplex.json";
 import TopPerformer from "./components/TopPerformer";
 import BottomPerformer from "./components/BottomPerformer";
 import { useSelector } from "react-redux";
-import {useGetAllProductsQuery} from "../../../services/apiSlice";
-
 const Dashboard = () => {
-  const userInfo = useSelector(state=>state.accountData.userInfo);
-
-  const {data} = useGetAllProductsQuery();
-
+  // const userInfo = useSelector((state) => state.accountData.userInfo);
   return (
     <div>
       {/* Card widget */}
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-6">
-    
         <Widget
           icon={<RiExchangeDollarFill className="h-7 w-7" />}
           title={"Sales"}

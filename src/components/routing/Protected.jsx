@@ -7,11 +7,10 @@ const Protected = ({ children, destination }) => {
   const subscriptionArr = ["Acros Ads", "Acros PPC", "plans"];
   const userInfo = useSelector((state) => state.accountData.userInfo);
 
-  // const isLoggedIn = localStorage.getItem("token");
-  // if (!isLoggedIn || isLoggedIn === undefined) {
-  //   // <Navigate to="/signIn" replace />;
-  //   navigate("/auth/sign-in")
-  // }
+  const isLoggedIn = localStorage.getItem("token");
+  if (!isLoggedIn || isLoggedIn === undefined) {
+    navigate("/auth/sign-in")
+  }
   return children ? children : <Outlet />;
 };
 

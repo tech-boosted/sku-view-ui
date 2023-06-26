@@ -4,7 +4,7 @@ import ComparisonCharts from "../comparison2/components/ComparisonCharts";
 import { FiChevronDown } from "react-icons/fi";
 import RangePicker from "components/datepicker";
 import { MdOutlineRefresh } from "react-icons/md";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Comparison1 = (props) => {
   // data
@@ -31,11 +31,12 @@ const Comparison1 = (props) => {
     const startDate = onefourdaysAgo.toISOString().split("T")[0];
     const endDate = sevenDaysAgo.toISOString().split("T")[0];
 
-    setStartDate(startDate);
-    setEndDate(endDate);
+    setStartDate("2023-04-17");
+    setEndDate("2023-05-10");
   };
   const chartDataFromStore = useSelector((state) => state.appData.chartData);
   const dateDataFromStore = useSelector((state) => state.appData.dateData);
+
   useEffect(() => {
     saveDates();
     if (chartDataFromStore !== undefined) {
@@ -75,12 +76,11 @@ const Comparison1 = (props) => {
           }
         });
       });
-
       setSKUList([...allSkus]);
       setChartData(data);
       setDates(dateDataFromStore);
     } else {
-      alert("Wrong");
+      alert("Error occured");
     }
   }, []);
 
@@ -604,7 +604,7 @@ const Comparison1 = (props) => {
   // states
   const [platformDropdownValue, setPlatformDropdownValue] =
     useState("Select Platform");
-  const [startDate, setStartDate] = useState("2023-05-02");
+  const [startDate, setStartDate] = useState("2023-04-15");
   const [endDate, setEndDate] = useState("2023-04-18");
   const [SKUArr, setSKUArr] = useState([]);
   // chart states
@@ -904,7 +904,7 @@ const Comparison1 = (props) => {
               </button>
             }
             children={
-              <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+              <div className="flex h-fit min-w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {SKUList.map((sku) => (
                   <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
                     <input
@@ -920,45 +920,6 @@ const Comparison1 = (props) => {
                     </label>
                   </div>
                 ))}
-                {/* <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name="l"
-                    id="Black T-shirt"
-                    value={"Black T-shirt"}
-                    className="mr-2 cursor-pointer"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label className="cursor-pointer" htmlFor="Black T-shirt">
-                    Black T-shirt
-                  </label>
-                </div>
-                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="Red T-shirt"
-                    value={"Red T-shirt"}
-                    className="mr-2 cursor-pointer"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label className="cursor-pointer" htmlFor="Red T-shirt">
-                    Red T-shirt
-                  </label>
-                </div>
-                <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="Pink T-shirt"
-                    value={"Pink T-shirt"}
-                    className="mr-2 cursor-pointer"
-                    onChange={(e) => handleCheckboxDropdown(e)}
-                  />
-                  <label className="cursor-pointer" htmlFor="Pink T-shirt">
-                    Pink T-shirt
-                  </label>
-                </div> */}
               </div>
             }
             classNames={"py-2 top-12 left-2  w-max"}

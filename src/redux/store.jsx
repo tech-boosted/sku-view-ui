@@ -5,8 +5,7 @@ import { appData } from "./reducers/appDataReducer";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import { combineReducers } from "@reduxjs/toolkit";
-import {productsApi} from "../services/apiSlice";
-
+import { chartsDataApi } from "../services/apiSlice";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -17,13 +16,14 @@ const reducer = combineReducers({
   accountData: userData,
   insightsData: insightsData,
   appData: appData,
-  [productsApi.reducerPath] : productsApi.reducer
+  [chartsDataApi.reducerPath]: chartsDataApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 const store = configureStore({
   reducer: persistedReducer,
-  middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([chartsDataApi.middleware]),
 });
 
 export default store;

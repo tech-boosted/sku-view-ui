@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import Protected from "components/routing/Protected";
 import SusbcribedRoute from "components/routing/SusbcribedRoute";
 import SubscriptionModal from "components/subscription/SubscriptionModal";
+import { useGetChartDataQuery } from "services/chartApiSlice";
+import { useGetUserInfoQuery } from "services/chartApiSlice";
 
 export default function Admin(props) {
   const { ...rest } = props;
@@ -17,23 +19,14 @@ export default function Admin(props) {
   const dispatch = useDispatch();
   const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
 
-  React.useEffect(() => {
-    window.addEventListener("resize", () =>
-      window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
-    );
-    const callbackForUserData = (res) => {
-      if (res) {
-        // if (res.data) {
-        //   dispatch({
-        //     type: "loadUser",
-        //     payload: {
-        //       userData: res.data,
-        //     },
-        //   });
-        // }
-      }
-    };
+  const {
+    data: chartData,
+    isLoading,
+    isSuccess: chartDataSuccess,
+  } = useGetChartDataQuery();
+  const { data: userInfo, isSuccess: userInfoSuccess } = useGetUserInfoQuery();
 
+  const chartDataApiCall = () => {
     const callbackForChartData = (res) => {
       let sumArray = (arr) => {
         let sum = 0;
@@ -46,7 +39,7 @@ export default function Admin(props) {
       };
 
       let performersData = [];
-      let data = res.data.data.dummyChartData;
+      let data = res?.data?.dummyChartData;
       data.map((item) => {
         let mainObj = { name: item.skuName, platform: [] };
         item.platform.map((platform) => {
@@ -73,9 +66,9 @@ export default function Admin(props) {
       };
 
       let dataForInsights = [];
-      if (res.data.data.dummyChartData !== undefined) {
+      if (res.data.dummyChartData !== undefined) {
         let obj;
-        res.data.data.dummyChartData.map((item) => {
+        res.data.dummyChartData.map((item) => {
           obj = {};
           obj.platform = [];
           obj.impressions = [];
@@ -118,18 +111,46 @@ export default function Admin(props) {
       dispatch({ type: "loadPerformersData", payload: performersData });
       dispatch({
         type: "loadChartData",
-        payload: res.data.data.dummyChartData,
+        payload: res.data.dummyChartData,
       });
       dispatch({
         type: "loadDateData",
-        payload: res.data.data.dummyDateData,
+        payload: res.data.dummyDateData,
       });
     };
 
-    getMiddleware("/user/userInfo", callbackForUserData, true);
-    getMiddleware("/data", callbackForChartData, true);
+    if (chartDataSuccess) {
+      callbackForChartData(chartData);
+    }
+  };
+
+  const userInfoApiCall = () => {
+    const callbackForUserData = (res) => {
+      if (res) {
+        dispatch({
+          type: "loadUser",
+          payload: {
+            userData: res,
+          },
+        });
+      }
+    };
+
+    if (userInfoSuccess) {
+      callbackForUserData(userInfo);
+    }
+  };
+
+  React.useEffect(() => {
+    chartDataApiCall();
+    userInfoApiCall();
+
+    window.addEventListener("resize", () =>
+      window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
+    );
   }, []);
 
+  
   React.useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);
@@ -187,6 +208,7 @@ export default function Admin(props) {
   };
 
   document.documentElement.dir = "ltr";
+
   return (
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />
