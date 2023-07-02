@@ -40,9 +40,9 @@ const ProfileOverview = () => {
 
   return (
     <>
-      <div className="flex w-full flex-col gap-5">
-        <div className="w-ful  mt-3 flex grid h-fit grid-cols-1 grid-cols-2 flex-col gap-5 lg:grid-cols-2">
-          <div className=" lg:!mb-0">
+      <div className="flex w-full flex-col gap-5 h-screen">
+        <div className="w-ful  mt-3  grid h-fit  grid-cols-2 flex-col gap-5 lg:grid-cols-2">
+          <div className=" lg:!mb-0 h-fit">
             <Banner />
           </div>
 

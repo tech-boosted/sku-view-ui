@@ -3,7 +3,7 @@ import React from "react";
 
 const Plans = () => {
   return (
-    <div>
+    <div className="">
       <section className="mt-5 rounded-[20px]  bg-white  dark:bg-navy-700 ">
         <div className="mx-auto py-8 px-4 lg:py-16 lg:px-6">
           <div className="mx-auto mb-8 max-w-screen-md text-center lg:mb-12">

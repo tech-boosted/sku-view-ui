@@ -4,11 +4,12 @@ import Checkbox from "components/checkbox";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
-import { useToast } from '@chakra-ui/react'
-
+import { useToast } from "@chakra-ui/react";
+import { useRegisterMutation } from "services/authApiSlice";
 
 const SignUp = () => {
-  const toast = useToast()
+  const [register, { isLoading }] = useRegisterMutation();
+  const toast = useToast();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,38 +43,40 @@ const SignUp = () => {
   const [inputState, setInputState] = useState(initialInputState);
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const callback = (res) => {
-    if (res.status === 200) {
-      localStorage.setItem("token", res.data.token);
+  // const callback = (res) => {
+  //   if (res.status === 200) {
+  //     localStorage.setItem("token", res.data.token);
 
-      dispatch({
-        type: "registerUser",
-        payload: {
-          userData: res.data,
-        },
-      });
+  //     dispatch({
+  //       type: "registerUser",
+  //       payload: {
+  //         userData: res.data,
+  //       },
+  //     });
 
-      navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
-      toast({
-        title: 'Login Successfull.',
-        status: 'success',
-        duration: 5000,
-        position:    'top-right',
-        variant:'subtle',
-        isClosable: true,
-      })
-    } else {
-      const errors = {};
-      var message;
-      if (res.response.data.message) {
-        message = res.response.data.message;
-      } else {
-        message = res.message;
-      }
-      errors.main = message;
-      setFormErrors(errors);
-    }
-  };
+  //     navigate(
+  //       location?.state?.prevPath ? location.state.prevPath : "/admin/default"
+  //     );
+  //     toast({
+  //       title: "Login Successfull.",
+  //       status: "success",
+  //       duration: 5000,
+  //       position: "top-right",
+  //       variant: "subtle",
+  //       isClosable: true,
+  //     });
+  //   } else {
+  //     const errors = {};
+  //     var message;
+  //     if (res.response.data.message) {
+  //       message = res.response.data.message;
+  //     } else {
+  //       message = res.message;
+  //     }
+  //     errors.main = message;
+  //     setFormErrors(errors);
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -137,7 +140,43 @@ const SignUp = () => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      postMiddleware("/user/register", formValues, callback, false);  
+      const handleRegister = async () => {
+        try {
+          const userData = await register(formValues);
+          if (userData) {
+            console.log(userData);
+            localStorage.setItem("token", userData.data.token);
+            console.log("ello");
+            dispatch({
+              type: "registerUser",
+              payload: {
+                userData: userData.data.userInfo,
+              },
+            });
+
+            navigate(
+              location?.state?.prevPath
+                ? location.state.prevPath
+                : "/admin/default"
+            );
+            toast({
+              title: "Login Successfull.",
+              status: "success",
+              duration: 5000,
+              position: "top-right",
+              variant: "subtle",
+              isClosable: true,
+            });
+          }
+        } catch (err) {
+          if (err?.originalStatus?.status === 401) {
+            navigate("/auth/login");
+          }
+        }
+      };
+
+      handleRegister();
+      // postMiddleware("/user/register", formValues, callback, false);
     }
   }, [formErrors]);
 

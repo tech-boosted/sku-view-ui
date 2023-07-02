@@ -84,10 +84,11 @@ const InsightsTable = (props) => {
   if (TableData !== undefined) {
     TableData.map((item) => {});
   }
+
   let renderData = () => {
     let result = [];
 
-    TableData.map((item) => {
+    TableData.map((item, index) => {
       for (let i = 0; i < item.platform.length; i++) {
         impressionsTotalVar += item.impressions[i];
         clicksTotalVar += item.clicks[i];
@@ -97,7 +98,7 @@ const InsightsTable = (props) => {
 
         if (i == 0) {
           result.push(
-            <tr className="">
+            <tr className="" key={Math.random()}>
               <td
                 className=" py-3 text-center dark:!border-navy-700"
                 rowSpan={item.platform.length + 2}
@@ -145,7 +146,7 @@ const InsightsTable = (props) => {
           }
 
           result.push(
-            <tr className={extraClass}>
+            <tr className={extraClass} key={Math.random() * 9}>
               <td className=" py-3 text-end dark:!border-navy-700">
                 <p className="text-base text-navy-700 dark:text-white">
                   {item.platform[i]}
@@ -183,7 +184,7 @@ const InsightsTable = (props) => {
 
       result.push(
         <>
-          <tr className={""}>
+          <tr className={""} key={Math.random()}>
             <td className=" py-3 text-end dark:!border-navy-700 ">
               <p className="text-base font-bold text-navy-700 dark:text-white">
                 {"Total"}
@@ -215,7 +216,7 @@ const InsightsTable = (props) => {
               </p>
             </td>
           </tr>
-          <tr className={"border-b border-b border-gray-200 "}>
+          <tr className={"border-b  border-gray-200 "} key={Math.random()}>
             <td className=" py-3 text-end dark:!border-navy-700">
               <p className="text-base font-bold text-navy-700 dark:text-white">
                 {"Average"}
@@ -265,7 +266,7 @@ const InsightsTable = (props) => {
 
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6 mt-5 py-5"}>
-      <header className="relative flex items-start items-center justify-between">
+      <header className="relative flex items-start  justify-between">
         <div className="items-start text-xl font-bold text-navy-700 dark:text-white">
           Business Insights
         </div>
@@ -278,38 +279,38 @@ const InsightsTable = (props) => {
         <table className="min-w-full ">
           <thead className="">
             <tr className="border-b border-gray-200 pb-[10px]">
-              <th className=" w-[25%] border-b border-gray-200 pb-[10px] text-center dark:!border-navy-700">
-                <div className="text-lg font-bold  text-black lg:text-base">
+              <th className=" w-[20%] border-b border-gray-200 pb-[10px] text-center dark:!border-navy-700">
+                <div className="text-black text-lg  font-bold lg:text-base">
                   SKU
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-bold text-black lg:text-lg">
+              <th className=" border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-black text-lg font-bold lg:text-lg">
                   Platform
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-bold text-black lg:text-lg">
+              <th className="  border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-black text-lg font-bold lg:text-lg">
                   Impressions
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-bold text-black lg:text-lg">
+              <th className="  border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-black text-lg font-bold lg:text-lg">
                   Clicks
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-bold text-black lg:text-lg">
+              <th className="  border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-black text-lg font-bold lg:text-lg">
                   Orders
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-bold text-black lg:text-lg">
+              <th className="  border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="text-black text-lg font-bold lg:text-lg">
                   Sales
                 </div>
               </th>
-              <th className=" w-[12%] border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
-                <div className="text-lg font-boldtracking-wide text-black lg:text-lg">
+              <th className="  border-b border-gray-200 pb-[10px] text-end dark:!border-navy-700">
+                <div className="font-boldtracking-wide text-black text-lg lg:text-lg">
                   Spend
                 </div>
               </th>

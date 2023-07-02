@@ -138,9 +138,9 @@ const Channels = () => {
 
   return (
     <>
-      <div className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-3">
+      <div className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-3 h-screen">
         {/* Google */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
+        <div className="flex flex-col items-end justify-between rounded-[20px] h-[250px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -237,7 +237,7 @@ const Channels = () => {
           )}
         </div>
         {/* Facebook */}
-        <div className="flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
+        <div className="flex flex-col h-[250px] items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"
@@ -289,7 +289,7 @@ const Channels = () => {
           )}
         </div>
         {/* Amazon */}
-        <div className="dark:bg-inherit flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
+        <div className="dark:bg-inherit h-[250px] flex flex-col items-end justify-between rounded-[20px]  bg-white p-4 dark:bg-navy-700 dark:text-white">
           <div className="flex w-full justify-between gap-2 p-2">
             <img
               className="h-10 w-10 rounded-full"

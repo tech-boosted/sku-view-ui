@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { BsPerson } from "react-icons/bs";
 
 const Banner = () => {
-  
   let statusVariable = useSelector(
     (state) => state.accountData.userInfo.credentials
   );
@@ -27,7 +26,6 @@ const Banner = () => {
       company: "pureNext",
       phone_number: 123,
       email: "gus@gmail.com",
-     
     };
   }
 
@@ -38,8 +36,8 @@ const Banner = () => {
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
         style={{ backgroundImage: `url(${banner})` }}
       >
-        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center bg-gray-100 rounded-full border-[4px] border-white  dark:bg-navy-800 dark:!border-navy-700 ">
-          <BsPerson className="h-[50px] w-[50px] text-brand-500"/>
+        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-gray-100  dark:!border-navy-700 dark:bg-navy-800 ">
+          <BsPerson className="h-[50px] w-[50px] text-brand-500" />
         </div>
       </div>
 
@@ -62,13 +60,11 @@ const Banner = () => {
           <p
             className={
               statusVariable.google.connected
-                ? "text-xs font-normal text-green-500 "
-                : "text-xs font-normal text-red-500 "
+                ? "text-xs font-normal text-green-500 dark:text-green-400"
+                : "text-xs font-normal text-red-500 dark:text-red-400"
             }
           >
-            {statusVariable.google.connected
-              ? "Connected"
-              : "Not Connected"}
+            {statusVariable.google.connected ? "Connected" : "Not Connected"}
           </p>
         </div>
 
@@ -79,8 +75,8 @@ const Banner = () => {
           <p
             className={
               statusVariable.amazon.connected
-             ? "text-xs font-normal text-green-500 "
-              : "text-xs font-normal text-red-500 "
+                ? "text-xs font-normal text-green-500 dark:text-green-400"
+                : "text-xs font-normal text-red-500 dark:text-red-400"
             }
           >
             {statusVariable.amazon.connected ? "Connected" : "Not Connected"}
@@ -93,8 +89,8 @@ const Banner = () => {
           <p
             className={
               statusVariable.facebook.connected
-              ? "text-xs font-normal text-green-500 "
-              : "text-xs font-normal text-red-500 "
+                ? "text-xs font-normal text-green-500 dark:text-green-400"
+                : "text-xs font-normal text-red-500 dark:text-red-400"
             }
           >
             {statusVariable.facebook.connected ? "Connected" : "Not Connected"}

@@ -31,6 +31,9 @@ const Comparison1 = (props) => {
     const startDate = onefourdaysAgo.toISOString().split("T")[0];
     const endDate = sevenDaysAgo.toISOString().split("T")[0];
 
+    if(!dateDataFromStore.includes(startDate) && !dateDataFromStore.includes(endDate)){
+        alert("Out of range");
+    }
     setStartDate("2023-04-17");
     setEndDate("2023-05-10");
   };
@@ -791,6 +794,10 @@ const Comparison1 = (props) => {
     const startDateIndex = dates.indexOf(d1);
     const endDateIndex = dates.indexOf(d2);
 
+    if(!dateDataFromStore.includes(d1) && !dateDataFromStore.includes(d2)){
+      alert("Im also out of range");
+    }
+
     let tempDates = [...dates];
     let filteredDateData = tempDates.slice(startDateIndex, endDateIndex + 1);
 
@@ -883,6 +890,7 @@ const Comparison1 = (props) => {
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-3 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformArr.map((item, index) => (
                   <button
+                  key={index}
                     className="text-black hover:text-black cursor-pointer pt-2 text-left text-base font-medium  hover:font-bold "
                     value={item}
                     onClick={(e) => handlePlatformSelection(e)}
@@ -904,9 +912,9 @@ const Comparison1 = (props) => {
               </button>
             }
             children={
-              <div className="flex h-fit min-w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                {SKUList.map((sku) => (
-                  <div className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
+              <div className="min-w-44 flex h-fit flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                {SKUList.map((sku,index) => (
+                  <div key={index} className="text-black hover:text-black flex cursor-pointer pt-2  text-left  text-base font-medium  hover:font-bold">
                     <input
                       type="checkbox"
                       name="l"
@@ -941,6 +949,11 @@ const Comparison1 = (props) => {
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+        {impressionsState?.series[0]?.data?.length === 0 || chartDataFromStore.length <= 0 && (
+          <p className="col-span-1  break-words pl-6 font-bold leading-snug text-red-500 md:col-span-2">
+            Currently, no data available.
+          </p>
+        )}
         <ComparisonCharts
           title={salesState.title}
           options={salesState.options}

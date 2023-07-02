@@ -2,16 +2,16 @@ import React from "react";
 import Dropdown from "components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { BsFillPersonFill} from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import {
-  IoMdNotificationsOutline,
-} from "react-icons/io";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { postMiddleware } from "Middleware";
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
+import { useLogOutUserMutation } from "services/chartApiSlice";
 
 const Navbar = (props) => {
+  const [logOutUser, { isLoading }] = useLogOutUserMutation();
   const toast = useToast();
   const dispatch = useDispatch();
 
@@ -25,8 +25,9 @@ const Navbar = (props) => {
     console.log("User logged Out");
   };
 
-  const handleLogout = () => {
-    postMiddleware("/user/logout", {}, callback, true);
+  const handleLogout = async () => {
+    await logOutUser();
+    // postMiddleware("/user/logout", {}, callback, true);
     localStorage.removeItem("token");
     dispatch({ type: "clearAppData" });
     dispatch({ type: "clearUser" });
@@ -166,7 +167,7 @@ const Navbar = (props) => {
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, {userInfo.firstname}
+                    👋 Hey, {userInfo?.firstname}
                   </p>{" "}
                 </div>
               </div>

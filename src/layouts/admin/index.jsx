@@ -9,8 +9,8 @@ import { useDispatch } from "react-redux";
 import Protected from "components/routing/Protected";
 import SusbcribedRoute from "components/routing/SusbcribedRoute";
 import SubscriptionModal from "components/subscription/SubscriptionModal";
-import { useGetChartDataQuery } from "services/chartApiSlice";
 import { useGetUserInfoQuery } from "services/chartApiSlice";
+import { useGetChartDataQuery } from "services/chartApiSlice";
 
 export default function Admin(props) {
   const { ...rest } = props;
@@ -120,12 +120,14 @@ export default function Admin(props) {
     };
 
     if (chartDataSuccess) {
+      console.log(chartData);
       callbackForChartData(chartData);
     }
   };
 
   const userInfoApiCall = () => {
     const callbackForUserData = (res) => {
+      console.log(res);
       if (res) {
         dispatch({
           type: "loadUser",
@@ -150,7 +152,6 @@ export default function Admin(props) {
     );
   }, []);
 
-  
   React.useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);

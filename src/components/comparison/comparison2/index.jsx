@@ -848,8 +848,9 @@ const Comparison2 = (props) => {
             }
             children={
               <div className="w-65 flex h-fit flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                {SKUList.map((sku) => (
+                {SKUList.map((sku, index) => (
                   <button
+                    key={index}
                     className="text-black hover:text-black cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold "
                     value={sku}
                     onClick={(e) => handleSKUSelection(e)}
@@ -866,7 +867,7 @@ const Comparison2 = (props) => {
             disabled={disable}
             toastHeading={"Please select the SKU first."}
             button={
-              <button className="flex h-[56px] w-auto items-center  justify-between justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
+              <button className="ml-8 flex h-[56px] w-auto items-center   justify-between rounded-xl bg-white px-5 py-3 text-base font-medium text-navy-700 transition duration-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/30">
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   Select Platform{" "}
                 </span>
@@ -876,7 +877,10 @@ const Comparison2 = (props) => {
             children={
               <div className="flex h-fit w-44 flex-col justify-start rounded-xl bg-white bg-cover bg-no-repeat p-5 shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
                 {platformPropArr.map((item, index) => (
-                  <div className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold">
+                  <div
+                    className="text-black hover:text-black flex cursor-pointer pt-2 text-left  text-base font-medium  hover:font-bold"
+                    key={index}
+                  >
                     <input
                       type="checkbox"
                       name="l"
@@ -911,6 +915,13 @@ const Comparison2 = (props) => {
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+        {impressionsState?.series[0]?.data?.length === 0 ||
+          (chartDataFromStore.length <= 0 && (
+            <p className="col-span-1  break-words pl-6 font-bold leading-snug text-red-500 md:col-span-2">
+              Currently, no data available.
+            </p>
+          ))}
+
         <ComparisonCharts
           title={salesState.title}
           options={salesState.options}

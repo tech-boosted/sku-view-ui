@@ -59,7 +59,7 @@ function RangePicker({ callback, customClass, disabled, toastHeading }) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           id="calendar"
-          className="mr-2 h-[26px] dark:text-white "
+          className="mr-2 h-[26px] dark:text-black "
           fill="currentColor"
         >
           <path d="M5 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5zM11 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z"></path>
@@ -79,7 +79,7 @@ function RangePicker({ callback, customClass, disabled, toastHeading }) {
             ranges={range}
             months={1}
             direction="horizontal"
-            className={`calendarElement absolute ${customClass} z-50 rounded `}
+            className={`calendarElement absolute ${customClass} z-50 rounded  dark:text-black `}
           />
         )}
       </div>

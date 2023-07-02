@@ -5,11 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postMiddleware } from "Middleware";
 import { useDispatch } from "react-redux";
-import { useToast } from '@chakra-ui/react'
-
+import { useToast } from "@chakra-ui/react";
+import { useLoginMutation } from "services/authApiSlice";
 
 export default function SignIn() {
-  const toast = useToast()
+  const toast = useToast();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,65 +19,63 @@ export default function SignIn() {
 
   const [formValues, setFormValues] = useState(initialValue);
   const [formErrors, setFormErrors] = useState({});
-  const[isSubmit,setIsSubmit] = useState(false);
-  
+  const [isSubmit, setIsSubmit] = useState(false);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/admin/");
     }
   }, []);
 
+  const [login, { isLoading }] = useLoginMutation();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const callback = (res) => {
-    if (res.status === 200) {
-      dispatch({
-        type: "registerUser",
-        payload: {
-          userData: res.data,
-        },
-      });
+  // const callback = (res) => {
+  //   if (res.status === 200) {
+  //     dispatch({
+  //       type: "registerUser",
+  //       payload: {
+  //         userData: res.data,
+  //       },
+  //     });
 
-      localStorage.setItem("token", res.data.token);
-      navigate(location?.state?.prevPath ? location.state.prevPath : "/admin/default");
+  //     localStorage.setItem("token", res.data.token);
+  //     navigate(
+  //       location?.state?.prevPath ? location.state.prevPath : "/admin/default"
+  //     );
 
-      toast({
-        title: 'Login Successfull.',
-        status: 'success',
-        duration: 5000,
-        position:    'top-right',
-        variant:'subtle',
-        isClosable: true,
-      })
+  //     toast({
+  //       title: "Login Successfull.",
+  //       status: "success",
+  //       duration: 5000,
+  //       position: "top-right",
+  //       variant: "subtle",
+  //       isClosable: true,
+  //     });
+  //   } else {
+  //     const errors = {};
+  //     var message;
 
-     
-    } else {
-      const errors = {};
-      var message;
-
-      if (res.response.data.message) {
-        message = res.response.data.message;
-      } else {
-        message = res.message;
-      }
-      errors.main = message ;
-      setFormErrors(errors);
-    }
-  };
+  //     if (res.response.data.message) {
+  //       message = res.response.data.message;
+  //     } else {
+  //       message = res.message;
+  //     }
+  //     errors.main = message;
+  //     setFormErrors(errors);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     setIsSubmit(true);
 
     const errors = validate(formValues);
     setFormErrors(errors);
-
-    
-    
   };
 
   const validate = (values) => {
@@ -100,15 +98,45 @@ export default function SignIn() {
     return errors;
   };
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      const handleLogin = async () => {
+        try {
+          const userData = await login(formValues);
 
-    if(Object.keys(formErrors).length === 0 && isSubmit){
-      postMiddleware("/user/login", formValues, callback, false);
+          if (userData) {
+            dispatch({
+              type: "registerUser",
+              payload: {
+                userData: userData.data.userInfo,
+              },
+            });
+            localStorage.setItem("token", userData.data.token);
+            navigate(
+              location?.state?.prevPath
+                ? location.state.prevPath
+                : "/admin/default"
+            );
+
+            toast({
+              title: "Login Successfull.",
+              status: "success",
+              duration: 5000,
+              position: "top-right",
+              variant: "subtle",
+              isClosable: true,
+            });
+          }
+        } catch (err) {
+          if (err?.originalStatus?.status === 401) {
+            navigate("/auth/login");
+          }
+        }
+      };
+      handleLogin();
+      // postMiddleware("/user/login", formValues, callback, false);
     }
-
-  },[formErrors])
-
- 
+  }, [formErrors]);
 
   return (
     <div className="mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center ">
