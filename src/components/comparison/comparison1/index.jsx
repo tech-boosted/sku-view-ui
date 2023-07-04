@@ -31,9 +31,9 @@ const Comparison1 = (props) => {
     const startDate = onefourdaysAgo.toISOString().split("T")[0];
     const endDate = sevenDaysAgo.toISOString().split("T")[0];
 
-    if(!dateDataFromStore.includes(startDate) && !dateDataFromStore.includes(endDate)){
-        alert("Out of range");
-    }
+    // if(!dateDataFromStore.includes(startDate) && !dateDataFromStore.includes(endDate)){
+    //     alert("Out of range");
+    // }
     setStartDate("2023-04-17");
     setEndDate("2023-05-10");
   };
@@ -79,6 +79,7 @@ const Comparison1 = (props) => {
           }
         });
       });
+      console.log("data: ", data)
       setSKUList([...allSkus]);
       setChartData(data);
       setDates(dateDataFromStore);

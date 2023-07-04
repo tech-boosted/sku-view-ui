@@ -25,7 +25,7 @@ import {
 import Channels from "views/admin/channels";
 import PPCDashboard from "views/admin/ppc/PPCDashboard";
 import SocialDashboard from "views/admin/social/SocialDashboard"
-import DSPDashboard from "views/admin/dspDashboard/DSPDashboard";
+import DSPDashboard from "views/admin/dsp/DSPDashboard";
 import NativeDashboard from "views/admin/native/NativeDashboard";
 import { IoIosAnalytics } from "react-icons/io";
 import { SiGoogleanalytics } from "react-icons/si";
@@ -55,16 +55,16 @@ const routes = [
       path:"overview-ppc",
     },
       {
-      name:"Insights",
+      name:"Sku Dynamics",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"insights-ppc"
+      path:"sku-dynamics-ppc"
     },
       {
-      name:"Compare ",
+      name:"Consumer Dynamics ",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"compare-ppc"
+      path:"consumer-dynamics-ppc"
     },
       
   ]
@@ -83,16 +83,16 @@ const routes = [
       path:"overview-social",
     },
       {
-      name:"Insights",
+      name:"Sku Dynamics",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"insights-social"
+      path:"sku-dynamics-social"
     },
       {
-      name:"Compare ",
+      name:"Consumer Dynamics ",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"compare-social"
+      path:"consumer-dynamics-social"
     },
       
   ]
@@ -111,16 +111,16 @@ const routes = [
       path:"overview-dsp",
     },
       {
-      name:"Insights",
+      name:"Sku Dynamics",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"insights-dsp"
+      path:"sku-dynamics-dsp"
     },
       {
-      name:"Compare ",
+      name:"Consumer Dynamics ",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"compare-dsp"
+      path:"consumer-dynamics-dsp"
     },
       
   ]
@@ -139,16 +139,16 @@ const routes = [
       path:"overview-native",
     },
       {
-      name:"Insights",
+      name:"Sku Dynamics",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"insights-native"
+      path:"sku-dynamics-native"
     },
       {
-      name:"Compare ",
+      name:"Consumer Dynamics ",
       layout:"/admin",
       icon: <MdPaid className="h-6 w-6" />,
-      path:"compare-native"
+      path:"consumer-dynamics-native"
     },
       
   ]
