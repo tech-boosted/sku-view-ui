@@ -236,9 +236,11 @@ export const barChartOptionsDailyTraffic = {
 
 export const pieChartOptions = {
   labels: ["Sales", "Spend"],
-  colors: [ "#AA00FF",
-  // "#49219C",
-  "#00AAFF"],
+  colors: [ 
+    "#AA00FF",
+  "#49219C",
+  // "#00AAFF"
+],
   chart: {
     width: "50px",
   },
@@ -269,7 +271,8 @@ export const pieChartOptions = {
   fill: {
     colors: ["#AA00FF",
     "#49219C",
-    "#00AAFF"],
+    // "#00AAFF"
+  ],
   },
   tooltip: {
     enabled: true,

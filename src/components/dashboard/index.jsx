@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import routes from "../../routes";
 import Compare from "../../views/admin/components/Compare";
 import { ChangeDrivers } from "components/drivers";
+import SplitBy from "../split/split";
 
 const Dashboard = ({ heading, platforms }) => {
   const route = routes.filter((item) => {
@@ -57,6 +58,9 @@ const Dashboard = ({ heading, platforms }) => {
       </div>
       <div ref={skuDynamicsRef}>
         <ChangeDrivers />
+        <SplitBy 
+          name="Platform"
+        />
         <InsightsTable platforms={[...platforms]} />
       </div>
       <Compare platforms={[...platforms]} />

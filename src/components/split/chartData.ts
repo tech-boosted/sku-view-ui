@@ -1,0 +1,1 @@
+export const chartData = [63, 25, 55];

@@ -1,6 +1,5 @@
 import React from "react";
-import { useToast } from '@chakra-ui/react'
-
+import { useToast } from "@chakra-ui/react";
 
 function useOutsideAlerter(ref, setX) {
   React.useEffect(() => {
@@ -21,29 +20,43 @@ function useOutsideAlerter(ref, setX) {
   }, [ref, setX]);
 }
 
-const Dropdown = (props) => {
-  const toast = useToast()
+export interface DropdownProps {
+  button: JSX.Element;
+  children: JSX.Element[] | JSX.Element;
+  classNames?: string;
+  animation?: string;
+  disabled?: boolean;
+  toastHeading?: string;
+}
 
-  const { button, children, classNames, animation,disabled,toastHeading} = props;
+const Dropdown = ({
+  button,
+  children,
+  classNames,
+  animation,
+  disabled,
+  toastHeading,
+}: DropdownProps) => {
+  const toast = useToast();
+
   const wrapperRef = React.useRef(null);
   const [openWrapper, setOpenWrapper] = React.useState(false);
   useOutsideAlerter(wrapperRef, setOpenWrapper);
 
-  const handleDisability = ()=>{
-    if(!disabled){
+  const handleDisability = () => {
+    if (!disabled) {
       setOpenWrapper(!openWrapper);
-    }
-    else{
+    } else {
       toast({
         title: `${toastHeading}`,
-        status: 'warning',
+        status: "warning",
         duration: 5000,
-        position:    'top-right',
-        variant:'subtle',
+        position: "top-right",
+        variant: "subtle",
         isClosable: true,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div ref={wrapperRef} className="relative flex">
