@@ -4,7 +4,7 @@ export const chartOptions = {
     height: 440,
     stacked: true,
   },
-  colors: ["#008FFB", "#FF4560"],
+  colors: ["#49219C", "#AA00FF", "#00AAFF"],
   plotOptions: {
     bar: {
       horizontal: true,

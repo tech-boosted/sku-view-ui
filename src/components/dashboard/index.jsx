@@ -8,6 +8,7 @@ import routes from "../../routes";
 import Compare from "../../views/admin/components/Compare";
 import { ChangeDrivers } from "components/drivers";
 import SplitBy from "../split/split";
+import { chartData, chartData2 } from "components/drivers/chartData";
 
 const Dashboard = ({ heading, platforms }) => {
   const route = routes.filter((item) => {
@@ -57,10 +58,9 @@ const Dashboard = ({ heading, platforms }) => {
         <Overview />
       </div>
       <div ref={skuDynamicsRef}>
-        <ChangeDrivers />
-        <SplitBy 
-          name="Platform"
-        />
+        <ChangeDrivers title={"Campaign"} keyname={"campaign"} data={chartData} />
+        <SplitBy name="Platform" />
+        <ChangeDrivers title={"Keywords"} keyname={"keyword"} data={chartData2} />
         <InsightsTable platforms={[...platforms]} />
       </div>
       <Compare platforms={[...platforms]} />
